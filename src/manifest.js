@@ -12,10 +12,7 @@ const DataManifest = [
         name: "PressStart2P",
         type: "binary",
         src: "./data/fnt/PressStart2P.fnt"
-    },
-
-    {name: "tutorial_tileset",  type:"image",	src: "data/map/tutorial_tilset.png"},
-    {name: "tutorial",          type: "tmx",	src: "data/map/tutorial.tmx"}
+    }
 ];
 
 export default DataManifest;

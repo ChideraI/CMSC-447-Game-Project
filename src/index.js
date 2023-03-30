@@ -14,7 +14,6 @@ import 'index.css';
 import TitleScreen from 'js/stage/title.js';
 import PlayScreen from 'js/stage/play.js';
 import PlayerEntity from 'js/renderables/player.js';
-import {Pot, DropTarget, DropTarget2} from './js/renderables/pot.js';
 
 import DataManifest from 'manifest.js';
 
@@ -49,9 +48,6 @@ device.onReady(() => {
 
         // add our player entity in the entity pool
         pool.register("mainPlayer", PlayerEntity);
-        pool.register("pot1", Pot)
-        pool.register("DT", DropTarget)
-        pool.register("DT2", DropTarget2)
 
         // Start the game.
         state.change(state.PLAY);
