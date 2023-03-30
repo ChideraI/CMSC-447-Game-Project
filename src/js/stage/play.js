@@ -5,6 +5,9 @@ class PlayScreen extends Stage {
      *  action to perform on state change
      */
     onResetEvent() {
+        //Load level
+        level.load("tutorial");
+
         // add a gray background to the default Stage
         game.world.addChild(new ColorLayer("background", "#202020"));
 
@@ -14,7 +17,7 @@ class PlayScreen extends Stage {
             size : 4.0,
             textBaseline : "middle",
             textAlign : "center",
-            text : "Hello World !"
+            text : "Hello World ?"
         }));
     }
 };
