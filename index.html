@@ -40,7 +40,7 @@
         this.add.image(400, 300, 'sky');
         this.add.image(400, 300, 'star');
 
-        var particles = this.add.particles('star');
+        /*var particles = this.add.particles('star');
 
         var emitter = particles.createEmitter({
             speed: 100,
@@ -54,7 +54,7 @@
         logo.setBounce(1, 1);
         logo.setCollideWorldBounds(true);
 
-        emitter.startFollow(logo);
+        emitter.startFollow(logo);*/
 
         platforms = this.physics.add.staticGroup();
 
@@ -64,6 +64,7 @@
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');
 
+        //First player object
         player = this.physics.add.sprite(100, 450, 'dude').setInteractive();
 
         player.setBounce(0.2);
@@ -71,11 +72,19 @@
 
         this.input.setDraggable(player);
 
+        //Second player object
+        player2 = this.physics.add.sprite(200, 450, 'dude').setInteractive();
+
+        player2.setBounce(0.2);
+        player2.setCollideWorldBounds(true);
+
+        this.input.setDraggable(player2);
+
         //this.physics.add.collider(stars, platforms);
 
         //this.phyics.add.overlap(player, star, collectStar, null, this);
 
-        scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
         //  A drop zone
         var zone = this.add.zone(500, 300, 300, 300).setRectangleDropZone(300, 300);
@@ -97,7 +106,9 @@
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.input.enabled = false;
-            score += 10;
+            if(gameObject == player){
+                score += 10;
+            }
             scoreText.setText('Score: ' + score);
             gameObject.disableBody(true, true);
         });
@@ -105,14 +116,6 @@
         this.input.on('dragend', function (pointer, gameObject) {
             gameObject.clearTint();
         });
-
-    }
-
-    function collectStar(player, star){
-        star.disableBody(true, true);
-
-        score += 10;
-        scoreText.setText('Score: ' + score);
     }
     </script>
 
