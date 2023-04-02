@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Botanical Bakery</title>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <script type="module" src=""></script>
 </head>
 <body>
 
@@ -13,7 +15,7 @@
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 200 }
+                //gravity: { y: 200 }
             }
         },
         scene: {
@@ -32,6 +34,8 @@
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('ground', 'assets/platform.png');
+        this.load.image('pot', 'assets/pot.png');
+        this.load.image('sunflower', 'assets/sunflower.png');
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
 
@@ -39,6 +43,8 @@
     {
         this.add.image(400, 300, 'sky');
         this.add.image(400, 300, 'star');
+        sunf = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sunflower');
+        sunf.visible = false;
 
         /*var particles = this.add.particles('star');
 
@@ -56,29 +62,61 @@
 
         emitter.startFollow(logo);*/
 
-        platforms = this.physics.add.staticGroup();
+        /*platforms = this.add.group();
 
-        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        p1 = platforms.create(400, 568, 'ground').setScale(2).setInteractive();
+        p2 = platforms.create(600, 400, 'ground').setInteractive();
+        p3 = platforms.create(50, 250, 'ground').setInteractive();
+        p4 = platforms.create(750, 220, 'ground').setInteractive();
 
-        platforms.create(600, 400, 'ground');
-        platforms.create(50, 250, 'ground');
-        platforms.create(750, 220, 'ground');
+        this.input.setDraggable(p1);*/
 
+
+        //Players
+        players = this.add.group();
         //First player object
-        player = this.physics.add.sprite(100, 450, 'dude').setInteractive();
-
-        player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
-
+        player = players.create(100, 450, 'dude').setTint(0xFF0000).setInteractive();
         this.input.setDraggable(player);
-
+        //player.setBounce(0.2);
+        //player.setCollideWorldBounds(true);
         //Second player object
-        player2 = this.physics.add.sprite(200, 450, 'dude').setInteractive();
-
-        player2.setBounce(0.2);
-        player2.setCollideWorldBounds(true);
-
+        player2 = players.create(200, 450, 'dude').setTint(0x00FF00).setInteractive();
         this.input.setDraggable(player2);
+        //player2.setBounce(0.2);
+        //player2.setCollideWorldBounds(true);
+
+        //Pots
+        pots = this.add.group();
+        //Pot 1
+        pot1 = pots.create(100, 100, 'pot').setScale(0.5).setInteractive();
+        this.input.setDraggable(pot1);
+        //Pot 2
+        pot2 = pots.create(100, 250, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        this.input.setDraggable(pot2);
+
+        //Stars
+        stars = this.add.group();
+        //Star 1
+        star1 = stars.create(600, 100, 'star').setInteractive();
+        this.input.setDraggable(star1);
+        //Star 2
+        star2 = stars.create(600, 150, 'star').setTint(0xCC00FF).setInteractive();
+        this.input.setDraggable(star2);
+        //Star 3
+        star3 = stars.create(600, 200, 'star').setTint(0x0000FF).setInteractive();
+        this.input.setDraggable(star3);
+
+        //Bombs
+        bombs = this.add.group();
+        //Bomb 1
+        bomb1 = bombs.create(600, 400, 'bomb').setScale(2).setInteractive();
+        this.input.setDraggable(bomb1);
+        //Bomb 2
+        bomb2 = bombs.create(600, 450, 'bomb').setScale(2).setTint(0x454635).setInteractive();
+        this.input.setDraggable(bomb2);
+        //Bomb 3
+        bomb3 = bombs.create(600, 500, 'bomb').setScale(2).setTint(0xABCAE6).setInteractive();
+        this.input.setDraggable(bomb3);
 
         //this.physics.add.collider(stars, platforms);
 
@@ -87,34 +125,63 @@
         scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
 
         //  A drop zone
-        var zone = this.add.zone(500, 300, 300, 300).setRectangleDropZone(300, 300);
+        var zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
 
         //  Just a visual display of the drop zone
         var graphics = this.add.graphics();
         graphics.lineStyle(2, 0xffff00);
         graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
 
-        this.input.on('dragstart', function (pointer, gameObject) {gameObject.setTint(0xEEEEEE);});
+        this.input.on('dragstart', function (pointer, gameObject) {/*gameObject.setTint(0xEEEEEE);*/});
 
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
         });
 
-        //When dropping object into zone, make object disappear and update score
+        //When dropping object into zone, move object and update score
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.input.enabled = false;
-            if(gameObject == player){
+            if(gameObject == player || gameObject == pot1 || gameObject == star1 || gameObject == bomb1){
                 score += 10;
             }
+            
+            //gameObject.disableBody(true, true);
+            if(pots.contains(gameObject)){
+                gameObject.y = dropZone.y + 100;
+            }
+
+            /*if(platforms.contains(gameObject)){
+                score += 100;
+            }*/
+
+            if(stars.contains(gameObject)){
+                gameObject.y = dropZone.y - 100;
+
+                //Line below is work in progress
+                //stars.getChildren().forEach(function(){this.children.visible = false;}, this);
+            }
+
+            if(bombs.contains(gameObject)){
+                gameObject.y = dropZone.y - 50;
+            }
+
+            //Update score on screen
             scoreText.setText('Score: ' + score);
-            gameObject.disableBody(true, true);
+
+            if(score == 40){
+                player.visible = false;
+                pot1.visible = false;
+                star1.visible = false;
+                bomb1.visible = false;
+                sunf.visible = true;
+            }
         });
 
         this.input.on('dragend', function (pointer, gameObject) {
-            gameObject.clearTint();
+            //gameObject.clearTint();
         });
     }
     </script>
