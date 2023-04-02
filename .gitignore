@@ -1,2 +1,9 @@
 node_modules
 .venv
+config
+dist
+plugins
+scripts
+src
+types
+.npmignore
