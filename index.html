@@ -30,6 +30,10 @@
     var water_count = 0;
     var fert_count = 0;
     var recipe_counter = 0;
+    var cur_pot;
+    var cur_soil;
+    var cur_seed;
+    var cur_plant;
 
     function preload ()
     {
@@ -54,7 +58,7 @@
         this.cameras.main.setBackgroundColor(0xAAFFAA);
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
         //this.add.image(400, 300, 'star');
-        sunf = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sunflower');
+        sunf = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 65, 'sunflower');
         sunf.visible = false;
 
         /*var particles = this.add.particles('star');
@@ -135,22 +139,6 @@
         fert3 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 300, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert3);
 
-        //Recipe Book open and close
-        book = this.add.image(this.cameras.main.width - 200, 100, 'recipes').setScale(0.2).setInteractive();
-        recipes = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'open_book').setScale(0.7);
-        close_button = this.add.image(this.cameras.main.width - 350, 100, 'x').setScale(0.25).setInteractive();
-        recipes.visible = false;
-        close_button.visible = false;
-        book.on('pointerdown', function(pointer){
-            recipes.visible = true;
-            close_button.visible = true;
-            recipe_counter += 1;
-        });
-        close_button.on('pointerdown', function(pointer){
-            recipes.visible = false;
-            close_button.visible = false;
-        });
-
         //this.physics.add.collider(stars, platforms);
 
         //this.phyics.add.overlap(player, star, collectStar, null, this);
@@ -165,6 +153,22 @@
         graphics.lineStyle(2, 0xffff00);
         graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
 
+        //Recipe Book open and close
+        book = this.add.image(this.cameras.main.width - 75, 75, 'recipes').setScale(0.25).setInteractive();
+        recipes = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'open_book').setScale(0.7);
+        close_button = this.add.image(this.cameras.main.width - 350, 100, 'x').setScale(0.25).setInteractive();
+        recipes.visible = false;
+        close_button.visible = false;
+        book.on('pointerdown', function(pointer){
+            recipes.visible = true;
+            close_button.visible = true;
+            recipe_counter += 1;
+        });
+        close_button.on('pointerdown', function(pointer){
+            recipes.visible = false;
+            close_button.visible = false;
+        });
+
         this.input.on('dragstart', function (pointer, gameObject) {/*gameObject.setTint(0xEEEEEE);*/});
 
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
@@ -177,9 +181,6 @@
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.input.enabled = false;
-            if(gameObject == seed1 || gameObject == pot1 || gameObject == soil1 || water_count == 2 || fert_count == 2){
-                score += 10;
-            }
             
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
@@ -188,36 +189,77 @@
 
             else if(soils.contains(gameObject)){
                 gameObject.y = dropZone.y + 25;
-
-                //Line below is work in progress
-                //soils.getChildren().forEach(function(){this.children.visible = false;}, this);
             }
 
             else if(waters.contains(gameObject)){
                 gameObject.y = dropZone.y - 100;
-                watercount += 1;
             }
 
             else if(ferts.contains(gameObject)){
                 gameObject.y = dropZone.y - 50;
+            }
+
+                //Line below is work in progress
+                //soils.getChildren().forEach(function(){this.children.visible = false;}, this);
+        });
+
+        this.input.on('dragend', function (pointer, gameObject) {
+            //gameObject.clearTint();
+            if(pots.contains(gameObject)){
+                cur_pot = gameObject;
+            }
+
+            else if(soils.contains(gameObject)){
+                cur_soil = gameObject;
+            }
+
+            else if(seeds.contains(gameObject)){
+                cur_seed = gameObject;
+            }
+
+            else if(waters.contains(gameObject)){
+                water_count += 1;
+                gameObject.visible = false;  
+            }
+            else if (ferts.contains(gameObject)){
                 fert_count += 1;
+                gameObject.visible = false;
+            }
+
+            if(cur_soil == soil1 && cur_seed == seed1){
+                seed1.visible = false;
+                soil1.visible = false;
+                cur_plant = sunf;
+                cur_plant.visible = true;
+                cur_plant.setTint(0x888888);
+                cur_plant.setScale(0.5);
             }
 
             //Update score on screen
             scoreText.setText('Score: ' + score);
 
-            if(score == 40){
-                seed1.visible = false;
-                pot1.visible = false;
-                soil1.visible = false;
-                drop1.visible = false;
-                fert1.visible = false;
-                sunf.visible = true;
+            if(water_count == 1){
+                cur_plant.setTint(0xAAFFAA);
             }
-        });
+            else if(water_count == 2){
+                cur_plant.setTint(0xFFAAAA);
+            }
+            else if(water_count == 3){
+                cur_plant.setTint(0xFFFFFF);
+            }
 
-        this.input.on('dragend', function (pointer, gameObject) {
-            //gameObject.clearTint();
+            if(fert_count == 1){
+                cur_plant.setScale(0.67);
+                cur_plant.y -= 25;
+            }
+            else if(fert_count == 2){
+                cur_plant.setScale(0.82);
+                cur_plant.y -= 35;
+            }
+            else if(fert_count == 3){
+                cur_plant.setScale(1);
+                cur_plant.y -= 45;
+            }
         });
     }
     </script>
