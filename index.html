@@ -154,19 +154,43 @@
         graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
 
         //Recipe Book open and close
-        book = this.add.image(this.cameras.main.width - 75, 75, 'recipes').setScale(0.25).setInteractive();
+        book = this.add.image(this.cameras.main.width - 100, 75, 'recipes').setScale(0.35).setInteractive();
         recipes = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'open_book').setScale(0.7);
         close_button = this.add.image(this.cameras.main.width - 350, 100, 'x').setScale(0.25).setInteractive();
+
+        //First recipe variables
+        r1soil = this.add.image(this.cameras.main.width / 4 - 25, this.cameras.main.height / 6 , 'soil').setScale(0.15);
+        r1seed = this.add.image(this.cameras.main.width / 3, this.cameras.main.height / 6, 'seeds').setTint(0xFF0000).setScale(0.15);
+        r1plant = this.add.image(this.cameras.main.width / 2 - 100, this.cameras.main.height / 6, 'sunflower').setScale(0.25);
+        r1text = this.add.text(this.cameras.main.width / 4 + 50, this.cameras.main.height / 6 - 25, '+     =', { fontSize: '48px', fill: '#000' });
+
+        //Hide book variables initially
         recipes.visible = false;
         close_button.visible = false;
+        r1soil.visible = false;
+        r1seed.visible = false;
+        r1plant.visible = false;
+        r1text.visible = false;
+
+        //Show book variables once clicked
         book.on('pointerdown', function(pointer){
             recipes.visible = true;
             close_button.visible = true;
+            r1soil.visible = true;
+            r1seed.visible = true;
+            r1plant.visible = true;
+            r1text.visible = true;
             recipe_counter += 1;
         });
+
+        //Hide book again after close button is clicked
         close_button.on('pointerdown', function(pointer){
             recipes.visible = false;
             close_button.visible = false;
+            r1soil.visible = false;
+            r1seed.visible = false;
+            r1plant.visible = false;
+            r1text.visible = false;
         });
 
         this.input.on('dragstart', function (pointer, gameObject) {/*gameObject.setTint(0xEEEEEE);*/});
@@ -250,7 +274,7 @@
 
             if(fert_count == 1){
                 cur_plant.setScale(0.67);
-                cur_plant.y -= 25;
+                cur_plant.y -= 35;
             }
             else if(fert_count == 2){
                 cur_plant.setScale(0.82);
