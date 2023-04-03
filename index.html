@@ -10,8 +10,8 @@
     <script>
     var config = {
         type: Phaser.AUTO,
-        width: 800,
-        height: 600,
+        width: 1690,
+        height: 900,
         physics: {
             default: 'arcade',
             arcade: {
@@ -27,6 +27,9 @@
     var game = new Phaser.Game(config);
     var score = 0;
     var scoreText;
+    var water_count = 0;
+    var fert_count = 0;
+    var recipe_counter = 0;
 
     function preload ()
     {
@@ -36,13 +39,21 @@
         this.load.image('ground', 'assets/platform.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('sunflower', 'assets/sunflower.png');
+        this.load.image('water', 'assets/water.png');
+        this.load.image('fertilizer', 'assets/fertilizer.png');
+        this.load.image('soil', 'assets/soil.png');
+        this.load.image('seeds', 'assets/seeds.png');
+        this.load.image('recipes', 'assets/recipe_book.png');
+        this.load.image('open_book', 'assets/open_book.png');
+        this.load.image('x', 'assets/x.png');
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
 
     function create ()
     {
-        this.add.image(400, 300, 'sky');
-        this.add.image(400, 300, 'star');
+        this.cameras.main.setBackgroundColor(0xAAFFAA);
+        //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
+        //this.add.image(400, 300, 'star');
         sunf = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sunflower');
         sunf.visible = false;
 
@@ -62,61 +73,83 @@
 
         emitter.startFollow(logo);*/
 
-        /*platforms = this.add.group();
 
-        p1 = platforms.create(400, 568, 'ground').setScale(2).setInteractive();
-        p2 = platforms.create(600, 400, 'ground').setInteractive();
-        p3 = platforms.create(50, 250, 'ground').setInteractive();
-        p4 = platforms.create(750, 220, 'ground').setInteractive();
+        //Soil
+        soils = this.add.group();
+        soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000' });
 
-        this.input.setDraggable(p1);*/
+        soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
+        soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 200, 'soil').setTint(0xAAAAAA).setScale(0.2).setInteractive();
+
+        this.input.setDraggable(soil1);
+        this.input.setDraggable(soil2);
 
 
-        //Players
-        players = this.add.group();
+        //Seeds
+        seeds = this.add.group();
+        seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000' });
         //First player object
-        player = players.create(100, 450, 'dude').setTint(0xFF0000).setInteractive();
-        this.input.setDraggable(player);
+        seed1 = seeds.create(this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'seeds').setTint(0xFF0000).setScale(0.2).setInteractive();
+        this.input.setDraggable(seed1);
         //player.setBounce(0.2);
         //player.setCollideWorldBounds(true);
         //Second player object
-        player2 = players.create(200, 450, 'dude').setTint(0x00FF00).setInteractive();
-        this.input.setDraggable(player2);
+        seed2 = seeds.create(this.cameras.main.width / 6, this.cameras.main.height / 2 + 200, 'seeds').setTint(0x00FF00).setScale(0.2).setInteractive();
+        this.input.setDraggable(seed2);
         //player2.setBounce(0.2);
         //player2.setCollideWorldBounds(true);
 
         //Pots
         pots = this.add.group();
+        potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4, 'Pots', { fontSize: '32px', fill: '#000' });
         //Pot 1
-        pot1 = pots.create(100, 100, 'pot').setScale(0.5).setInteractive();
+        pot1 = pots.create(this.cameras.main.width / 2 - 150, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setInteractive();
         this.input.setDraggable(pot1);
         //Pot 2
-        pot2 = pots.create(100, 250, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        pot2 = pots.create(this.cameras.main.width / 2 + 150, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
         this.input.setDraggable(pot2);
 
-        //Stars
-        stars = this.add.group();
-        //Star 1
-        star1 = stars.create(600, 100, 'star').setInteractive();
-        this.input.setDraggable(star1);
-        //Star 2
-        star2 = stars.create(600, 150, 'star').setTint(0xCC00FF).setInteractive();
-        this.input.setDraggable(star2);
-        //Star 3
-        star3 = stars.create(600, 200, 'star').setTint(0x0000FF).setInteractive();
-        this.input.setDraggable(star3);
+        //Water droplets
+        waters = this.add.group();
+        waterText = this.add.text(5*this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Water', { fontSize: '32px', fill: '#000' });
+        //Drop 1
+        drop1 = waters.create(5*this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'water').setScale(0.1).setInteractive();
+        this.input.setDraggable(drop1);
+        //Drop 2
+        drop2 = waters.create(5*this.cameras.main.width / 6, this.cameras.main.height / 6 + 150, 'water').setScale(0.1).setInteractive();
+        this.input.setDraggable(drop2);
+        //Drop 3
+        drop3 = waters.create(5*this.cameras.main.width / 6, this.cameras.main.height / 6 + 200, 'water').setScale(0.1).setInteractive();
+        this.input.setDraggable(drop3);
 
-        //Bombs
-        bombs = this.add.group();
-        //Bomb 1
-        bomb1 = bombs.create(600, 400, 'bomb').setScale(2).setInteractive();
-        this.input.setDraggable(bomb1);
-        //Bomb 2
-        bomb2 = bombs.create(600, 450, 'bomb').setScale(2).setTint(0x454635).setInteractive();
-        this.input.setDraggable(bomb2);
-        //Bomb 3
-        bomb3 = bombs.create(600, 500, 'bomb').setScale(2).setTint(0xABCAE6).setInteractive();
-        this.input.setDraggable(bomb3);
+        //Fertilizer
+        ferts = this.add.group();
+        fertText = this.add.text(5*this.cameras.main.width / 6 - 100, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000' });
+        //Fertilizer 1
+        fert1 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'fertilizer').setScale(0.2).setInteractive();
+        this.input.setDraggable(fert1);
+        //Fertilizer 2
+        fert2 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 200, 'fertilizer').setScale(0.2).setInteractive();
+        this.input.setDraggable(fert2);
+        //Fertilizer 3
+        fert3 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 300, 'fertilizer').setScale(0.2).setInteractive();
+        this.input.setDraggable(fert3);
+
+        //Recipe Book open and close
+        book = this.add.image(this.cameras.main.width - 200, 100, 'recipes').setScale(0.2).setInteractive();
+        recipes = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'open_book').setScale(0.7);
+        close_button = this.add.image(this.cameras.main.width - 350, 100, 'x').setScale(0.25).setInteractive();
+        recipes.visible = false;
+        close_button.visible = false;
+        book.on('pointerdown', function(pointer){
+            recipes.visible = true;
+            close_button.visible = true;
+            recipe_counter += 1;
+        });
+        close_button.on('pointerdown', function(pointer){
+            recipes.visible = false;
+            close_button.visible = false;
+        });
 
         //this.physics.add.collider(stars, platforms);
 
@@ -144,7 +177,7 @@
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.input.enabled = false;
-            if(gameObject == player || gameObject == pot1 || gameObject == star1 || gameObject == bomb1){
+            if(gameObject == seed1 || gameObject == pot1 || gameObject == soil1 || water_count == 2 || fert_count == 2){
                 score += 10;
             }
             
@@ -153,29 +186,32 @@
                 gameObject.y = dropZone.y + 100;
             }
 
-            /*if(platforms.contains(gameObject)){
-                score += 100;
-            }*/
-
-            if(stars.contains(gameObject)){
-                gameObject.y = dropZone.y - 100;
+            else if(soils.contains(gameObject)){
+                gameObject.y = dropZone.y + 25;
 
                 //Line below is work in progress
-                //stars.getChildren().forEach(function(){this.children.visible = false;}, this);
+                //soils.getChildren().forEach(function(){this.children.visible = false;}, this);
             }
 
-            if(bombs.contains(gameObject)){
+            else if(waters.contains(gameObject)){
+                gameObject.y = dropZone.y - 100;
+                watercount += 1;
+            }
+
+            else if(ferts.contains(gameObject)){
                 gameObject.y = dropZone.y - 50;
+                fert_count += 1;
             }
 
             //Update score on screen
             scoreText.setText('Score: ' + score);
 
             if(score == 40){
-                player.visible = false;
+                seed1.visible = false;
                 pot1.visible = false;
-                star1.visible = false;
-                bomb1.visible = false;
+                soil1.visible = false;
+                drop1.visible = false;
+                fert1.visible = false;
                 sunf.visible = true;
             }
         });
