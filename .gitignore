@@ -7,3 +7,6 @@ scripts
 src
 types
 .npmignore
+.cache/
+.vscode/
+javascript/.cache/

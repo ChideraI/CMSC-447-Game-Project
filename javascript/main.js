@@ -1,21 +1,45 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser'
+import GameScene from './game.js'
+import LoginScene from './login.js'
 
-var config = {
+const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1690,
+    height: 900,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 200 }
+            //gravity: { y: 200 }
         }
     },
-    scene: {
-        preload: preload,
-        create: create
-    }
+    parent: "botany_bakery",
+    dom: {
+        createContainer: true
+    },
+    // scene: {
+    //     preload: preload,
+    //     create: create
+    // }
+    scene: [LoginScene, GameScene]
 };
+const game = new Phaser.Game(config)
 
-var game = new Phaser.Game(config);
-var score = 0;
-var scoreText;
+// var config = {
+//     type: Phaser.AUTO,
+//     width: 800,
+//     height: 600,
+//     physics: {
+//         default: 'arcade',
+//         arcade: {
+//             gravity: { y: 200 }
+//         }
+//     },
+//     scene: {
+//         preload: preload,
+//         create: create
+//     }
+// };
+
+// var game = new Phaser.Game(config);
+// var score = 0;
+// var scoreText;
