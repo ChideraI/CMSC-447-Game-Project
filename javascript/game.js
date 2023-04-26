@@ -57,22 +57,10 @@ export default class GameScene extends Phaser.Scene {
 
         let tulip = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 25, 'tulip').setTint(0x888888).setScale(0.1);
         tulip.visible = false;
-    
-        /*var particles = this.add.particles('star');
-    
-        var emitter = particles.createEmitter({
-            speed: 100,
-            scale: { start: 1, end: 0 },
-            blendMode: 'ADD'
-        });
-    
-        var logo = this.physics.add.image(400, 100, 'bomb');
-    
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-    
-        emitter.startFollow(logo);*/
+
+        //Add 3 cacti
+        //Add 3 fruits/vegetables: carrot, tomato, lettuce??
+        //Add 3 herbs: basil, rosemary, uhhhhhhh
     
     
         //Soil
