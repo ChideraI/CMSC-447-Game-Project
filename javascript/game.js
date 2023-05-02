@@ -603,13 +603,43 @@ export default class GameScene extends Phaser.Scene {
             scoreText.setText('Score: ' + score);
 
             if(water_count == 1 && waters.contains(gameObject)){
-                cur_plant.setTint(0xFF0000);
+                cur_base.setTint(0x003300);
+                if(cur_seed == seed1){
+                    cur_plant.setTint(0xFF0000);
+                }else if(cur_seed == seed2){
+                    cur_plant.setTint(0xFF55BB);
+                }else if(cur_seed == seed3){
+                    cur_plant.setTint(0xFFFF00);
+                }else{
+                    cur_plant.setTint(0x773300);
+                    cur_base.setTint(0x552211);
+                }
             }
             else if(water_count == 2 && waters.contains(gameObject)){
-                cur_plant.setTint(0xFFFF00);
+                cur_base.setTint(0x009900);
+                if(cur_seed == seed1){
+                    cur_plant.setTint(0xFF00FF);
+                }else if(cur_seed == seed2){
+                    cur_plant.setTint(0xFFAA00);
+                }else if(cur_seed == seed3){
+                    cur_plant.setTint(0xFFAA00);
+                }else{
+                    cur_plant.setTint(0xAA8800);
+                    cur_base.setTint(0x774411);
+                }
             }
             else if(water_count == 3 && waters.contains(gameObject)){
-                cur_plant.setTint(0x0000FF);
+                cur_base.setTint(0x00DD00);
+                if(cur_seed == seed1){
+                    cur_plant.setTint(0xFFFF00);
+                }else if(cur_seed == seed2){
+                    cur_plant.setTint(0xFFFF00);
+                }else if(cur_seed == seed3){
+                    cur_plant.setTint(0xFF0000);
+                }else{
+                    cur_plant.setTint(0x00CC00);
+                    cur_base.setTint(0x885511);
+                }
             }
     
             if(fert_count == 1 && ferts.contains(gameObject)){
