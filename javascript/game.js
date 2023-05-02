@@ -23,6 +23,12 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('sunflower', 'assets/sunflower.png');
         this.load.image('rose', 'assets/rose.png');
         this.load.image('tulip', 'assets/tulip.png');
+        this.load.image('cactus', 'assets/cactus.png');
+        this.load.image('cactus_flower', 'assets/cactus_flower.png');
+        this.load.image('succulent1', 'assets/cactus_stem.png');
+        this.load.image('succulent2', 'assets/succulent.png');
+        this.load.image('carrot', 'assets/carrot.png');
+        this.load.image('carrot_leaves', 'assets/carrot_leaves.png');
         this.load.image('water', 'assets/water.png');
         this.load.image('fertilizer', 'assets/fertilizer.png');
         this.load.image('soil', 'assets/soil.png');
@@ -64,7 +70,25 @@ export default class GameScene extends Phaser.Scene {
         tulip.visible = false;
 
         //Add 3 cacti
+        let cactus = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'cactus');
+        cactus.visible = false;
+
+        let cactus_flower = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'cactus_flower');
+        cactus_flower.visible = false;
+
+        let succulent1 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent1');
+        succulent1.visible = false;
+
+        let succulent2 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent2');
+        succulent2.visible = false;
+
         //Add 3 fruits/vegetables: carrot, tomato, lettuce??
+        let carrot = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot');
+        carrot.visible = false;
+
+        let carrot_leaves = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot_leaves');
+        carrot_leaves.visible = false;
+
         //Add 3 herbs: basil, rosemary, uhhhhhhh
     
     
@@ -188,11 +212,11 @@ export default class GameScene extends Phaser.Scene {
         r3plant.visible = false;
         r3text.visible = false;
 
-        //Cactus #1 recipe variables
+        //Cactus Flower recipe variables
         let r4soil = this.add.image(400, 475, 'soil').setScale(0.15);
         let r4seed = this.add.image(575, 475, 'seeds').setTint(0x00FF00).setScale(0.15);
-        let r4base = this.add.image(725, 475, 'stem').setScale(0.5);
-        let r4plant = this.add.image(725, 475, 'sunflower').setScale(0.5);
+        let r4base = this.add.image(725, 475, 'cactus').setScale(0.5);
+        let r4plant = this.add.image(725, 475, 'cactus_flower').setScale(0.5);
         let r4text = this.add.text(475, 450, '+     =', { fontSize: '48px', fill: '#000' });
         r4soil.visible = false;
         r4seed.visible = false;
@@ -200,11 +224,11 @@ export default class GameScene extends Phaser.Scene {
         r4plant.visible = false;
         r4text.visible = false;
 
-        //Cactus #2 recipe variables
+        //Succulent #1 recipe variables
         let r5soil = this.add.image(400, 600, 'soil').setTint(0xFFF000).setScale(0.15);
         let r5seed = this.add.image(575, 600, 'seeds').setTint(0x00FF00).setScale(0.15);
-        let r5base = this.add.image(725, 600, 'stem').setScale(0.5);
-        let r5plant = this.add.image(725, 600, 'rose').setScale(0.5);
+        let r5base = this.add.image(725, 600, 'succulent1').setScale(0.5);
+        let r5plant = this.add.image(725, 600, 'succulent1').setScale(0.5);
         let r5text = this.add.text(475, 575, '+     =', { fontSize: '48px', fill: '#000' });
         r5soil.visible = false;
         r5seed.visible = false;
@@ -212,11 +236,11 @@ export default class GameScene extends Phaser.Scene {
         r5plant.visible = false;
         r5text.visible = false;
 
-        //Cactus #3 recipe variables
+        //Succulent #2 recipe variables
         let r6soil = this.add.image(400, 725, 'soil').setTint(0x000FFF).setScale(0.15);
         let r6seed = this.add.image(575, 725, 'seeds').setTint(0x00FF00).setScale(0.15);
-        let r6base = this.add.image(725, 725, 'stem').setScale(0.5);
-        let r6plant = this.add.image(725, 725, 'tulip').setScale(0.5);
+        let r6base = this.add.image(725, 725, 'succulent2').setScale(0.5);
+        let r6plant = this.add.image(725, 725, 'succulent2').setScale(0.5);
         let r6text = this.add.text(475, 700, '+     =', { fontSize: '48px', fill: '#000' });
         r6soil.visible = false;
         r6seed.visible = false;
@@ -224,11 +248,11 @@ export default class GameScene extends Phaser.Scene {
         r6plant.visible = false;
         r6text.visible = false;
 
-        //Sunflower recipe variables
+        //Carrot recipe variables
         let r7soil = this.add.image(950, 100, 'soil').setScale(0.15);
         let r7seed = this.add.image(1125, 100, 'seeds').setTint(0x0000FF).setScale(0.15);
-        let r7base = this.add.image(1275, 100, 'stem').setScale(0.5);
-        let r7plant = this.add.image(1275, 100, 'sunflower').setScale(0.5);
+        let r7base = this.add.image(1275, 100, 'carrot_leaves').setScale(0.5);
+        let r7plant = this.add.image(1275, 100, 'carrot').setScale(0.5);
         let r7text = this.add.text(1025, 75, '+     =', { fontSize: '48px', fill: '#000' });
         r7soil.visible = false;
         r7seed.visible = false;
@@ -503,6 +527,7 @@ export default class GameScene extends Phaser.Scene {
                 gameObject.visible = false;
             }
     
+            //Flowers
             if(cur_soil == soil1 && cur_seed == seed1){
                 seed1.visible = false;
                 soil1.visible = false;
@@ -522,6 +547,54 @@ export default class GameScene extends Phaser.Scene {
                 soil3.visible = false;
                 cur_base = stem;
                 cur_plant = tulip;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+            }
+            
+            //Cacti/succulents
+            else if(cur_soil == soil1 && cur_seed == seed2){
+                seed2.visible = false;
+                soil1.visible = false;
+                cur_base = cactus;
+                cur_plant = cactus_flower;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+            }else if(cur_soil == soil2 && cur_seed == seed2){
+                seed2.visible = false;
+                soil2.visible = false;
+                cur_base = succulent1;
+                cur_plant = succulent1;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+            }else if(cur_soil == soil3 && cur_seed == seed2){
+                seed2.visible = false;
+                soil3.visible = false;
+                cur_base = succulent2;
+                cur_plant = succulent2;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+            }
+
+            //Vegetables
+            else if(cur_soil == soil1 && cur_seed == seed3){
+                seed3.visible = false;
+                soil1.visible = false;
+                cur_base = carrot_leaves;
+                cur_plant = carrot;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+            }else if(cur_soil == soil2 && cur_seed == seed3){
+                seed3.visible = false;
+                soil2.visible = false;
+                cur_base = succulent1;
+                cur_plant = succulent1;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+            }else if(cur_soil == soil3 && cur_seed == seed3){
+                seed3.visible = false;
+                soil3.visible = false;
+                cur_base = succulent2;
+                cur_plant = succulent2;
                 cur_base.visible = true;
                 cur_plant.visible = true;
             }
