@@ -1,0 +1,41 @@
+{
+    "Customer1" : {
+        "pot" : "pot1", 
+        "soil": "soil1",
+        "seed": "seed1", 
+        "water": 1, 
+        "fertilizer": 1
+    }, 
+    
+    "Customer2" : {
+        "pot" : "pot2", 
+        "soil": "soil2",
+        "seed": "seed1", 
+        "water": 2, 
+        "fertilizer": 2
+    }, 
+
+    "Customer3" : {
+        "pot" : "pot1", 
+        "soil": "soil2",
+        "seed": "seed2", 
+        "water": 2, 
+        "fertilizer": 1
+    }, 
+
+    "Customer4" : {
+        "pot" : "pot3", 
+        "soil": "soil2",
+        "seed": "seed1", 
+        "water": 1, 
+        "fertilizer": 2
+    }, 
+    
+    "Customer5" : {
+        "pot" : "pot2", 
+        "soil": "soil1",
+        "seed": "seed2", 
+        "water": 2, 
+        "fertilizer": 2
+    }
+}
