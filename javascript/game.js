@@ -83,13 +83,14 @@ export default class GameScene extends Phaser.Scene {
         succulent2.visible = false;
 
         //Add 3 fruits/vegetables: carrot, tomato, lettuce??
-        let carrot = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot');
-        carrot.visible = false;
-
         let carrot_leaves = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot_leaves');
         carrot_leaves.visible = false;
 
-        //Add 3 herbs: basil, rosemary, uhhhhhhh
+        let carrot = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot');
+        carrot.visible = false;
+        
+
+        //Add 3 bonsai??
     
     
         //Soil
@@ -496,10 +497,25 @@ export default class GameScene extends Phaser.Scene {
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
                 gameObject.y = dropZone.y + 100;
+                pot1.disableInteractive();
+                pot2.disableInteractive();
+                pot3.disableInteractive();
+                pot4.disableInteractive();
+                pot5.disableInteractive();
             }
     
             else if(soils.contains(gameObject)){
                 gameObject.y = dropZone.y + 25;
+                soil1.disableInteractive();
+                soil2.disableInteractive();
+                soil3.disableInteractive();
+            }
+
+            else if (seeds.contains(gameObject)){
+                seed1.disableInteractive();
+                seed2.disableInteractive();
+                seed3.disableInteractive();
+                seed4.disableInteractive();
             }
     
             else if(waters.contains(gameObject)){
