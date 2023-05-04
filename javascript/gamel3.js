@@ -1,7 +1,6 @@
-export default class GameL3Scene extends Phaser.Scene {
+export default class GameSceneL3 extends Phaser.Scene {
 
 
-    //var game = new Phaser.Game(config);
     constructor() {
         super("GameL3");
         // let logged_in = false;
@@ -18,6 +17,7 @@ export default class GameL3Scene extends Phaser.Scene {
     
     preload ()
     {
+        this.load.image('background', './main_screen.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('stem', 'assets/flower_stem.png');
         this.load.image('sunflower', 'assets/sunflower.png');
@@ -53,6 +53,17 @@ export default class GameL3Scene extends Phaser.Scene {
         let cur_base;
     
         //First, put up log in/new account screen
+        const myThis = this;
+
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
+        let scaleX = this.cameras.main.width / image.width
+        let scaleY = this.cameras.main.height / image.height
+        let scale = Math.max(scaleX, scaleY)
+        image.setScale(scale).setScrollFactor(0)
+
+        const loginButton = this.add.text(400, 400, 'Welcome to game 3 page! to go back to Login, click here!', {fontSize: '32px', fill: '#000' });
+        loginButton.setInteractive();
+        loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
         this.cameras.main.setBackgroundColor(0xAAFFAA);
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
@@ -676,4 +687,4 @@ export default class GameL3Scene extends Phaser.Scene {
             }
         });
     }
-    }
+}

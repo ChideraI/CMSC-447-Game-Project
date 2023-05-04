@@ -1,19 +1,7 @@
-export default class TutorialScene extends Phaser.Scene {
+export default class Tutorial extends Phaser.Scene{
 
-
-    //var game = new Phaser.Game(config);
     constructor() {
         super("Tutorial");
-        // let logged_in = false;
-        // let score = 0;
-        // let scoreText;
-        // let water_count = 0;
-        // let fert_count = 0;
-        // let recipe_counter = 0;
-        // let cur_pot;
-        // let cur_soil;
-        // let cur_seed;
-        // let cur_plant;
     }
     
     preload ()

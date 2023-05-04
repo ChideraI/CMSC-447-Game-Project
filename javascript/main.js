@@ -1,11 +1,11 @@
 import Phaser from 'phaser'
 import GameScene from './game.js'
 import LoginScene from './login.js'
-import TutorialScene from './tutorial.js';
-import Level1Scene from './level1.js';
-import Level2Scene from './level2.js';
-import Level3Scene from './level3.js';
-import MenuScene from './menu.js';
+import GameSceneL1 from './gamel1.js';
+import GameSceneL2 from './gamel2.js';
+import GameSceneL3 from './gamel3.js';
+import Tutorial from './tutorial.js';
+import Customization from './customization.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -25,7 +25,8 @@ const config = {
     //     preload: preload,
     //     create: create
     // }
-    scene: [LoginScene, MenuScene, GameScene, TutorialScene, Level1Scene, Level2Scene, Level3Scene],
+    
+    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization]
 
     level: 0,
     cpot : "", 

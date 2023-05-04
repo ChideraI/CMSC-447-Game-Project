@@ -1,23 +1,13 @@
-export default class GameL1Scene extends Phaser.Scene {
+export default class GameSceneL1 extends Phaser.Scene {
 
 
-    //var game = new Phaser.Game(config);
     constructor() {
         super("GameL1");
-        // let logged_in = false;
-        // let score = 0;
-        // let scoreText;
-        // let water_count = 0;
-        // let fert_count = 0;
-        // let recipe_counter = 0;
-        // let cur_pot;
-        // let cur_soil;
-        // let cur_seed;
-        // let cur_plant;
     }
     
     preload ()
     {
+        this.load.image('background', './main_screen.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('stem', 'assets/flower_stem.png');
         this.load.image('sunflower', 'assets/sunflower.png');
@@ -49,6 +39,17 @@ export default class GameL1Scene extends Phaser.Scene {
         let cur_base;
     
         //First, put up log in/new account screen
+        const myThis = this;
+
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
+        let scaleX = this.cameras.main.width / image.width
+        let scaleY = this.cameras.main.height / image.height
+        let scale = Math.max(scaleX, scaleY)
+        image.setScale(scale).setScrollFactor(0)
+
+        const loginButton = this.add.text(400, 400, 'Welcome to game 1 page! to go back to Login, click here!', {fontSize: '32px', fill: '#000' });
+        loginButton.setInteractive();
+        loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
         this.cameras.main.setBackgroundColor(0xAAFFAA);
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
@@ -368,4 +369,4 @@ export default class GameL1Scene extends Phaser.Scene {
             }
         });
     }
-    }
+}
