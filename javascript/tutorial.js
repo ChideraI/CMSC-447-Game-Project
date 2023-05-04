@@ -1,5 +1,9 @@
-class Tutorial extends Phaser.Scene{
+export default class Tutorial extends Phaser.Scene{
 
+    constructor() {
+        super("Tutorial");
+    }
+    
     preload ()
     {
         this.load.image('sky', 'assets/sky.png');

@@ -1,6 +1,11 @@
 import Phaser from 'phaser'
 import GameScene from './game.js'
 import LoginScene from './login.js'
+import GameSceneL1 from './gamel1.js';
+import GameSceneL2 from './gamel2.js';
+import GameSceneL3 from './gamel3.js';
+import Tutorial from './tutorial.js';
+import Customization from './customization.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -20,7 +25,7 @@ const config = {
     //     preload: preload,
     //     create: create
     // }
-    scene: [LoginScene, GameScene]
+    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization]
 };
 const game = new Phaser.Game(config)
 
