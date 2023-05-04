@@ -26,7 +26,7 @@ const config = {
     //     create: create
     // }
     
-    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization]
+    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization],
 
     level: 0,
     cpot : "", 
