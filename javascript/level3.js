@@ -1,10 +1,12 @@
-export default class GameScene extends Phaser.Scene {
+export default class Level3Scene extends Phaser.Scene {
 
 
     //var game = new Phaser.Game(config);
     constructor() {
-        super("Game");
+        super("Level3");
         // let logged_in = false;
+        // let score = 0;
+        // let scoreText;
         // let water_count = 0;
         // let fert_count = 0;
         // let recipe_counter = 0;
@@ -39,6 +41,8 @@ export default class GameScene extends Phaser.Scene {
     create ()
     {
         let logged_in = false;
+        let score = 0;
+        let scoreText;
         let water_count = 0;
         let fert_count = 0;
         let recipe_counter = 0;
@@ -157,7 +161,9 @@ export default class GameScene extends Phaser.Scene {
         //Fertilizer 3
         let fert3 = ferts.create(5*this.cameras.main.width / 6 + 100, this.cameras.main.height / 2 + 225, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert3);
-        
+    
+        scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
     
@@ -483,14 +489,13 @@ export default class GameScene extends Phaser.Scene {
             gameObject.y = dragY;
         });
     
-        //When dropping object into zone, move object
+        //When dropping object into zone, move object and update score
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.input.enabled = false;
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
-                cur_pot = gameObject;
                 gameObject.y = dropZone.y + 100;
                 pot1.disableInteractive();
                 pot2.disableInteractive();
@@ -500,7 +505,6 @@ export default class GameScene extends Phaser.Scene {
             }
     
             else if(soils.contains(gameObject)){
-                cur_soil = gameObject;
                 gameObject.y = dropZone.y + 25;
                 soil1.disableInteractive();
                 soil2.disableInteractive();
@@ -508,7 +512,6 @@ export default class GameScene extends Phaser.Scene {
             }
 
             else if (seeds.contains(gameObject)){
-                cur_seed = gameObject;
                 seed1.disableInteractive();
                 seed2.disableInteractive();
                 seed3.disableInteractive();
@@ -516,15 +519,28 @@ export default class GameScene extends Phaser.Scene {
             }
     
             else if(waters.contains(gameObject)){
-                water_count += 1;
-                gameObject.visible = false;
                 gameObject.y = dropZone.y - 100;
             }
     
             else if(ferts.contains(gameObject)){
+                gameObject.y = dropZone.y - 50;
+            }
+    
+         // });
+    //NOTE: dragend only fires on drop outside of drop target. Do the function on "drop" event.
+        // this.input.on('dragend', function (pointer, gameObject) {
+            if(pots.contains(gameObject)){
+               cur_pot = gameObject;
+            }else if(soils.contains(gameObject)){
+                cur_soil = gameObject;
+            }else if(seeds.contains(gameObject)){
+                cur_seed = gameObject;
+            }else if(waters.contains(gameObject)){
+                water_count += 1;
+                gameObject.visible = false;  
+            }else if (ferts.contains(gameObject)){
                 fert_count += 1;
                 gameObject.visible = false;
-                gameObject.y = dropZone.y - 50;
             }
     
             //Flowers
@@ -598,6 +614,9 @@ export default class GameScene extends Phaser.Scene {
                 cur_base.visible = true;
                 cur_plant.visible = true;
             }
+
+            //Update score on screen
+            scoreText.setText('Score: ' + score);
 
             if(water_count == 1 && waters.contains(gameObject)){
                 cur_base.setTint(0x003300);

@@ -1,9 +1,9 @@
-export default class GameScene extends Phaser.Scene {
+export default class TutorialScene extends Phaser.Scene {
 
 
     //var game = new Phaser.Game(config);
     constructor() {
-        super("Game");
+        super("Tutorial");
         // let logged_in = false;
         // let score = 0;
         // let scoreText;

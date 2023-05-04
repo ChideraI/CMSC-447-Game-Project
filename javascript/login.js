@@ -15,10 +15,10 @@ export default class LoginScene extends Phaser.Scene {
 
         const loginButton = this.add.text(100, 100, 'Login', {fontSize: '32px', fill: '#000' });
         loginButton.setInteractive();
-        loginButton.on('pointerup', () => {  myThis.scene.start('Game') });
+        loginButton.on('pointerup', () => {  myThis.scene.start('Menu') });
         const playButton = this.add.text(100, 300, 'Just Play', {fontSize: '32px', fill: '#000' });
         playButton.setInteractive();
-        playButton.on('pointerup', () => {  myThis.scene.start('Game') });
+        playButton.on('pointerup', () => {  myThis.scene.start('Menu') });
         // const loginButton = this.dom.getChildByName("login_button");
         // const loginButton = document.getElementsByName("login_button");
         
