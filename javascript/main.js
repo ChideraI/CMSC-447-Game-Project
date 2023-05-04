@@ -25,7 +25,15 @@ const config = {
     //     preload: preload,
     //     create: create
     // }
+    
     scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization]
+
+    level: 0,
+    cpot : "", 
+    csoil : "", 
+    cseed : "", 
+    cwater : 0,
+    cfertlizer : 0
 };
 const game = new Phaser.Game(config)
 
