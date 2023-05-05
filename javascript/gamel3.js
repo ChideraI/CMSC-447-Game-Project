@@ -99,8 +99,30 @@ export default class GameSceneL3 extends Phaser.Scene {
         let carrot = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot');
         carrot.visible = false;
         
+        let tomato_stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tomato_stem');
+        tomato_stem.visible = false;
 
-        //Add 3 bonsai??
+        let tomato = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tomato');
+        tomato.visible = false;
+
+        let pumpkin_leaves = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'pumpkin_leaves');
+        pumpkin_leaves.visible = false;
+
+        let pumpkin = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'pumpkin');
+        pumpkin.visible = false;
+
+        //Add 3 bonsai
+        let bonsai_base = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai_base');
+        bonsai_base.visible = false;
+
+        let bonsai1 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai1');
+        bonsai1.visible = false;
+
+        let bonsai2 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai2');
+        bonsai2.visible = false;
+
+        let bonsai3 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai3');
+        bonsai3.visible = false;
     
     
         //Soil
@@ -269,11 +291,11 @@ export default class GameSceneL3 extends Phaser.Scene {
         r7plant.visible = false;
         r7text.visible = false;
 
-        //Rose recipe variables
+        //Tomato recipe variables
         let r8soil = this.add.image(950, 225, 'soil').setTint(0xFFF000).setScale(0.15);
         let r8seed = this.add.image(1125, 225, 'seeds').setTint(0x0000FF).setScale(0.15);
-        let r8base = this.add.image(1275, 225, 'stem').setScale(0.5);
-        let r8plant = this.add.image(1275, 225, 'rose').setScale(0.5);
+        let r8base = this.add.image(1275, 225, 'tomato_stem').setScale(0.5);
+        let r8plant = this.add.image(1275, 225, 'tomato').setScale(0.5);
         let r8text = this.add.text(1025, 200, '+     =', { fontSize: '48px', fill: '#000' });
         r8soil.visible = false;
         r8seed.visible = false;
@@ -281,11 +303,11 @@ export default class GameSceneL3 extends Phaser.Scene {
         r8plant.visible = false;
         r8text.visible = false;
 
-        //Tulip recipe variables
+        //Pumpkin recipe variables
         let r9soil = this.add.image(950, 350, 'soil').setTint(0x000FFF).setScale(0.15);
         let r9seed = this.add.image(1125, 350, 'seeds').setTint(0x0000FF).setScale(0.15);
-        let r9base = this.add.image(1275, 350, 'stem').setScale(0.5);
-        let r9plant = this.add.image(1275, 350, 'tulip').setScale(0.5);
+        let r9base = this.add.image(1275, 350, 'pumpkin_leaves').setScale(0.5);
+        let r9plant = this.add.image(1275, 350, 'pumpkin').setScale(0.5);
         let r9text = this.add.text(1025, 325, '+     =', { fontSize: '48px', fill: '#000' });
         r9soil.visible = false;
         r9seed.visible = false;
@@ -293,11 +315,11 @@ export default class GameSceneL3 extends Phaser.Scene {
         r9plant.visible = false;
         r9text.visible = false;
 
-        //Cactus #1 recipe variables
+        //Bonsai #1 recipe variables
         let r10soil = this.add.image(950, 475, 'soil').setScale(0.15);
         let r10seed = this.add.image(1125, 475, 'seeds').setTint(0xFF0000).setScale(0.15);
-        let r10base = this.add.image(1275, 475, 'stem').setScale(0.5);
-        let r10plant = this.add.image(1275, 475, 'sunflower').setScale(0.5);
+        let r10base = this.add.image(1275, 475, 'bonsai_base').setScale(0.5);
+        let r10plant = this.add.image(1275, 475, 'bonsai1').setScale(0.5);
         let r10text = this.add.text(1025, 450, '+     =', { fontSize: '48px', fill: '#000' });
         r10soil.visible = false;
         r10seed.visible = false;
@@ -305,11 +327,11 @@ export default class GameSceneL3 extends Phaser.Scene {
         r10plant.visible = false;
         r10text.visible = false;
 
-        //Cactus #2 recipe variables
+        //Bonsai #2 recipe variables
         let r11soil = this.add.image(950, 600, 'soil').setTint(0xFFF000).setScale(0.15);
         let r11seed = this.add.image(1125, 600, 'seeds').setTint(0xFF0000).setScale(0.15);
-        let r11base = this.add.image(1275, 600, 'stem').setScale(0.5);
-        let r11plant = this.add.image(1275, 600, 'rose').setScale(0.5);
+        let r11base = this.add.image(1275, 600, 'bonsai_base').setScale(0.5);
+        let r11plant = this.add.image(1275, 600, 'bonsai2').setScale(0.5);
         let r11text = this.add.text(1025, 575, '+     =', { fontSize: '48px', fill: '#000' });
         r11soil.visible = false;
         r11seed.visible = false;
@@ -317,11 +339,11 @@ export default class GameSceneL3 extends Phaser.Scene {
         r11plant.visible = false;
         r11text.visible = false;
 
-        //Cactus #3 recipe variables
+        //Bonsai #3 recipe variables
         let r12soil = this.add.image(950, 725, 'soil').setTint(0x000FFF).setScale(0.15);
         let r12seed = this.add.image(1125, 725, 'seeds').setTint(0xFF0000).setScale(0.15);
-        let r12base = this.add.image(1275, 725, 'stem').setScale(0.5);
-        let r12plant = this.add.image(1275, 725, 'tulip').setScale(0.5);
+        let r12base = this.add.image(1275, 725, 'bonsai_base').setScale(0.5);
+        let r12plant = this.add.image(1275, 725, 'bonsai3').setScale(0.5);
         let r12text = this.add.text(10255, 700, '+     =', { fontSize: '48px', fill: '#000' });
         r12soil.visible = false;
         r12seed.visible = false;

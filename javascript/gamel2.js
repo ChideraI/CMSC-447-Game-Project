@@ -88,6 +88,12 @@ export default class GameSceneL2 extends Phaser.Scene {
 
         let carrot_leaves = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot_leaves');
         carrot_leaves.visible = false;
+
+        let tomato = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tomato');
+        tomato.visible = false;
+
+        let tomato_stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tomato_stem');
+        tomato_stem.visible = false;
     
     
         //Soil
@@ -229,8 +235,8 @@ export default class GameSceneL2 extends Phaser.Scene {
         //Rose recipe variables
         let r8soil = this.add.image(950, 225, 'soil').setTint(0xFFF000).setScale(0.15);
         let r8seed = this.add.image(1125, 225, 'seeds').setTint(0x0000FF).setScale(0.15);
-        let r8base = this.add.image(1275, 225, 'stem').setScale(0.5);
-        let r8plant = this.add.image(1275, 225, 'rose').setScale(0.5);
+        let r8base = this.add.image(1275, 225, 'tomato_stem').setScale(0.5);
+        let r8plant = this.add.image(1275, 225, 'tomato').setScale(0.5);
         let r8text = this.add.text(1025, 200, '+     =', { fontSize: '48px', fill: '#000' });
         r8soil.visible = false;
         r8seed.visible = false;
@@ -437,8 +443,8 @@ export default class GameSceneL2 extends Phaser.Scene {
             }else if(cur_soil == soil2 && cur_seed == seed3){
                 seed3.visible = false;
                 soil2.visible = false;
-                cur_base = succulent1;
-                cur_plant = succulent1;
+                cur_base = tomato_stem;
+                cur_plant = tomato;
                 cur_base.visible = true;
                 cur_plant.visible = true;
                 soil = 2;

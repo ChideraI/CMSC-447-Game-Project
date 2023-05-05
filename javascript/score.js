@@ -99,30 +99,6 @@ export default class ScoreScene extends Phaser.Scene {
         //First, put up log in/new account screen
         
         this.cameras.main.setBackgroundColor(0xAAFFAA);
-
-        this.add.text(this.cameras.main.width / 2, 100, cur_pot, {fontSize: '32px', fill: '#000' });
-        this.add.text(this.cameras.main.width / 2, 200, cur_soil, {fontSize: '32px', fill: '#000' });
-        this.add.text(this.cameras.main.width / 2, 300, cur_seed, {fontSize: '32px', fill: '#000' });
-        this.add.text(this.cameras.main.width / 2, 400, water_count, {fontSize: '32px', fill: '#000' });
-        this.add.text(this.cameras.main.width / 2, 500, fert_count, {fontSize: '32px', fill: '#000' });
-
-        //Pots
-        let pots = this.add.group();
-        //Pot 1
-        let pot1 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setInteractive();
-        pot1.visible = false;
-        //Pot 2
-        let pot2 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
-        pot2.visible = false;
-        //Pot 3
-        let pot3 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x00FFF0).setInteractive();
-        pot3.visible = false;
-        //Pot 4
-        let pot4 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0xAA11FF).setInteractive();
-        pot4.visible = false;
-        //Pot 5
-        let pot5 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x11111).setInteractive();
-        pot5.visible = false;
         
         //Flowers
         let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');
@@ -177,10 +153,28 @@ export default class ScoreScene extends Phaser.Scene {
         bonsai1.visible = false;
 
         let bonsai2 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai2');
-        bonsai1.visible = false;
+        bonsai2.visible = false;
 
         let bonsai3 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai3');
-        bonsai1.visible = false;
+        bonsai3.visible = false;
+
+        //Pots
+        let pots = this.add.group();
+        //Pot 1
+        let pot1 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setInteractive();
+        pot1.visible = false;
+        //Pot 2
+        let pot2 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        pot2.visible = false;
+        //Pot 3
+        let pot3 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x00FFF0).setInteractive();
+        pot3.visible = false;
+        //Pot 4
+        let pot4 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0xAA11FF).setInteractive();
+        pot4.visible = false;
+        //Pot 5
+        let pot5 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x11111).setInteractive();
+        pot5.visible = false;
     
         //Pot visibility
         if(cur_pot == 1){
@@ -243,9 +237,6 @@ export default class ScoreScene extends Phaser.Scene {
             cur_plant = bonsai3;
         }
 
-        this.add.text(this.cameras.main.width / 2, 600, cur_base, {fontSize: '32px', fill: '#000' });
-        this.add.text(this.cameras.main.width / 2, 700, cur_plant, {fontSize: '32px', fill: '#000' });
-
         cur_base.visible = true;
         cur_plant.visible = true;
 
@@ -306,7 +297,10 @@ export default class ScoreScene extends Phaser.Scene {
             cur_base.y -= 50;
         }
 
-        this.add.text(this.cameras.main.width / 2 + 200, 800, 'Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
+        this.game.config.tscore += this.game.config.cscore;
+
+        this.add.text(this.cameras.main.width / 2 + 100, 700, 'Customer'+this.game.config.ccustomer+' Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
+        this.add.text(this.cameras.main.width / 2 + 100, 800, 'Level '+this.game.config.level+' Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000' });
 
         //Make plant button
         const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next Customer', {fontSize: '32px', fill: '#000' });

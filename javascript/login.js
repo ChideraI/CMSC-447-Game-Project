@@ -11,6 +11,17 @@ export default class LoginScene extends Phaser.Scene {
     create() {
         const myThis = this;
 
+        //Reset global variables when user returns to main menu
+        this.game.config.ccustomer = 1;
+        this.game.config.cpot = 0;
+        this.game.config.csoil = 0;
+        this.game.config.cseed = 0;
+        this.game.config.cwater = 0;
+        this.game.config.cfertlizer = 0;
+        this.game.config.r_count = 0;
+        this.game.config.cscore = 0;
+        this.game.config.tscore = 0;
+
 
         let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
         let scaleX = this.cameras.main.width / image.width
