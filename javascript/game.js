@@ -25,8 +25,16 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cactus_flower', 'assets/cactus_flower.png');
         this.load.image('succulent1', 'assets/cactus_stem.png');
         this.load.image('succulent2', 'assets/succulent.png');
-        this.load.image('carrot', 'assets/carrot.png');
         this.load.image('carrot_leaves', 'assets/carrot_leaves.png');
+        this.load.image('carrot', 'assets/carrot.png');
+        this.load.image('tomato_stem', 'assets/tomato_stem.png');
+        this.load.image('tomato', 'assets/tomato.png');
+        this.load.image('pumpkin_leaves', 'assets/pumpkin_leaves.png');
+        this.load.image('pumpkin', 'assets/pumpkin.png');
+        this.load.image('bonsai_base', 'assets/bonsai_base.png');
+        this.load.image('bonsai1', 'assets/bonsai1.png');
+        this.load.image('bonsai2', 'assets/bonsai2.png');
+        this.load.image('bonsai3', 'assets/bonsai3.png');
         this.load.image('water', 'assets/water.png');
         this.load.image('fertilizer', 'assets/fertilizer.png');
         this.load.image('soil', 'assets/soil.png');
@@ -46,7 +54,6 @@ export default class GameScene extends Phaser.Scene {
         let logged_in = false;
         let water_count = 0;
         let fert_count = 0;
-        let recipe_counter = 0;
         let cur_pot;
         let cur_soil;
         let cur_seed;
@@ -71,6 +78,10 @@ export default class GameScene extends Phaser.Scene {
         }else{
             cur_data = level3_data;
             num_customers = 15;
+        }
+
+        if(this.game.config.ccustomer > num_customers){
+            myThis.scene.start('Menu');
         }
 
         this.game.config.cpot = cur_data["Customer"+this.game.config.ccustomer]["pot"];
@@ -310,5 +321,11 @@ export default class GameScene extends Phaser.Scene {
             cur_plant.y -= 50;
             cur_base.y -= 50;
         }
+
+        if(this.game.config.cscore != 0){
+            this.add.text(this.cameras.main.width / 2, 800, 'Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
+            this.game.config.cscore = 0;
+        }
+
         }
     }

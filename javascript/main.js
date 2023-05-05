@@ -34,7 +34,9 @@ const config = {
     csoil : 0, 
     cseed : 0, 
     cwater : 0,
-    cfertlizer : 0
+    cfertlizer : 0, 
+    r_count : 0, 
+    cscore : 0
 };
 const game = new Phaser.Game(config);
 game.config.level = 0;
@@ -44,6 +46,8 @@ game.config.csoil = 0;
 game.config.cseed = 0;
 game.config.cwater = 0;
 game.config.cfertlizer = 0;
+game.config.r_count = 0;
+game.config.cscore = 0;
 
 // var config = {
 //     type: Phaser.AUTO,
