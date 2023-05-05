@@ -38,29 +38,29 @@ export default class LoginScene extends Phaser.Scene {
         const tutorialButton = this.add.text(400, 800, 'Tutorial', {fontSize: '32px', fill: '#000' });
         tutorialButton.setInteractive();
         tutorialButton.on('pointerup', () => {  
-            myThis.scene.start('Tutorial');
             this.game.config.level = 0;
+            myThis.scene.start('Game');
         });
             //go to level 1
         const level1Button = this.add.text(1000, 400, 'Play Level 1', {fontSize: '32px', fill: '#000' });
         level1Button.setInteractive();
         level1Button.on('pointerup', () => {  
-            myThis.scene.start('GameL1');
             this.game.config.level = 1;
+            myThis.scene.start('Game');
         });
             //go to level 2
         const level2Button = this.add.text(1000, 550, 'Play Level 2', {fontSize: '32px', fill: '#000' });
         level2Button.setInteractive();
         level2Button.on('pointerup', () => { 
-            myThis.scene.start('GameL2');
             this.game.config.level = 2;
+            myThis.scene.start('Game');
         });
             //go to level 3
         const level3Button = this.add.text(1000, 700, 'Play Level 3', {fontSize: '32px', fill: '#000' });
         level3Button.setInteractive();
         level3Button.on('pointerup', () => {  
-            myThis.scene.start('GameL3');
-            this.game.config.level = 0;
+            this.game.config.level = 3;
+            myThis.scene.start('Game');
         });
 
         // const loginButton = this.dom.getChildByName("login_button");

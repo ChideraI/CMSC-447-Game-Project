@@ -384,26 +384,27 @@ export default class GameSceneL1 extends Phaser.Scene {
             }
         });
 
-        const submitButton = this.add.text(this.cameras.main.width / 2, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
+        this.add.text(this.cameras.main.width / 2 + 300, 800, pot, {fontSize: '32px', fill: '#000' });
+
+        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
         submitButton.setInteractive();
         submitButton.on('pointerup', () => {
             if(pot == this.game.config.cpot){
                 this.game.config.cscore += 0.5;
             }
             if(soil == this.game.config.csoil){
-                this.game.config.score += 1;
+                this.game.config.cscore += 1;
             }
             if(seed == this.game.config.cseed){
-                this.game.config.score += 1;
+                this.game.config.cscore += 1;
             }
             if(water_count == this.game.config.cwater){
-                this.game.config.score += 0.5;
+                this.game.config.cscore += 0.5;
             }
             if(fert_count == this.game.config.cfertilizer){
-                this.game.config.score += 0.5;
+                this.game.config.cscore += 0.5;
             }
-            this.game.config.ccustomer += 1;
-            myThis.scene.start('Game');
+            myThis.scene.start('Score');
         });
     }
 }
