@@ -260,4 +260,4 @@ export default class Tutorial extends Phaser.Scene{
             }
         });
     }
-    }
+}

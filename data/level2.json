@@ -1,80 +1,80 @@
 {
     "Customer1" : {
-        "pot" : "pot4", 
-        "soil": "soil1",
-        "seed": "seed3", 
+        "pot" : 4, 
+        "soil": 1,
+        "seed": 3, 
         "water": 3, 
         "fertilizer": 1
     }, 
     
     "Customer2" : {
-        "pot" : "pot3", 
-        "soil": "soil2",
-        "seed": "seed2", 
+        "pot" : 3, 
+        "soil": 2,
+        "seed": 2, 
         "water": 2, 
         "fertilizer": 2
     }, 
 
     "Customer3" : {
-        "pot" : "pot1", 
-        "soil": "soil1",
-        "seed": "seed2", 
+        "pot" : 1, 
+        "soil": 1,
+        "seed": 2, 
         "water": 2, 
         "fertilizer": 3
     }, 
 
     "Customer4" : {
-        "pot" : "pot2", 
-        "soil": "soil2",
-        "seed": "seed1", 
+        "pot" : 2, 
+        "soil": 2,
+        "seed": 1, 
         "water": 3, 
         "fertilizer": 1
     }, 
     
     "Customer5" : {
-        "pot" : "pot2", 
-        "soil": "soil1",
-        "seed": "seed1", 
+        "pot" : 2, 
+        "soil": 1,
+        "seed": 1, 
         "water": 3, 
         "fertilizer": 2
     }, 
 
     "Customer6" : {
-        "pot" : "pot4", 
-        "soil": "soil1",
-        "seed": "seed3", 
+        "pot" : 4, 
+        "soil": 1,
+        "seed": 3, 
         "water": 1, 
         "fertilizer": 1
     }, 
     
     "Customer7" : {
-        "pot" : "pot3", 
-        "soil": "soil2",
-        "seed": "seed3", 
+        "pot" : 3, 
+        "soil": 2,
+        "seed": 3, 
         "water": 2, 
         "fertilizer": 1
     }, 
 
     "Customer8" : {
-        "pot" : "pot1", 
-        "soil": "soil2",
-        "seed": "seed1", 
+        "pot" : 1, 
+        "soil": 2,
+        "seed": 1, 
         "water": 1, 
         "fertilizer": 3
     }, 
 
     "Customer9" : {
-        "pot" : "pot4", 
-        "soil": "soil1",
-        "seed": "seed2", 
+        "pot" : 4, 
+        "soil": 1,
+        "seed": 2, 
         "water": 3, 
         "fertilizer": 1
     }, 
     
     "Customer10" : {
-        "pot" : "pot2", 
-        "soil": "soil2",
-        "seed": "seed3", 
+        "pot" : 2, 
+        "soil": 2,
+        "seed": 3, 
         "water": 3, 
         "fertilizer": 2
     }
