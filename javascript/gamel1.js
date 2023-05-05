@@ -41,17 +41,16 @@ export default class GameSceneL1 extends Phaser.Scene {
         //First, put up log in/new account screen
         const myThis = this;
 
-        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
-        let scaleX = this.cameras.main.width / image.width
-        let scaleY = this.cameras.main.height / image.height
-        let scale = Math.max(scaleX, scaleY)
-        image.setScale(scale).setScrollFactor(0)
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background');
+        let scaleX = (this.cameras.main.width / image.width);
+        let scaleY = (this.cameras.main.height / image.height);
+        let scale = Math.max(scaleX, scaleY);
+        image.setScale(scale).setScrollFactor(0);
 
         const loginButton = this.add.text(400, 400, 'Welcome to game 1 page! to go back to Login, click here!', {fontSize: '32px', fill: '#000' });
         loginButton.setInteractive();
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
-        this.cameras.main.setBackgroundColor(0xAAFFAA);
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
         //this.add.image(400, 300, 'star');
         let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');

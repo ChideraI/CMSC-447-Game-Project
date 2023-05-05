@@ -6,6 +6,7 @@ export default class Tutorial extends Phaser.Scene{
     
     preload ()
     {
+        this.load.image('background', './main_screen.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('stem', 'assets/flower_stem.png');
         this.load.image('sunflower', 'assets/sunflower.png');
@@ -23,7 +24,6 @@ export default class Tutorial extends Phaser.Scene{
     {
         let logged_in = false;
         let score = 0;
-        let scoreText;
         let water_count = 0;
         let fert_count = 0;
         let recipe_counter = 0;
@@ -32,10 +32,20 @@ export default class Tutorial extends Phaser.Scene{
         let cur_seed;
         let cur_plant;
         let cur_base;
-    
+
         //First, put up log in/new account screen
-        
-        this.cameras.main.setBackgroundColor(0xAAFFAA);
+        const myThis = this;
+
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background');
+        let scaleX = (this.cameras.main.width / image.width);
+        let scaleY = (this.cameras.main.height / image.height);
+        let scale = Math.max(scaleX, scaleY);
+        image.setScale(scale).setScrollFactor(0);
+
+        const loginButton = this.add.text(50, 50, 'Return to Main Menu', {fontSize: '32px', fill: '#000' });
+        loginButton.setInteractive();
+        loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
+    
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
         //this.add.image(400, 300, 'star');
         let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');
@@ -91,9 +101,6 @@ export default class Tutorial extends Phaser.Scene{
         //Fertilizer 1
         let fert1 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert1);
-
-    
-        scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
     
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
@@ -235,9 +242,6 @@ export default class Tutorial extends Phaser.Scene{
                 cur_base.visible = true;
                 cur_plant.visible = true;
             }             
-
-            //Update score on screen
-            scoreText.setText('Score: ' + score);
 
             if(water_count == 1 && waters.contains(gameObject)){
                 cur_base.setTint(0x003300);
