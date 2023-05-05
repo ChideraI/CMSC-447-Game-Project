@@ -3,16 +3,6 @@ export default class GameSceneL3 extends Phaser.Scene {
 
     constructor() {
         super("GameL3");
-        // let logged_in = false;
-        // let score = 0;
-        // let scoreText;
-        // let water_count = 0;
-        // let fert_count = 0;
-        // let recipe_counter = 0;
-        // let cur_pot;
-        // let cur_soil;
-        // let cur_seed;
-        // let cur_plant;
     }
     
     preload ()
@@ -29,6 +19,14 @@ export default class GameSceneL3 extends Phaser.Scene {
         this.load.image('succulent2', 'assets/succulent.png');
         this.load.image('carrot', 'assets/carrot.png');
         this.load.image('carrot_leaves', 'assets/carrot_leaves.png');
+        this.load.image('tomato_stem', 'assets/tomato_stem.png');
+        this.load.image('tomato', 'assets/tomato.png');
+        this.load.image('pumpkin_leaves', 'assets/pumpkin_leaves.png');
+        this.load.image('pumpkin', 'assets/pumpkin.png');
+        this.load.image('bonsai_base', 'assets/bonsai_base.png');
+        this.load.image('bonsai1', 'assets/bonsai1.png');
+        this.load.image('bonsai2', 'assets/bonsai2.png');
+        this.load.image('bonsai3', 'assets/bonsai3.png');
         this.load.image('water', 'assets/water.png');
         this.load.image('fertilizer', 'assets/fertilizer.png');
         this.load.image('soil', 'assets/soil.png');
@@ -41,8 +39,6 @@ export default class GameSceneL3 extends Phaser.Scene {
     create ()
     {
         let logged_in = false;
-        let score = 0;
-        let scoreText;
         let water_count = 0;
         let fert_count = 0;
         let recipe_counter = 0;
@@ -51,6 +47,10 @@ export default class GameSceneL3 extends Phaser.Scene {
         let cur_seed;
         let cur_plant;
         let cur_base;
+
+        let pot;
+        let soil;
+        let seed;
     
         //First, put up log in/new account screen
         const myThis = this;
@@ -61,7 +61,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
 
-        const loginButton = this.add.text(400, 400, 'Welcome to game 3 page! to go back to Login, click here!', {fontSize: '32px', fill: '#000' });
+        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000' });
         loginButton.setInteractive();
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
@@ -171,9 +171,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         //Fertilizer 3
         let fert3 = ferts.create(5*this.cameras.main.width / 6 + 100, this.cameras.main.height / 2 + 225, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert3);
-    
-        scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
-    
+        
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
     
@@ -499,7 +497,7 @@ export default class GameSceneL3 extends Phaser.Scene {
             gameObject.y = dragY;
         });
     
-        //When dropping object into zone, move object and update score
+        //When dropping object into zone, move object
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
@@ -540,7 +538,18 @@ export default class GameSceneL3 extends Phaser.Scene {
     //NOTE: dragend only fires on drop outside of drop target. Do the function on "drop" event.
         // this.input.on('dragend', function (pointer, gameObject) {
             if(pots.contains(gameObject)){
-               cur_pot = gameObject;
+                cur_pot = gameObject;
+                if(cur_pot == pot1){
+                    pot = 1;
+                }else if(cur_pot == pot2){
+                    pot = 2;
+                }else if(cur_pot == pot3){
+                    pot = 3;
+                }else if(cur_pot == pot4){
+                    pot = 4;
+                }else{
+                    pot = 5;
+                }
             }else if(soils.contains(gameObject)){
                 cur_soil = gameObject;
             }else if(seeds.contains(gameObject)){
@@ -561,6 +570,8 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = sunf;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 1;
+                seed = 1;
             }else if(cur_soil == soil2 && cur_seed == seed1){
                 seed1.visible = false;
                 soil2.visible = false;
@@ -568,6 +579,8 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = rose;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 2;
+                seed = 1;
             }else if(cur_soil == soil3 && cur_seed == seed1){
                 seed1.visible = false;
                 soil3.visible = false;
@@ -575,6 +588,8 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = tulip;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 3;
+                seed = 1;
             }
             
             //Cacti/succulents
@@ -585,6 +600,8 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = cactus_flower;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 1;
+                seed = 2;
             }else if(cur_soil == soil2 && cur_seed == seed2){
                 seed2.visible = false;
                 soil2.visible = false;
@@ -592,6 +609,8 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = succulent1;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 2;
+                seed = 2;
             }else if(cur_soil == soil3 && cur_seed == seed2){
                 seed2.visible = false;
                 soil3.visible = false;
@@ -599,6 +618,8 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = succulent2;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 3;
+                seed = 2;
             }
 
             //Vegetables
@@ -609,24 +630,57 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant = carrot;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 1;
+                seed = 3;
             }else if(cur_soil == soil2 && cur_seed == seed3){
                 seed3.visible = false;
                 soil2.visible = false;
-                cur_base = succulent1;
-                cur_plant = succulent1;
+                cur_base = tomato_stem;
+                cur_plant = tomato;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 2;
+                seed = 3;
             }else if(cur_soil == soil3 && cur_seed == seed3){
                 seed3.visible = false;
                 soil3.visible = false;
-                cur_base = succulent2;
-                cur_plant = succulent2;
+                cur_base = pumpkin_leaves;
+                cur_plant = pumpkin;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 3;
+                seed = 3;
             }
 
-            //Update score on screen
-            scoreText.setText('Score: ' + score);
+            //Bonsai
+            else if(cur_soil == soil1 && cur_seed == seed4){
+                seed4.visible = false;
+                soil1.visible = false;
+                cur_base = bonsai_base;
+                cur_plant = bonsai1;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+                soil = 1;
+                seed = 4;
+            }else if(cur_soil == soil2 && cur_seed == seed4){
+                seed4.visible = false;
+                soil2.visible = false;
+                cur_base = bonsai_base;
+                cur_plant = bonsai2;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+                soil = 2;
+                seed = 4;
+            }else if(cur_soil == soil3 && cur_seed == seed4){
+                seed4.visible = false;
+                soil3.visible = false;
+                cur_base = bonsai_base;
+                cur_plant = bonsai3;
+                cur_base.visible = true;
+                cur_plant.visible = true;
+                soil = 3;
+                seed = 4;
+            }
 
             if(water_count == 1 && waters.contains(gameObject)){
                 cur_base.setTint(0x003300);
@@ -684,6 +738,29 @@ export default class GameSceneL3 extends Phaser.Scene {
                 cur_plant.y -= 50;
                 cur_base.y -= 50;
             }
+        });
+
+        this.add.text(this.cameras.main.width / 2 + 300, 800, pot, {fontSize: '32px', fill: '#000' });
+
+        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
+        submitButton.setInteractive();
+        submitButton.on('pointerup', () => {
+            if(pot == this.game.config.cpot){
+                this.game.config.cscore += 0.5;
+            }
+            if(soil == this.game.config.csoil){
+                this.game.config.cscore += 1;
+            }
+            if(seed == this.game.config.cseed){
+                this.game.config.cscore += 1;
+            }
+            if(water_count == this.game.config.cwater){
+                this.game.config.cscore += 0.5;
+            }
+            if(fert_count == this.game.config.cfertilizer){
+                this.game.config.cscore += 0.5;
+            }
+            myThis.scene.start('Score');
         });
     }
 }

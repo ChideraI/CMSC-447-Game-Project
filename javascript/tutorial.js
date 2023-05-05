@@ -23,7 +23,6 @@ export default class Tutorial extends Phaser.Scene{
     create ()
     {
         let logged_in = false;
-        let score = 0;
         let water_count = 0;
         let fert_count = 0;
         let recipe_counter = 0;
@@ -32,6 +31,10 @@ export default class Tutorial extends Phaser.Scene{
         let cur_seed;
         let cur_plant;
         let cur_base;
+
+        let pot;
+        let soil;
+        let seed;
 
         //First, put up log in/new account screen
         const myThis = this;
@@ -42,7 +45,7 @@ export default class Tutorial extends Phaser.Scene{
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
 
-        const loginButton = this.add.text(50, 50, 'Return to Main Menu', {fontSize: '32px', fill: '#000' });
+        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000' });
         loginButton.setInteractive();
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
     
@@ -187,7 +190,7 @@ export default class Tutorial extends Phaser.Scene{
             gameObject.y = dragY;
         });
     
-        //When dropping object into zone, move object and update score
+        //When dropping object into zone, move object
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;

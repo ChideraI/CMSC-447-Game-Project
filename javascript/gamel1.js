@@ -27,8 +27,6 @@ export default class GameSceneL1 extends Phaser.Scene {
     create ()
     {
         let logged_in = false;
-        let score = 0;
-        let scoreText;
         let water_count = 0;
         let fert_count = 0;
         let recipe_counter = 0;
@@ -51,7 +49,7 @@ export default class GameSceneL1 extends Phaser.Scene {
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
 
-        const loginButton = this.add.text(400, 400, 'Welcome to game 1 page! to go back to Login, click here!', {fontSize: '32px', fill: '#000' });
+        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000' });
         loginButton.setInteractive();
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
@@ -129,9 +127,6 @@ export default class GameSceneL1 extends Phaser.Scene {
         //Fertilizer 2
         let fert2 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 250, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert2);
-
-    
-        scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
     
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
@@ -266,7 +261,7 @@ export default class GameSceneL1 extends Phaser.Scene {
             gameObject.y = dragY;
         });
     
-        //When dropping object into zone, move object and update score
+        //When dropping object into zone, move object
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
@@ -351,9 +346,6 @@ export default class GameSceneL1 extends Phaser.Scene {
                 seed = 2;
             }
 
-            //Update score on screen
-            scoreText.setText('Score: ' + score);
-
             if(water_count == 1 && waters.contains(gameObject)){
                 cur_base.setTint(0x003300);
                 if(cur_seed == seed1){
@@ -383,8 +375,6 @@ export default class GameSceneL1 extends Phaser.Scene {
                 cur_base.y -= 20;
             }
         });
-
-        this.add.text(this.cameras.main.width / 2 + 300, 800, pot, {fontSize: '32px', fill: '#000' });
 
         const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
         submitButton.setInteractive();
