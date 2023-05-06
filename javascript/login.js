@@ -11,6 +11,17 @@ export default class LoginScene extends Phaser.Scene {
     create() {
         const myThis = this;
 
+        //Reset global variables when user returns to main menu
+        this.game.config.ccustomer = 1;
+        this.game.config.cpot = 0;
+        this.game.config.csoil = 0;
+        this.game.config.cseed = 0;
+        this.game.config.cwater = 0;
+        this.game.config.cfertlizer = 0;
+        this.game.config.r_count = 0;
+        this.game.config.cscore = 0;
+        this.game.config.tscore = 0;
+
 
         let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
         let scaleX = this.cameras.main.width / image.width
@@ -37,19 +48,31 @@ export default class LoginScene extends Phaser.Scene {
             //go to tutorial
         const tutorialButton = this.add.text(400, 800, 'Tutorial', {fontSize: '32px', fill: '#000' });
         tutorialButton.setInteractive();
-        tutorialButton.on('pointerup', () => {  myThis.scene.start('Tutorial') });
+        tutorialButton.on('pointerup', () => {  
+            this.game.config.level = 0;
+            myThis.scene.start('Game');
+        });
             //go to level 1
         const level1Button = this.add.text(1000, 400, 'Play Level 1', {fontSize: '32px', fill: '#000' });
         level1Button.setInteractive();
-        level1Button.on('pointerup', () => {  myThis.scene.start('GameL1') });
+        level1Button.on('pointerup', () => {  
+            this.game.config.level = 1;
+            myThis.scene.start('Game');
+        });
             //go to level 2
         const level2Button = this.add.text(1000, 550, 'Play Level 2', {fontSize: '32px', fill: '#000' });
         level2Button.setInteractive();
-        level2Button.on('pointerup', () => {  myThis.scene.start('GameL2') });
+        level2Button.on('pointerup', () => { 
+            this.game.config.level = 2;
+            myThis.scene.start('Game');
+        });
             //go to level 3
         const level3Button = this.add.text(1000, 700, 'Play Level 3', {fontSize: '32px', fill: '#000' });
         level3Button.setInteractive();
-        level3Button.on('pointerup', () => {  myThis.scene.start('GameL3') });
+        level3Button.on('pointerup', () => {  
+            this.game.config.level = 3;
+            myThis.scene.start('Game');
+        });
 
         // const loginButton = this.dom.getChildByName("login_button");
         // const loginButton = document.getElementsByName("login_button");

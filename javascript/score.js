@@ -1,9 +1,9 @@
-export default class GameScene extends Phaser.Scene {
+export default class ScoreScene extends Phaser.Scene {
 
 
     //var game = new Phaser.Game(config);
     constructor() {
-        super("Game");
+        super("Score");
         // let logged_in = false;
         // let water_count = 0;
         // let fert_count = 0;
@@ -81,7 +81,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         if(this.game.config.ccustomer > num_customers){
-            myThis.scene.start('Login');
+            myThis.scene.start('Menu');
         }
 
         this.game.config.cpot = cur_data["Customer"+this.game.config.ccustomer]["pot"];
@@ -99,21 +99,6 @@ export default class GameScene extends Phaser.Scene {
         //First, put up log in/new account screen
         
         this.cameras.main.setBackgroundColor(0xAAFFAA);
-
-        //Make plant button
-        const makeButton = this.add.text(this.cameras.main.width / 2, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
-        makeButton.setInteractive();
-        makeButton.on('pointerup', () => { 
-            if(this.game.config.level == 0){
-                myThis.scene.start('Tutorial');
-            }else if(this.game.config.level == 1){
-                myThis.scene.start('GameL1');
-            }else if(this.game.config.level == 2){
-                myThis.scene.start('GameL2');
-            }else{
-                myThis.scene.start('GameL3');
-            }
-        });
         
         //Flowers
         let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');
@@ -311,6 +296,20 @@ export default class GameScene extends Phaser.Scene {
             cur_plant.y -= 50;
             cur_base.y -= 50;
         }
+
+        this.game.config.tscore += this.game.config.cscore;
+
+        this.add.text(300, 700, 'Customer '+this.game.config.ccustomer+' Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
+        this.add.text(300, 800, 'Level '+this.game.config.level+' Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000' });
+
+        //Make plant button
+        const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next', {fontSize: '32px', fill: '#000' });
+        nextButton.setInteractive();
+        nextButton.on('pointerup', () => { 
+            this.game.config.ccustomer += 1;
+            this.game.config.cscore = 0;
+            myThis.scene.start('Game');
+        });
 
         }
     }

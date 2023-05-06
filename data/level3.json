@@ -1,120 +1,120 @@
 {
     "Customer1" : {
-        "pot" : "pot5", 
-        "soil": "soil3",
-        "seed": "seed2", 
+        "pot" : 5, 
+        "soil": 3,
+        "seed": 2, 
         "water": 3, 
         "fertilizer": 2
     }, 
     
     "Customer2" : {
-        "pot" : "pot2", 
-        "soil": "soil2",
-        "seed": "seed1", 
+        "pot" : 2, 
+        "soil": 2,
+        "seed": 1, 
         "water": 1, 
         "fertilizer": 3
     }, 
 
     "Customer3" : {
-        "pot" : "pot3", 
-        "soil": "soil1",
-        "seed": "seed4", 
+        "pot" : 3, 
+        "soil": 1,
+        "seed": 4, 
         "water": 2, 
         "fertilizer": 2
     }, 
 
     "Customer4" : {
-        "pot" : "pot1", 
-        "soil": "soil2",
-        "seed": "seed3", 
+        "pot" : 1, 
+        "soil": 2,
+        "seed": 3, 
         "water": 3, 
         "fertilizer": 2
     }, 
     
     "Customer5" : {
-        "pot" : "pot4", 
-        "soil": "soil1",
-        "seed": "seed3", 
+        "pot" : 4, 
+        "soil": 1,
+        "seed": 3, 
         "water": 2, 
         "fertilizer": 3
     }, 
 
     "Customer6" : {
-        "pot" : "pot1", 
-        "soil": "soil3",
-        "seed": "seed4", 
+        "pot" : 1, 
+        "soil": 3,
+        "seed": 4, 
         "water": 2, 
         "fertilizer": 3
     }, 
     
     "Customer7" : {
-        "pot" : "pot2", 
-        "soil": "soil3",
-        "seed": "seed1", 
+        "pot" : 2, 
+        "soil": 3,
+        "seed": 1, 
         "water": 2, 
         "fertilizer": 2
     }, 
 
     "Customer8" : {
-        "pot" : "pot3", 
-        "soil": "soil1",
-        "seed": "seed2", 
+        "pot" : 3, 
+        "soil": 1,
+        "seed": 2, 
         "water": 3, 
         "fertilizer": 2
     }, 
 
     "Customer9" : {
-        "pot" : "pot5", 
-        "soil": "soil2",
-        "seed": "seed4", 
+        "pot" : 5, 
+        "soil": 2,
+        "seed": 4, 
         "water": 3, 
         "fertilizer": 1
     }, 
     
     "Customer10" : {
-        "pot" : "pot4", 
-        "soil": "soil1",
-        "seed": "seed1", 
+        "pot" : 4, 
+        "soil": 1,
+        "seed": 1, 
         "water": 1, 
         "fertilizer": 2
     }, 
 
     "Customer11" : {
-        "pot" : "pot2", 
-        "soil": "soil3",
-        "seed": "seed3", 
+        "pot" : 2, 
+        "soil": 3,
+        "seed": 3, 
         "water": 1, 
         "fertilizer": 3
     }, 
     
     "Customer12" : {
-        "pot" : "pot4", 
-        "soil": "soil3",
-        "seed": "seed4", 
+        "pot" : 4, 
+        "soil": 3,
+        "seed": 4, 
         "water": 2, 
         "fertilizer": 1
     }, 
 
     "Customer13" : {
-        "pot" : "pot3", 
-        "soil": "soil2",
-        "seed": "seed2", 
+        "pot" : 3, 
+        "soil": 2,
+        "seed": 2, 
         "water": 2, 
         "fertilizer": 2
     }, 
 
     "Customer14" : {
-        "pot" : "pot1", 
-        "soil": "soil2",
-        "seed": "seed3", 
+        "pot" : 1, 
+        "soil": 2,
+        "seed": 3, 
         "water": 1, 
         "fertilizer": 2
     }, 
     
     "Customer15" : {
-        "pot" : "pot5", 
-        "soil": "soil1",
-        "seed": "seed4", 
+        "pot" : 5, 
+        "soil": 1,
+        "seed": 4, 
         "water": 3, 
         "fertilizer": 1
     }

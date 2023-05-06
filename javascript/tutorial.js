@@ -6,6 +6,7 @@ export default class Tutorial extends Phaser.Scene{
     
     preload ()
     {
+        this.load.image('background', './main_screen.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('stem', 'assets/flower_stem.png');
         this.load.image('sunflower', 'assets/sunflower.png');
@@ -22,8 +23,6 @@ export default class Tutorial extends Phaser.Scene{
     create ()
     {
         let logged_in = false;
-        let score = 0;
-        let scoreText;
         let water_count = 0;
         let fert_count = 0;
         let recipe_counter = 0;
@@ -32,10 +31,24 @@ export default class Tutorial extends Phaser.Scene{
         let cur_seed;
         let cur_plant;
         let cur_base;
-    
+
+        let pot;
+        let soil;
+        let seed;
+
         //First, put up log in/new account screen
-        
-        this.cameras.main.setBackgroundColor(0xAAFFAA);
+        const myThis = this;
+
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background');
+        let scaleX = (this.cameras.main.width / image.width);
+        let scaleY = (this.cameras.main.height / image.height);
+        let scale = Math.max(scaleX, scaleY);
+        image.setScale(scale).setScrollFactor(0);
+
+        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000' });
+        loginButton.setInteractive();
+        loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
+    
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
         //this.add.image(400, 300, 'star');
         let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');
@@ -91,9 +104,6 @@ export default class Tutorial extends Phaser.Scene{
         //Fertilizer 1
         let fert1 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert1);
-
-    
-        scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
     
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
@@ -180,7 +190,7 @@ export default class Tutorial extends Phaser.Scene{
             gameObject.y = dragY;
         });
     
-        //When dropping object into zone, move object and update score
+        //When dropping object into zone, move object
         this.input.on('drop', function (pointer, gameObject, dropZone) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
@@ -188,25 +198,27 @@ export default class Tutorial extends Phaser.Scene{
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
                 gameObject.y = dropZone.y + 100;
+                pot1.disableInteractive();
+                pot2.disableInteractive();
             }
     
             else if(soils.contains(gameObject)){
                 gameObject.y = dropZone.y + 25;
+                soil1.disableInteractive();
+                soil2.disableInteractive();
+            }
+
+            else if (seeds.contains(gameObject)){
+                seed1.disableInteractive();
             }
     
-            else if(waters.contains(gameObject)){
-                gameObject.y = dropZone.y - 100;
-            }
-    
-            else if(ferts.contains(gameObject)){
-                gameObject.y = dropZone.y - 50;
-            }
-    
-         // });
-    //NOTE: dragend only fires on drop outside of drop target. Do the function on "drop" event.
-        // this.input.on('dragend', function (pointer, gameObject) {
             if(pots.contains(gameObject)){
                 cur_pot = gameObject;
+                if(cur_pot == pot1){
+                    pot = 1;
+                }else{
+                    pot = 2;
+                }
             }else if(soils.contains(gameObject)){
                 cur_soil = gameObject;
             }else if(seeds.contains(gameObject)){
@@ -227,6 +239,8 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant = sunf;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 1;
+                seed = 1;
             }else if(cur_soil == soil2 && cur_seed == seed1){
                 seed1.visible = false;
                 soil2.visible = false;
@@ -234,10 +248,9 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant = rose;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 2;
+                seed = 1;
             }             
-
-            //Update score on screen
-            scoreText.setText('Score: ' + score);
 
             if(water_count == 1 && waters.contains(gameObject)){
                 cur_base.setTint(0x003300);
@@ -255,5 +268,32 @@ export default class Tutorial extends Phaser.Scene{
                 cur_base.y -= 30;
             }
         });
+
+        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
+        submitButton.setInteractive();
+        submitButton.on('pointerup', () => {
+            if(pot == this.game.config.cpot){
+                this.game.config.cscore += 0.5;
+            }
+            if(soil == this.game.config.csoil){
+                this.game.config.cscore += 1;
+            }
+            if(seed == this.game.config.cseed){
+                this.game.config.cscore += 1;
+            }
+            if(water_count == this.game.config.cwater){
+                this.game.config.cscore += 0.5;
+            }
+            if(fert_count == this.game.config.cfertilizer){
+                this.game.config.cscore += 0.5;
+            }
+            this.game.config.cscore -= 0.1 * recipe_counter;
+
+            if(this.game.config.cscore < 0){
+                this.game.config.cscore = 0;
+            }
+
+            myThis.scene.start('Score');
+        });
     }
-    }
+}

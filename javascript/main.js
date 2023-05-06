@@ -6,6 +6,7 @@ import GameSceneL2 from './gamel2.js';
 import GameSceneL3 from './gamel3.js';
 import Tutorial from './tutorial.js';
 import Customization from './customization.js';
+import ScoreScene from './score.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -26,16 +27,28 @@ const config = {
     //     create: create
     // }
     
-    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization],
+    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization, ScoreScene],
 
     level: 0,
-    cpot : "", 
-    csoil : "", 
-    cseed : "", 
+    ccustomer : 1,
+    cpot : 0, 
+    csoil : 0, 
+    cseed : 0, 
     cwater : 0,
-    cfertlizer : 0
+    cfertlizer : 0, 
+    cscore : 0, 
+    tscore : 0
 };
-const game = new Phaser.Game(config)
+const game = new Phaser.Game(config);
+game.config.level = 0;
+game.config.ccustomer = 1;
+game.config.cpot = 0;
+game.config.csoil = 0;
+game.config.cseed = 0;
+game.config.cwater = 0;
+game.config.cfertlizer = 0;
+game.config.cscore = 0;
+game.config.tscore = 0;
 
 // var config = {
 //     type: Phaser.AUTO,
