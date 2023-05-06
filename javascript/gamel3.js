@@ -710,7 +710,7 @@ export default class GameSceneL3 extends Phaser.Scene {
                 }else if(cur_seed == seed3){
                     cur_plant.setTint(0xFFFF00);
                 }else{
-                    cur_plant.setTint(0x773300);
+                    cur_plant.setTint(0xAA5500);
                     cur_base.setTint(0x552211);
                 }
             }
@@ -723,7 +723,7 @@ export default class GameSceneL3 extends Phaser.Scene {
                 }else if(cur_seed == seed3){
                     cur_plant.setTint(0xFFAA00);
                 }else{
-                    cur_plant.setTint(0xAA8800);
+                    cur_plant.setTint(0xCCAA00);
                     cur_base.setTint(0x774411);
                 }
             }
