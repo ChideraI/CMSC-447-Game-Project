@@ -4,14 +4,6 @@ export default class ScoreScene extends Phaser.Scene {
     //var game = new Phaser.Game(config);
     constructor() {
         super("Score");
-        // let logged_in = false;
-        // let water_count = 0;
-        // let fert_count = 0;
-        // let recipe_counter = 0;
-        // let cur_pot;
-        // let cur_soil;
-        // let cur_seed;
-        // let cur_plant;
     }
     
     preload ()
