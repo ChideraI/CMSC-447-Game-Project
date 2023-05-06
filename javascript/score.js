@@ -299,11 +299,11 @@ export default class ScoreScene extends Phaser.Scene {
 
         this.game.config.tscore += this.game.config.cscore;
 
-        this.add.text(this.cameras.main.width / 2 + 100, 700, 'Customer'+this.game.config.ccustomer+' Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
-        this.add.text(this.cameras.main.width / 2 + 100, 800, 'Level '+this.game.config.level+' Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000' });
+        this.add.text(300, 700, 'Customer '+this.game.config.ccustomer+' Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
+        this.add.text(300, 800, 'Level '+this.game.config.level+' Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000' });
 
         //Make plant button
-        const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next Customer', {fontSize: '32px', fill: '#000' });
+        const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next', {fontSize: '32px', fill: '#000' });
         nextButton.setInteractive();
         nextButton.on('pointerup', () => { 
             this.game.config.ccustomer += 1;

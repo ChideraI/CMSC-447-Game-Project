@@ -198,23 +198,20 @@ export default class Tutorial extends Phaser.Scene{
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
                 gameObject.y = dropZone.y + 100;
+                pot1.disableInteractive();
+                pot2.disableInteractive();
             }
     
             else if(soils.contains(gameObject)){
                 gameObject.y = dropZone.y + 25;
+                soil1.disableInteractive();
+                soil2.disableInteractive();
+            }
+
+            else if (seeds.contains(gameObject)){
+                seed1.disableInteractive();
             }
     
-            else if(waters.contains(gameObject)){
-                gameObject.y = dropZone.y - 100;
-            }
-    
-            else if(ferts.contains(gameObject)){
-                gameObject.y = dropZone.y - 50;
-            }
-    
-         // });
-    //NOTE: dragend only fires on drop outside of drop target. Do the function on "drop" event.
-        // this.input.on('dragend', function (pointer, gameObject) {
             if(pots.contains(gameObject)){
                 cur_pot = gameObject;
             }else if(soils.contains(gameObject)){
@@ -261,6 +258,27 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant.y -= 30;
                 cur_base.y -= 30;
             }
+        });
+
+        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
+        submitButton.setInteractive();
+        submitButton.on('pointerup', () => {
+            if(pot == this.game.config.cpot){
+                this.game.config.cscore += 0.5;
+            }
+            if(soil == this.game.config.csoil){
+                this.game.config.cscore += 1;
+            }
+            if(seed == this.game.config.cseed){
+                this.game.config.cscore += 1;
+            }
+            if(water_count == this.game.config.cwater){
+                this.game.config.cscore += 0.5;
+            }
+            if(fert_count == this.game.config.cfertilizer){
+                this.game.config.cscore += 0.5;
+            }
+            myThis.scene.start('Score');
         });
     }
 }

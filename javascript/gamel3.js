@@ -524,7 +524,7 @@ export default class GameSceneL3 extends Phaser.Scene {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
             gameObject.input.enabled = false;
-            //gameObject.disableBody(true, true);
+
             if(pots.contains(gameObject)){
                 gameObject.y = dropZone.y + 100;
                 pot1.disableInteractive();
@@ -556,9 +556,6 @@ export default class GameSceneL3 extends Phaser.Scene {
                 gameObject.y = dropZone.y - 50;
             }
     
-         // });
-    //NOTE: dragend only fires on drop outside of drop target. Do the function on "drop" event.
-        // this.input.on('dragend', function (pointer, gameObject) {
             if(pots.contains(gameObject)){
                 cur_pot = gameObject;
                 if(cur_pot == pot1){

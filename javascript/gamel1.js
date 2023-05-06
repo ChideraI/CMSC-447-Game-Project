@@ -269,18 +269,20 @@ export default class GameSceneL1 extends Phaser.Scene {
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
                 gameObject.y = dropZone.y + 100;
+                pot1.disableInteractive();
+                pot2.disableInteractive();
+                pot3.disableInteractive();
             }
     
             else if(soils.contains(gameObject)){
                 gameObject.y = dropZone.y + 25;
+                soil1.disableInteractive();
+                soil2.disableInteractive();
             }
-    
-            else if(waters.contains(gameObject)){
-                gameObject.y = dropZone.y - 100;
-            }
-    
-            else if(ferts.contains(gameObject)){
-                gameObject.y = dropZone.y - 50;
+
+            else if (seeds.contains(gameObject)){
+                seed1.disableInteractive();
+                seed2.disableInteractive();
             }
     
             if(pots.contains(gameObject)){
