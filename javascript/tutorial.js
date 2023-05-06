@@ -214,6 +214,11 @@ export default class Tutorial extends Phaser.Scene{
     
             if(pots.contains(gameObject)){
                 cur_pot = gameObject;
+                if(cur_pot == pot1){
+                    pot = 1;
+                }else{
+                    pot = 2;
+                }
             }else if(soils.contains(gameObject)){
                 cur_soil = gameObject;
             }else if(seeds.contains(gameObject)){
@@ -234,6 +239,8 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant = sunf;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 1;
+                seed = 1;
             }else if(cur_soil == soil2 && cur_seed == seed1){
                 seed1.visible = false;
                 soil2.visible = false;
@@ -241,6 +248,8 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant = rose;
                 cur_base.visible = true;
                 cur_plant.visible = true;
+                soil = 2;
+                seed = 1;
             }             
 
             if(water_count == 1 && waters.contains(gameObject)){
@@ -278,6 +287,12 @@ export default class Tutorial extends Phaser.Scene{
             if(fert_count == this.game.config.cfertilizer){
                 this.game.config.cscore += 0.5;
             }
+            this.game.config.cscore -= 0.1 * recipe_counter;
+
+            if(this.game.config.cscore < 0){
+                this.game.config.cscore = 0;
+            }
+
             myThis.scene.start('Score');
         });
     }

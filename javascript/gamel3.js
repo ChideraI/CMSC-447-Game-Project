@@ -779,6 +779,12 @@ export default class GameSceneL3 extends Phaser.Scene {
             if(fert_count == this.game.config.cfertilizer){
                 this.game.config.cscore += 0.5;
             }
+            this.game.config.cscore -= 0.1 * recipe_counter;
+
+            if(this.game.config.cscore < 0){
+                this.game.config.cscore = 0;
+            }
+
             myThis.scene.start('Score');
         });
     }
