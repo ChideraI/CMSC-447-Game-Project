@@ -7,6 +7,8 @@ import GameSceneL3 from './gamel3.js';
 import Tutorial from './tutorial.js';
 import Customization from './customization.js';
 import ScoreScene from './score.js';
+import betweenLevel from './betweenLevel.js'
+
 
 const config = {
     type: Phaser.AUTO,
@@ -27,7 +29,7 @@ const config = {
     //     create: create
     // }
     
-    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization, ScoreScene],
+    scene: [LoginScene, GameScene, GameSceneL1, GameSceneL2, GameSceneL3, Tutorial, Customization, ScoreScene, betweenLevel],
 
     level: 0,
     ccustomer : 1,
