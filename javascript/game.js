@@ -84,6 +84,15 @@ export default class GameScene extends Phaser.Scene {
             myThis.scene.start('Login');
         }
 
+        //Tutorial stuff
+        if(this.game.config.level == 0 && this.game.config.ccustomer == 1){
+            let welcome = this.add.text(525, 75, 'Welcome to the tutorial level!', {fontSize: '32px', fill: '#000' });
+            let welcome2 = this.add.text(400, 150, 'This is the plant that the customer ordered, be sure to remember it!', {fontSize: '24px', fill: '#000' });
+            let welcome3 = this.add.text(300, 650, 'When you\'re ready, click the \'Make Plant\' button to move to the plant making station.', {fontSize: '24px', fill: '#000' })
+        }else{
+            let customer_text = this.add.text(525, 75, 'Customer'+this.game.config.ccustomer+'\'s Order:', {fontSize: '32px', fill: '#000' });
+        }
+
         this.game.config.cpot = cur_data["Customer"+this.game.config.ccustomer]["pot"];
         this.game.config.csoil = cur_data["Customer"+this.game.config.ccustomer]["soil"];
         this.game.config.cseed = cur_data["Customer"+this.game.config.ccustomer]["seed"];

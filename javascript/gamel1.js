@@ -81,7 +81,7 @@ export default class GameSceneL1 extends Phaser.Scene {
         let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000' });
 
         let soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
-        let soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 250, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
+        let soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 200, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
 
         this.input.setDraggable(soil1);
         this.input.setDraggable(soil2);
