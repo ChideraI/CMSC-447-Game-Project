@@ -49,7 +49,10 @@ export default class LoginScene extends Phaser.Scene {
         playButton.setInteractive({
             useHandCursor: true
         });
-        playButton.on('pointerup', () => {  myThis.scene.start('Game') });
+        playButton.on('pointerup', () => {  
+            this.game.config.level = 0;
+            myThis.scene.start('Game'); 
+        });
             //go to customization
         const custimizationButton = this.add.text(400, 650, 'Customization', {fontSize: '32px', fill: '#000' });
         custimizationButton.setInteractive({
@@ -63,7 +66,7 @@ export default class LoginScene extends Phaser.Scene {
         });
         tutorialButton.on('pointerup', () => {  
             this.game.config.level = 0;
-            myThis.scene.start('Tutorial');
+            myThis.scene.start('Game');
         });
             //go to level 1
         const level1Button = this.add.text(1000, 400, 'Play Level 1', {fontSize: '32px', fill: '#000' });
@@ -91,15 +94,7 @@ export default class LoginScene extends Phaser.Scene {
         level3Button.on('pointerup', () => {  
             this.game.config.level = 3;
             myThis.scene.start('Game');
-        }); 
-        //in between level scene  TEMPORARY button for easy access while editing it
-        const betweenLevel = this.add.text(1000, 800, 'TEMP between level', {fontSize: '32px', fill: '#000' });
-        betweenLevel.setInteractive({
-            useHandCursor: true
-        });
-        betweenLevel.on('pointerup', () => {  myThis.scene.start('betweenLevel') });
-
-    
+        });     
     
         this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
