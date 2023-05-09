@@ -36,6 +36,18 @@ export default class Tutorial extends Phaser.Scene{
         let soil;
         let seed;
 
+        let tutorial1 = this.add.text(500, 75, 'Welcome to the plant making screen!', {fontSize: '32px', fill: '#000' });
+        let tutorial2 = this.add.text(400, 150, 'First, select the pot the customer wanted from the options below.', {fontSize: '24px', fill: '#000' });
+        let tutorial3 = this.add.text(450, 75, 'Great! Remember what plant the customer ordered? It was a rose!', {fontSize: '28px', fill: '#000' });
+        //tutorial3.visible = false;
+        let tutorial4 = this.add.text(500, 150, 'Click on the recipe book to see how to make a rose.', {fontSize: '28px', fill: '#000' });
+        //tutorial4.visible = false;
+        let tutorial5;
+        let tutorial6;
+        let tutorial7;
+        let tutorial8;
+        let tutorial9;
+
         //First, put up log in/new account screen
         const myThis = this;
 
@@ -66,7 +78,7 @@ export default class Tutorial extends Phaser.Scene{
         let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000' });
 
         let soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
-        let soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 250, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
+        let soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 200, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
 
         this.input.setDraggable(soil1);
         this.input.setDraggable(soil2);
@@ -83,6 +95,7 @@ export default class Tutorial extends Phaser.Scene{
         //Pot 1
         let pot1 = pots.create(this.cameras.main.width / 2 - 75, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setInteractive();
         this.input.setDraggable(pot1);
+        
         //Pot 2
         let pot2 = pots.create(this.cameras.main.width / 2 + 75, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
         this.input.setDraggable(pot2);
@@ -266,6 +279,15 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant.setScale(1.25);
                 cur_plant.y -= 30;
                 cur_base.y -= 30;
+            }
+        });
+
+        pot1.on('pointerdown', function(pointer){
+            if(this.game.config.ccustomer == 1){
+                tutorial1.visible = false;
+                tutorial2.visible = false;
+                tutorial3.visible = true;
+                tutorial4.visible = true;
             }
         });
 
