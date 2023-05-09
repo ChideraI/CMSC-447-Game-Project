@@ -32,7 +32,7 @@ export default class LoginScene extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor(0xAAFFAA);
 
-        this.nameInput = this.add.dom(840, 460).createFromCache("login_form");
+        this.nameInput = this.add.dom(840, 530).createFromCache("login_form");  
         this.nameInput.visible = false;
          
         /////////////////////BUTTON BACKGROUNDS     
@@ -94,9 +94,9 @@ export default class LoginScene extends Phaser.Scene {
             this.game.config.level = 3;
             myThis.scene.start('Game');
         });     
-    
+
         /////////BUTTON STYLE
-        const buttonStyle =  {fontSize: '32px', fontFamily:'cursive', fontWeight:'bolder'} ;//stroke: '#ffFF00' };
+        const buttonStyle =  {fontSize: '32px', fontFamily:'cursive', fontWeight:'bolder'};
         
         
         /////////////////////////TEXT BUTTONS
@@ -161,19 +161,20 @@ export default class LoginScene extends Phaser.Scene {
             this.game.config.level = 3;
             myThis.scene.start('Game');
         });     
-    
+                              //LOGIN  POP UP INFO
         this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         const loginBackground = this.add.rectangle(850, 550,900, 500, 0xffff00, 80);
         loginBackground.visible = false;
-        const loginCancelButton = this.add.text(500, 700, "Cancel", {fontSize: '32px', fill: '#000'});
+        const loginCancelButton = this.add.text(500, 700, "Cancel", buttonStyle);
         loginCancelButton.setInteractive({
             useHandCursor: true
         });
         loginCancelButton.on('pointerup', () => {
             showHomePage();
         })
-        const loginSubmitButton = this.add.text(700, 700, "Submit", {fontSize: '32px', fill: '#000'});
+        const loginText = this.add.text(800, 375, 'Login', buttonStyle);
+        const loginSubmitButton = this.add.text(700, 700, "Submit", buttonStyle);
         loginSubmitButton.setInteractive({
             useHandCursor: true
         });
@@ -184,7 +185,7 @@ export default class LoginScene extends Phaser.Scene {
             // DANIEL, database code for LOGIN goes here (part 1 of 2 see below)
             showHomePage();
         })
-        const createAccountButton = this.add.text(900, 700, "Create Account", {fontSize: '32px', fill: '#000'});
+        const createAccountButton = this.add.text(900, 700, "Create Account", buttonStyle);
         createAccountButton.setInteractive({
             useHandCursor: true
         });
@@ -198,7 +199,7 @@ export default class LoginScene extends Phaser.Scene {
         loginSubmitButton.visible = false;
         loginCancelButton.visible = false;
         createAccountButton.visible = false;
-
+        loginText.visible = false;
 
         // this.returnKey.on("down", event => {
         //     console.log(this.nameInput);
@@ -235,6 +236,7 @@ export default class LoginScene extends Phaser.Scene {
             loginSubmitButton.visible = true;
             loginCancelButton.visible = true;
             createAccountButton.visible = true;
+            loginText.visible = true;
             myThis.nameInput.visible = true;
         }
 
@@ -258,6 +260,7 @@ export default class LoginScene extends Phaser.Scene {
             loginCancelButton.visible = false;
             loginSubmitButton.visible = false;
             createAccountButton.visible = false;
+            loginText.visible = false;
             myThis.nameInput.visible = false;
 
         }
