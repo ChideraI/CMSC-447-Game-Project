@@ -36,18 +36,6 @@ export default class Tutorial extends Phaser.Scene{
         let soil;
         let seed;
 
-        let tutorial1 = this.add.text(500, 75, 'Welcome to the plant making screen!', {fontSize: '32px', fill: '#000' });
-        let tutorial2 = this.add.text(400, 150, 'First, select the pot the customer wanted from the options below.', {fontSize: '24px', fill: '#000' });
-        let tutorial3 = this.add.text(450, 75, 'Great! Remember what plant the customer ordered? It was a rose!', {fontSize: '28px', fill: '#000' });
-        //tutorial3.visible = false;
-        let tutorial4 = this.add.text(500, 150, 'Click on the recipe book to see how to make a rose.', {fontSize: '28px', fill: '#000' });
-        //tutorial4.visible = false;
-        let tutorial5;
-        let tutorial6;
-        let tutorial7;
-        let tutorial8;
-        let tutorial9;
-
         //First, put up log in/new account screen
         const myThis = this;
 
@@ -158,6 +146,51 @@ export default class Tutorial extends Phaser.Scene{
         //Hide book variables initially
         recipes.visible = false;
         close_button.visible = false;
+
+        let tutorial1 = this.add.text(500, 75, 'Welcome to the plant making screen!', {fontSize: '32px', fill: '#000' });
+        let tutorial2 = this.add.text(400, 150, 'First, select the pot the customer wanted from the options below and drag it to the oven.', {fontSize: '24px', fill: '#000' });
+        let tutorial3 = this.add.text(450, 75, 'Great! Remember what plant the customer ordered? It was a rose!', {fontSize: '28px', fill: '#000' });
+        let tutorial4 = this.add.text(500, 150, 'Click on the recipe book to see how to make a rose.', {fontSize: '28px', fill: '#000' });
+        let tutorial5 = this.add.text(550, 300, 'Welcome to the receipe book!', {fontSize: '28px', fill: '#000' });
+        let tutorial6 = this.add.text(400, 400, 'Here you can see what soil and seed combinations make each plant.', {fontSize: '24px', fill: '#000' });
+        let tutorial7 = this.add.text(300, 500, 'But be careful! A small amount of your tips will be taken off each time you open it.', {fontSize: '24px', fill: '#000' });
+        let tutorial8 = this.add.text(400, 75, 'Great! Now we know what soil and seeds we need.', {fontSize: '28px', fill: '#000' });
+        let tutorial9 = this.add.text(500, 150, 'First, drag the necessary soil to the pot.', {fontSize: '24px', fill: '#000' });
+        let tutorial10 = this.add.text(400, 75, 'Good job! Now drag the seeds to the pot to make the plant.', {fontSize: '28px', fill: '#000' });
+        let tutorial11 = this.add.text(550, 75, 'Look, a rose!', {fontSize: '28px', fill: '#000' });
+        let tutorial12 = this.add.text(400, 150, 'Next, we need to add some color.', {fontSize: '28px', fill: '#000' });
+        let tutorial13 = this.add.text(400, 225, 'Add one drop of water and see what color the rose becomes.', {fontSize: '24px', fill: '#000' });
+        let tutorial14 = this.add.text(550, 75, 'Perfect! Looks like the color we needed.', {fontSize: '28px', fill: '#000' });
+        let tutorial15 = this.add.text(400, 150, 'Adding more water changes the color of the plants.', {fontSize: '24px', fill: '#000' });
+        let tutorial16 = this.add.text(400, 225, 'Now add the fertilzier.', {fontSize: '24px', fill: '#000' });
+        let tutorial17 = this.add.text(550, 75, 'Looks great!', {fontSize: '28px', fill: '#000' });
+        let tutorial18 = this.add.text(400, 150, 'Adding more fertilizer increases the size of the plants.', {fontSize: '24px', fill: '#000' });
+        let tutorial19 = this.add.text(400, 225, 'Our plant is ready to go! Click the \'Make Plant\' button to give it to the customer.', {fontSize: '24px', fill: '#000' });
+        
+        if(this.game.config.ccustomer == 1){
+            tutorial1.visible = true;
+            tutorial2.visible = true;
+        }else{
+            tutorial1.visible = false;
+            tutorial2.visible = false;
+        }
+        tutorial3.visible = false;
+        tutorial4.visible = false;
+        tutorial5.visible = false;
+        tutorial6.visible = false;
+        tutorial7.visible = false;
+        tutorial8.visible = false;
+        tutorial9.visible = false;
+        tutorial10.visible = false;
+        tutorial11.visible = false;
+        tutorial12.visible = false;
+        tutorial13.visible = false;
+        tutorial14.visible = false;
+        tutorial15.visible = false;
+        tutorial16.visible = false;
+        tutorial17.visible = false;
+        tutorial18.visible = false;
+        tutorial19.visible = false;
     
         //Show book variables once clicked
         book.on('pointerdown', function(pointer){
@@ -174,6 +207,14 @@ export default class Tutorial extends Phaser.Scene{
             r2base.visible = true;
             r2plant.visible = true;
             r2text.visible = true;
+
+            tutorial1.visible = false;
+            tutorial2.visible = false;
+            tutorial3.visible = false;
+            tutorial4.visible = false;
+            tutorial5.visible = true;
+            tutorial6.visible = true;
+            tutorial7.visible = true;
 
             recipe_counter += 1;
         });
@@ -194,6 +235,12 @@ export default class Tutorial extends Phaser.Scene{
             r2base.visible = false;
             r2plant.visible = false;
             r2text.visible = false;
+
+            tutorial5.visible = false;
+            tutorial6.visible = false;
+            tutorial7.visible = false;
+            tutorial8.visible = true;
+            tutorial9.visible = true;
         });
     
         this.input.on('dragstart', function (pointer, gameObject) {/*gameObject.setTint(0xEEEEEE);*/});
@@ -232,16 +279,39 @@ export default class Tutorial extends Phaser.Scene{
                 }else{
                     pot = 2;
                 }
+                tutorial1.visible = false;
+                tutorial2.visible = false;
+                tutorial3.visible = true;
+                tutorial4.visible = true;
             }else if(soils.contains(gameObject)){
                 cur_soil = gameObject;
+                tutorial8.visible = false;
+                tutorial9.visible = false;
+                tutorial10.visible = true;
             }else if(seeds.contains(gameObject)){
                 cur_seed = gameObject;
+                tutorial10.visible = false;
+                tutorial11.visible = true;
+                tutorial12.visible = true;
+                tutorial13.visible = true;
             }else if(waters.contains(gameObject)){
                 water_count += 1;
-                gameObject.visible = false;  
+                gameObject.visible = false;
+                tutorial11.visible = false;
+                tutorial12.visible = false;
+                tutorial13.visible = false;
+                tutorial14.visible = true;
+                tutorial15.visible = true;
+                tutorial16.visible = true;
             }else if (ferts.contains(gameObject)){
                 fert_count += 1;
                 gameObject.visible = false;
+                tutorial14.visible = false;
+                tutorial15.visible = false;
+                tutorial16.visible = false;
+                tutorial17.visible = true;
+                tutorial18.visible = true;
+                tutorial19.visible = true;
             }
     
             //Flowers
@@ -279,15 +349,6 @@ export default class Tutorial extends Phaser.Scene{
                 cur_plant.setScale(1.25);
                 cur_plant.y -= 30;
                 cur_base.y -= 30;
-            }
-        });
-
-        pot1.on('pointerdown', function(pointer){
-            if(this.game.config.ccustomer == 1){
-                tutorial1.visible = false;
-                tutorial2.visible = false;
-                tutorial3.visible = true;
-                tutorial4.visible = true;
             }
         });
 
