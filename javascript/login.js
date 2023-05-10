@@ -35,7 +35,7 @@ export default class LoginScene extends Phaser.Scene {
         this.nameInput = this.add.dom(840, 530).createFromCache("login_form");  
         this.nameInput.visible = false;
          
-        /////////////////////BUTTON BACKGROUNDS     
+        ////BUTTON BACKGROUNDS     
         //login
         const loginButtonBg1 = this.add.image(445, 365, 'button1').setScale(0.30).setInteractive({
             useHandCursor: true
@@ -174,7 +174,7 @@ export default class LoginScene extends Phaser.Scene {
             showHomePage();
         })
         const loginText = this.add.text(800, 375, 'Login', buttonStyle);
-        const loginSubmitButton = this.add.text(700, 700, "Submit", buttonStyle);
+        const loginSubmitButton = this.add.text(700, 700, "Enter", buttonStyle);
         loginSubmitButton.setInteractive({
             useHandCursor: true
         });

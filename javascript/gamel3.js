@@ -34,6 +34,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         this.load.image('recipes', 'assets/recipe_book.png');
         this.load.image('open_book', 'assets/open_book.png');
         this.load.image('x', 'assets/x.png');
+        this.load.image('button1', 'assets/kisspng-button-glass-clip-art-botwtoon-5b0b1141547751.187244581527451969346.png');
     }
     
     create ()
@@ -60,9 +61,16 @@ export default class GameSceneL3 extends Phaser.Scene {
         let scaleY = (this.cameras.main.height / image.height);
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
+        //BACKG ROUND BUTTON    
+        const loginButtonBg1 = this.add.image(125, 70, 'button1').setScale(0.25).setInteractive({
+            useHandCursor: true
+        });
+        loginButtonBg1.on('pointerup', () => {  myThis.scene.start('Login') });
 
-        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000' });
-        loginButton.setInteractive();
+        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        loginButton.setInteractive({
+            useHandCursor: true
+        });
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
@@ -127,7 +135,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Soil
         let soils = this.add.group();
-        let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000' });
+        let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
 
         let soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
         let soil2 = soils.create(this.cameras.main.width / 6 - 100, this.cameras.main.height / 6 + 200, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
@@ -139,7 +147,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Seeds
         let seeds = this.add.group();
-        let seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000' });
+        let seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         let seed1 = seeds.create(this.cameras.main.width / 6 - 75, this.cameras.main.height / 2 + 100, 'seeds').setScale(0.2).setInteractive();
         this.input.setDraggable(seed1);
         let seed2 = seeds.create(this.cameras.main.width / 6 - 75, this.cameras.main.height / 2 + 200, 'seeds').setTint(0x00FF00).setScale(0.2).setInteractive();
@@ -151,7 +159,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Pots
         let pots = this.add.group();
-        let potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000' });
+        let potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         //Pot 1
         let pot1 = pots.create(this.cameras.main.width / 2 - 300, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setInteractive();
         this.input.setDraggable(pot1);
@@ -170,7 +178,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Water droplets
         let waters = this.add.group();
-        let waterText = this.add.text(5*this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Water', { fontSize: '32px', fill: '#000' });
+        let waterText = this.add.text(5*this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Water', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         //Drop 1
         let drop1 = waters.create(5*this.cameras.main.width / 6, this.cameras.main.height / 6 + 75, 'water').setScale(0.1).setInteractive();
         this.input.setDraggable(drop1);
@@ -183,7 +191,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Fertilizer
         let ferts = this.add.group();
-        let fertText = this.add.text(5*this.cameras.main.width / 6 - 100, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000' });
+        let fertText = this.add.text(5*this.cameras.main.width / 6 - 100, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         //Fertilizer 1
         let fert1 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert1);
@@ -212,7 +220,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r1seed = this.add.image(575, 100, 'seeds').setScale(0.15);
         let r1base = this.add.image(725, 100, 'stem').setScale(0.5);
         let r1plant = this.add.image(725, 100, 'sunflower').setScale(0.5);
-        let r1text = this.add.text(475, 75, '+     =', { fontSize: '48px', fill: '#000' });
+        let r1text = this.add.text(475, 75, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r1soil.visible = false;
         r1seed.visible = false;
         r1base.visible = false;
@@ -224,7 +232,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r2seed = this.add.image(575, 225, 'seeds').setScale(0.15);
         let r2base = this.add.image(725, 225, 'stem').setScale(0.5);
         let r2plant = this.add.image(725, 225, 'rose').setScale(0.5);
-        let r2text = this.add.text(475, 200, '+     =', { fontSize: '48px', fill: '#000' });
+        let r2text = this.add.text(475, 200, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r2soil.visible = false;
         r2seed.visible = false;
         r2base.visible = false;
@@ -236,7 +244,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r3seed = this.add.image(575, 350, 'seeds').setScale(0.15);
         let r3base = this.add.image(725, 350, 'stem').setScale(0.5);
         let r3plant = this.add.image(725, 350, 'tulip').setScale(0.5);
-        let r3text = this.add.text(475, 325, '+     =', { fontSize: '48px', fill: '#000' });
+        let r3text = this.add.text(475, 325, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r3soil.visible = false;
         r3seed.visible = false;
         r3base.visible = false;
@@ -248,7 +256,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r4seed = this.add.image(575, 475, 'seeds').setTint(0x00FF00).setScale(0.15);
         let r4base = this.add.image(725, 475, 'cactus').setScale(0.5);
         let r4plant = this.add.image(725, 475, 'cactus_flower').setScale(0.5);
-        let r4text = this.add.text(475, 450, '+     =', { fontSize: '48px', fill: '#000' });
+        let r4text = this.add.text(475, 450, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r4soil.visible = false;
         r4seed.visible = false;
         r4base.visible = false;
@@ -260,7 +268,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r5seed = this.add.image(575, 600, 'seeds').setTint(0x00FF00).setScale(0.15);
         let r5base = this.add.image(725, 600, 'succulent1').setScale(0.5);
         let r5plant = this.add.image(725, 600, 'succulent1').setScale(0.5);
-        let r5text = this.add.text(475, 575, '+     =', { fontSize: '48px', fill: '#000' });
+        let r5text = this.add.text(475, 575, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r5soil.visible = false;
         r5seed.visible = false;
         r5base.visible = false;
@@ -272,7 +280,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r6seed = this.add.image(575, 725, 'seeds').setTint(0x00FF00).setScale(0.15);
         let r6base = this.add.image(725, 725, 'succulent2').setScale(0.5);
         let r6plant = this.add.image(725, 725, 'succulent2').setScale(0.5);
-        let r6text = this.add.text(475, 700, '+     =', { fontSize: '48px', fill: '#000' });
+        let r6text = this.add.text(475, 700, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r6soil.visible = false;
         r6seed.visible = false;
         r6base.visible = false;
@@ -284,7 +292,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r7seed = this.add.image(1125, 100, 'seeds').setTint(0x0000FF).setScale(0.15);
         let r7base = this.add.image(1275, 100, 'carrot_leaves').setScale(0.5);
         let r7plant = this.add.image(1275, 100, 'carrot').setScale(0.5);
-        let r7text = this.add.text(1025, 75, '+     =', { fontSize: '48px', fill: '#000' });
+        let r7text = this.add.text(1025, 75, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r7soil.visible = false;
         r7seed.visible = false;
         r7base.visible = false;
@@ -296,7 +304,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r8seed = this.add.image(1125, 225, 'seeds').setTint(0x0000FF).setScale(0.15);
         let r8base = this.add.image(1275, 225, 'tomato_stem').setScale(0.5);
         let r8plant = this.add.image(1275, 225, 'tomato').setScale(0.5);
-        let r8text = this.add.text(1025, 200, '+     =', { fontSize: '48px', fill: '#000' });
+        let r8text = this.add.text(1025, 200, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r8soil.visible = false;
         r8seed.visible = false;
         r8base.visible = false;
@@ -308,7 +316,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r9seed = this.add.image(1125, 350, 'seeds').setTint(0x0000FF).setScale(0.15);
         let r9base = this.add.image(1275, 350, 'pumpkin_leaves').setScale(0.5);
         let r9plant = this.add.image(1275, 350, 'pumpkin').setScale(0.5);
-        let r9text = this.add.text(1025, 325, '+     =', { fontSize: '48px', fill: '#000' });
+        let r9text = this.add.text(1025, 325, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r9soil.visible = false;
         r9seed.visible = false;
         r9base.visible = false;
@@ -320,7 +328,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r10seed = this.add.image(1125, 475, 'seeds').setTint(0xFF0000).setScale(0.15);
         let r10base = this.add.image(1275, 475, 'bonsai_base').setScale(0.5);
         let r10plant = this.add.image(1275, 475, 'bonsai1').setScale(0.5);
-        let r10text = this.add.text(1025, 450, '+     =', { fontSize: '48px', fill: '#000' });
+        let r10text = this.add.text(1025, 450, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r10soil.visible = false;
         r10seed.visible = false;
         r10base.visible = false;
@@ -332,7 +340,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r11seed = this.add.image(1125, 600, 'seeds').setTint(0xFF0000).setScale(0.15);
         let r11base = this.add.image(1275, 600, 'bonsai_base').setScale(0.5);
         let r11plant = this.add.image(1275, 600, 'bonsai2').setScale(0.5);
-        let r11text = this.add.text(1025, 575, '+     =', { fontSize: '48px', fill: '#000' });
+        let r11text = this.add.text(1025, 575, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r11soil.visible = false;
         r11seed.visible = false;
         r11base.visible = false;
@@ -344,7 +352,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let r12seed = this.add.image(1125, 725, 'seeds').setTint(0xFF0000).setScale(0.15);
         let r12base = this.add.image(1275, 725, 'bonsai_base').setScale(0.5);
         let r12plant = this.add.image(1275, 725, 'bonsai3').setScale(0.5);
-        let r12text = this.add.text(10255, 700, '+     =', { fontSize: '48px', fill: '#000' });
+        let r12text = this.add.text(10255, 700, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive' });
         r12soil.visible = false;
         r12seed.visible = false;
         r12base.visible = false;
@@ -760,9 +768,39 @@ export default class GameSceneL3 extends Phaser.Scene {
         });
 
         this.add.text(this.cameras.main.width / 2 + 300, 800, pot, {fontSize: '32px', fill: '#000' });
+        //background button
+        const loginButtonBg2 = this.add.image(1425,820, 'button1').setScale(0.25).setInteractive({
+            useHandCursor: true
+        });
+        loginButtonBg2.on('pointerup', () => {
+            if(pot == this.game.config.cpot){
+                this.game.config.cscore += 0.5;
+            }
+            if(soil == this.game.config.csoil){
+                this.game.config.cscore += 1;
+            }
+            if(seed == this.game.config.cseed){
+                this.game.config.cscore += 1;
+            }
+            if(water_count == this.game.config.cwater){
+                this.game.config.cscore += 0.5;
+            }
+            if(fert_count == this.game.config.cfertilizer){
+                this.game.config.cscore += 0.5;
+            }
+            this.game.config.cscore -= 0.1 * recipe_counter;
 
-        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
-        submitButton.setInteractive();
+            if(this.game.config.cscore < 0){
+                this.game.config.cscore = 0;
+            }
+
+            myThis.scene.start('Score');
+        });
+        //text
+        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
+        submitButton.setInteractive({
+            useHandCursor: true
+        });
         submitButton.on('pointerup', () => {
             if(pot == this.game.config.cpot){
                 this.game.config.cscore += 0.5;
