@@ -1,10 +1,7 @@
-//need to npm install sqlite3
-
-const fs = require('fs');
+//const fs = require('fs');
 
 const sqlite3 = require('sqlite3').verbose();
 
-//change filepath
 const filename = './user.db';
 
 //connect to database and make tables if not done already
@@ -54,7 +51,7 @@ function insert_user(name, password){
 	
 	db = connect();
 	
-	//STILL NEED TO ADD CHECK IF NAME ALREADY TAKEN
+	//checks if name is taken, row is undefined if not entries in table for supplied name
 	db.get('SELECT * FROM user WHERE name = $name', [name], function(err, row){
 		
 		if(err){
@@ -95,30 +92,6 @@ function insert_user(name, password){
 			return 0;
 		}
 	});
-
-		//insert info into user table
-		db.run('INSERT INTO user (name, password) VALUES ($name, $password)', [name, password], (err) =>{
-			
-			if(err){
-				return console.error(err.message);
-			}
-		});
-		
-		//insert empty save
-		db.run('INSERT INTO save (name, last_level_completed, current_score) VALUES (?, ?, ?)', [name, 0, 0], (err) =>{
-		
-			if(err){
-				return console.error(err.message);
-			}
-		});
-	
-		//insert empty high score to be updated later
-		db.run('INSERT INTO high_score (name, score) VALUES (?, ?)', [name, 0], (err) =>{
-	
-			if(err){
-				return console.error(err.message);
-			}
-		});
 }
 
 
@@ -191,12 +164,26 @@ function update_high_score(name, score){
 
 	db = connect();
 	
-	db.run('UPDATE high_score SET score = $score WHERE name = $name', [score, name], (err) =>{
+	db.get('SELECT score FROM high_score WHERE name = $name', [name], function (err, row){
 		
 		if(err){
 			return console.error(err.message);
 		}
+		
+		//needs tested
+		//check if score is higher
+		if(row.score < score){
+		
+			db.run('UPDATE high_score SET score = $score WHERE name = $name', [score, name], (err) =>{
+		
+				if(err){
+					return console.error(err.message);
+				}
+			});
+		}
 	});
+	
+	
 
 }
 //get top 5 high scores or current score or customization or progress
@@ -206,7 +193,7 @@ function query_top5(){
 
 	db = connect();
 
-	db.all("SELECT * FROM high_score ORDER BY score DESC LIMIT 5;", (err, rows) =>{
+	db.all("SELECT * FROM high_score ORDER BY score DESC LIMIT 5;", function(err, rows){
 	
 		if(err){
 			return console.error(err.message);
@@ -223,7 +210,7 @@ function query_score(name){
 
 	db = connect();
 
-	db.get('SELECT current_score FROM save WHERE name = $name', [name], (err, row) =>{
+	db.get('SELECT current_score FROM save WHERE name = $name', [name], function(err, row) {
 	
 		if(err){
 			return console.error(err.message);
@@ -240,7 +227,7 @@ function query_customization(name){
 
 	db = connect();
 
-	db.get('SELECT hair, skin, outfit FROM user WHERE name = $name', [name], (err, row) =>{
+	db.get('SELECT hair, skin, outfit FROM user WHERE name = $name', [name], function(err, row){
 	
 		if(err){
 			return console.error(err.message);
@@ -257,7 +244,7 @@ function query_progress(name){
 
 	db = connect();
 
-	db.get("SELECT last_level_completed FROM save WHERE name = $name", [name], (err, row) =>{
+	db.get("SELECT last_level_completed FROM save WHERE name = $name", [name], function(err, row){
 	
 		if(err){
 			return console.error(err.message);
@@ -276,7 +263,7 @@ function check_password(name, password){
 	
 	db = connect();
 	
-	db.get('SELECT name, password WHERE name = $name AND password = $password', [name, password], (err, row)=>{
+	db.get('SELECT name, password WHERE name = $name AND password = $password', [name, password], function(err, row){
 		
 		if(err){
 			return console.error(err.message);
