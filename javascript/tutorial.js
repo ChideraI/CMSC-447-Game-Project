@@ -45,9 +45,16 @@ export default class Tutorial extends Phaser.Scene{
         let scaleY = (this.cameras.main.height / image.height);
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
+    //BACKGROUND BUTTON
+        const loginButtonBg1 = this.add.image(125, 70, 'button1').setScale(0.25).setInteractive({
+            useHandCursor: true
+        });
+        loginButtonBg1.on('pointerup', () => {  myThis.scene.start('Login') });
 
-        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000' });
-        loginButton.setInteractive();
+        const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000', fontFamily:'cursive'});
+        loginButton.setInteractive({
+            useHandCursor: true
+        });
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
     
         //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
@@ -64,7 +71,7 @@ export default class Tutorial extends Phaser.Scene{
     
         //Soil
         let soils = this.add.group();
-        let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000' });
+        let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
 
         let soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
         let soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 200, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
@@ -74,13 +81,13 @@ export default class Tutorial extends Phaser.Scene{
 
         //Seeds
         let seeds = this.add.group();
-        let seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000' });
+        let seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
         let seed1 = seeds.create(this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'seeds').setScale(0.2).setInteractive();
         this.input.setDraggable(seed1);
     
         //Pots
         let pots = this.add.group();
-        let potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000' });
+        let potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
         //Pot 1
         let pot1 = pots.create(this.cameras.main.width / 2 - 75, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setInteractive();
         this.input.setDraggable(pot1);
@@ -91,7 +98,7 @@ export default class Tutorial extends Phaser.Scene{
     
         //Water droplets
         let waters = this.add.group();
-        let waterText = this.add.text(5*this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Water', { fontSize: '32px', fill: '#000' });
+        let waterText = this.add.text(5*this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Water', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
         //Drop 1
         let drop1 = waters.create(5*this.cameras.main.width / 6, this.cameras.main.height / 6 + 75, 'water').setScale(0.1).setInteractive();
         this.input.setDraggable(drop1);
@@ -102,7 +109,7 @@ export default class Tutorial extends Phaser.Scene{
     
         //Fertilizer
         let ferts = this.add.group();
-        let fertText = this.add.text(5*this.cameras.main.width / 6 - 100, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000' });
+        let fertText = this.add.text(5*this.cameras.main.width / 6 - 100, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
         //Fertilizer 1
         let fert1 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert1);
@@ -125,7 +132,7 @@ export default class Tutorial extends Phaser.Scene{
         let r1seed = this.add.image(575, 100, 'seeds').setScale(0.15);
         let r1base = this.add.image(725, 100, 'stem').setScale(0.5);
         let r1plant = this.add.image(725, 100, 'sunflower').setScale(0.5);
-        let r1text = this.add.text(475, 75, '+     =', { fontSize: '48px', fill: '#000' });
+        let r1text = this.add.text(475, 75, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r1soil.visible = false;
         r1seed.visible = false;
         r1base.visible = false;
@@ -137,7 +144,7 @@ export default class Tutorial extends Phaser.Scene{
         let r2seed = this.add.image(575, 225, 'seeds').setScale(0.15);
         let r2base = this.add.image(725, 225, 'stem').setScale(0.5);
         let r2plant = this.add.image(725, 225, 'rose').setScale(0.5);
-        let r2text = this.add.text(475, 200, '+     =', { fontSize: '48px', fill: '#000' });
+        let r2text = this.add.text(475, 200, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r2soil.visible = false;
         r2seed.visible = false;
         r2base.visible = false;
@@ -366,9 +373,40 @@ export default class Tutorial extends Phaser.Scene{
                 cur_base.y -= 30;
             }
         });
+        //background button
+        const loginButtonBg2 = this.add.image(1425,820, 'button1').setScale(0.25).setInteractive({
+            useHandCursor: true
+        });
+        loginButtonBg2.on('pointerup', () => {
+            if(pot == this.game.config.cpot){
+                this.game.config.cscore += 0.5;
+            }
+            if(soil == this.game.config.csoil){
+                this.game.config.cscore += 1;
+            }
+            if(seed == this.game.config.cseed){
+                this.game.config.cscore += 1;
+            }
+            if(water_count == this.game.config.cwater){
+                this.game.config.cscore += 0.5;
+            }
+            if(fert_count == this.game.config.cfertilizer){
+                this.game.config.cscore += 0.5;
+            }
+            this.game.config.cscore -= 0.1 * recipe_counter;
 
-        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
-        submitButton.setInteractive();
+            if(this.game.config.cscore < 0){
+                this.game.config.cscore = 0;
+            }
+
+            myThis.scene.start('Score');
+        });
+
+        //text
+        const submitButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Make Plant', {fontSize: '32px', fill: '#000', fontFamily:'cursive'});
+        submitButton.setInteractive({
+            useHandCursor: true
+        });
         submitButton.on('pointerup', () => {
             if(pot == this.game.config.cpot){
                 this.game.config.cscore += 0.5;
