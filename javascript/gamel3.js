@@ -7,7 +7,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
     preload ()
     {
-        this.load.image('background', './main_screen.png');
+        this.load.image('bg', 'assets/plant_station.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('stem', 'assets/flower_stem.png');
         this.load.image('sunflower', 'assets/sunflower.png');
@@ -56,7 +56,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         //First, put up log in/new account screen
         const myThis = this;
 
-        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background');
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'bg');
         let scaleX = (this.cameras.main.width / image.width);
         let scaleY = (this.cameras.main.height / image.height);
         let scale = Math.max(scaleX, scaleY);
@@ -73,8 +73,6 @@ export default class GameSceneL3 extends Phaser.Scene {
         });
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
         
-        //this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'sky').setScale(2);
-        //this.add.image(400, 300, 'star');
         let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');
         stem.visible = false;
 
