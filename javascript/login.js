@@ -105,6 +105,7 @@ export default class LoginScene extends Phaser.Scene {
          loginButton.setInteractive({
             useHandCursor: true
         });
+        
         loginButton.on('pointerup', () => {  
             showLogin();                          
          });

@@ -117,11 +117,6 @@ export default class Tutorial extends Phaser.Scene{
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
     
-        //  Just a visual display of the drop zone
-        let graphics = this.add.graphics();
-        graphics.lineStyle(2, 0xffff00);
-        graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
-    
         //Recipe Book open and close
         let book = this.add.image(this.cameras.main.width - 100, 75, 'recipes').setScale(0.35).setInteractive();
         let recipes = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'open_book').setScale(0.7);
@@ -132,7 +127,7 @@ export default class Tutorial extends Phaser.Scene{
         let r1seed = this.add.image(575, 100, 'seeds').setScale(0.15);
         let r1base = this.add.image(725, 100, 'stem').setScale(0.5);
         let r1plant = this.add.image(725, 100, 'sunflower').setScale(0.5);
-        let r1text = this.add.text(475, 75, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
+        let r1text = this.add.text(475, 75, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r1soil.visible = false;
         r1seed.visible = false;
         r1base.visible = false;
@@ -144,7 +139,7 @@ export default class Tutorial extends Phaser.Scene{
         let r2seed = this.add.image(575, 225, 'seeds').setScale(0.15);
         let r2base = this.add.image(725, 225, 'stem').setScale(0.5);
         let r2plant = this.add.image(725, 225, 'rose').setScale(0.5);
-        let r2text = this.add.text(475, 200, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
+        let r2text = this.add.text(475, 200, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r2soil.visible = false;
         r2seed.visible = false;
         r2base.visible = false;
@@ -155,25 +150,25 @@ export default class Tutorial extends Phaser.Scene{
         recipes.visible = false;
         close_button.visible = false;
 
-        let tutorial1 = this.add.text(500, 25, 'Welcome to the plant making screen!', {fontSize: '32px', fill: '#000' });
-        let tutorial2 = this.add.text(250, 75, 'First, select the pot the customer wanted from the options below and drag it to the oven.', {fontSize: '24px', fill: '#000' });
-        let tutorial3 = this.add.text(300, 25, 'Great! Remember what plant the customer ordered? It was a sunflower!', {fontSize: '28px', fill: '#000' });
-        let tutorial4 = this.add.text(375, 75, 'Click on the recipe book to see how to make a sunflower.', {fontSize: '28px', fill: '#000' });
-        let tutorial5 = this.add.text(550, 400, 'Welcome to the receipe book!', {fontSize: '28px', fill: '#000' });
-        let tutorial6 = this.add.text(400, 450, 'Here you can see what soil and seed combinations make each plant.', {fontSize: '24px', fill: '#000' });
-        let tutorial7 = this.add.text(350, 500, 'But be careful! A small amount of your tips will be taken off each time you open it.', {fontSize: '20px', fill: '#000' });
-        let tutorial8 = this.add.text(450, 50, 'Great! Now we know what soil and seeds we need.', {fontSize: '28px', fill: '#000' });
-        let tutorial9 = this.add.text(550, 100, 'First, drag the necessary soil to the pot.', {fontSize: '24px', fill: '#000' });
-        let tutorial10 = this.add.text(400, 75, 'Good job! Now drag the seeds to the pot to make the plant.', {fontSize: '28px', fill: '#000' });
-        let tutorial11 = this.add.text(700, 10, 'Look, a sunflower!', {fontSize: '28px', fill: '#000' });
-        let tutorial12 = this.add.text(600, 60, 'Next, we need to add some color.', {fontSize: '28px', fill: '#000' });
-        let tutorial13 = this.add.text(425, 100, 'Add one drop of water and see what color the flower becomes.', {fontSize: '24px', fill: '#000' });
-        let tutorial14 = this.add.text(525, 10, 'Perfect! Looks like the color we needed.', {fontSize: '28px', fill: '#000' });
-        let tutorial15 = this.add.text(500, 60, 'Adding more water changes the color of the plants.', {fontSize: '24px', fill: '#000' });
-        let tutorial16 = this.add.text(675, 100, 'Now add the fertilzier.', {fontSize: '24px', fill: '#000' });
-        let tutorial17 = this.add.text(700, 10, 'Looks great!', {fontSize: '28px', fill: '#000' });
-        let tutorial18 = this.add.text(450, 60, 'Adding more fertilizer increases the size of the plants.', {fontSize: '24px', fill: '#000' });
-        let tutorial19 = this.add.text(250, 100, 'Our plant is ready to go! Click the \'Make Plant\' button to give it to the customer.', {fontSize: '24px', fill: '#000' });
+        let tutorial1 = this.add.text(550, 25, 'Welcome to the plant making screen!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        let tutorial2 = this.add.text(350, 75, 'First, select the pot the customer wanted from the options below and drag it to the oven.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial3 = this.add.text(375, 25, 'Great! Remember what plant the customer ordered? It was a sunflower!', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial4 = this.add.text(475, 75, 'Click on the recipe book to see how to make a sunflower.', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial5 = this.add.text(650, 400, 'Welcome to the receipe book!', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial6 = this.add.text(500, 450, 'Here you can see what soil and seed combinations make each plant.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial7 = this.add.text(400, 500, 'But be careful! A small amount of your tips will be taken off each time you open it.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial8 = this.add.text(525, 50, 'Great! Now we know what soil and seeds we need.', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial9 = this.add.text(625, 100, 'First, drag the necessary soil to the pot.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial10 = this.add.text(450, 75, 'Good job! Now drag the seeds to the pot to make the plant.', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial11 = this.add.text(725, 10, 'Look, a sunflower!', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial12 = this.add.text(625, 60, 'Next, we need to add some color.', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial13 = this.add.text(500, 100, 'Add one drop of water and see what color the flower becomes.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial14 = this.add.text(575, 10, 'Perfect! Looks like the color we needed.', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial15 = this.add.text(550, 60, 'Adding more water changes the color of the plants.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial16 = this.add.text(725, 100, 'Now add the fertilzier.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial17 = this.add.text(725, 10, 'Looks great!', {fontSize: '28px', fill: '#000', fontFamily:'cursive' });
+        let tutorial18 = this.add.text(550, 60, 'Adding more fertilizer increases the size of the plants.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let tutorial19 = this.add.text(450, 100, 'Our plant is ready to go! Click the \'Make Plant\' button to give it to the customer.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
         
         if(cur_customer == 1){
             tutorial1.visible = true;

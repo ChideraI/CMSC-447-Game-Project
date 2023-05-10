@@ -16,6 +16,7 @@ export default class GameScene extends Phaser.Scene {
     
     preload ()
     {
+        this.load.image('order_screen', 'assets/order_screen.png');
         this.load.image('pot', 'assets/pot.png');
         this.load.image('stem', 'assets/flower_stem.png');
         this.load.image('sunflower', 'assets/sunflower.png');
@@ -85,14 +86,22 @@ export default class GameScene extends Phaser.Scene {
             myThis.scene.start('Login');
         }
 
+        let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'order_screen');
+        let scaleX = (this.cameras.main.width / image.width);
+        let scaleY = (this.cameras.main.height / image.height);
+        let scale = Math.max(scaleX, scaleY);
+        image.setScale(scale).setScrollFactor(0);
+
         //Tutorial stuff
         if(this.game.config.level == 0 && this.game.config.ccustomer == 1){
-            let welcome = this.add.text(525, 75, 'Welcome to the tutorial level!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
-            let welcome2 = this.add.text(400, 150, 'This is the plant that the customer ordered, be sure to remember it!', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
-            let welcome3 = this.add.text(300, 650, 'When you\'re ready, click the \'Make Plant\' button to move to the plant making station.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' })
-        }else{
-            let customer_text = this.add.text(525, 75, 'Customer'+this.game.config.ccustomer+'\'s Order:', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+            let welcome = this.add.text(550, 50, 'Welcome to the tutorial level!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+            let welcome2 = this.add.text(1230, 150, 'This is the plant the customer ordered,', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+            let welcome3 = this.add.text(1350, 200, 'be sure to remember it!', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+            let welcome4 = this.add.text(1250, 665, 'When you\'re ready, click the \'Make Plant\'', {fontSize: '20px', fill: '#000', fontFamily:'cursive' });
+            let welcome5 = this.add.text(1250, 700, 'button to move to the plant making station.', {fontSize: '20px', fill: '#000', fontFamily:'cursive' });
         }
+
+        let customer_text = this.add.text(1300, 25, 'Customer '+this.game.config.ccustomer+'\'s Order:', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
 
         this.game.config.cpot = cur_data["Customer"+this.game.config.ccustomer]["pot"];
         this.game.config.csoil = cur_data["Customer"+this.game.config.ccustomer]["soil"];
@@ -104,15 +113,12 @@ export default class GameScene extends Phaser.Scene {
         cur_soil = this.game.config.csoil;
         cur_seed = this.game.config.cseed;
         water_count = this.game.config.cwater;
-        fert_count = this.game.config.cfertilizer;
-    
-        //First, put up log in/new account screen
-        
-        this.cameras.main.setBackgroundColor(0xAAFFAA);
+        fert_count = this.game.config.cfertilizer;        
+
         //background button font 
         const buttonStyle =  {fontSize: '32px', fontFamily:'cursive', fontWeight:'bolder'};
         //Make plant BACKGROUND BUTTON
-        const loginButtonBg1 = this.add.image(925, 800, 'button').setScale(0.30).setInteractive({
+        const loginButtonBg1 = this.add.image(1475, 800, 'button').setScale(0.30).setInteractive({
             useHandCursor: true
         });
         loginButtonBg1.on('pointerup', () => {  
@@ -129,7 +135,7 @@ export default class GameScene extends Phaser.Scene {
         });
 
        //Make plant button
-        const makeButton = this.add.text(this.cameras.main.width / 2, 780, 'Make Plant', buttonStyle);
+        const makeButton = this.add.text(1400, 780, 'Make Plant', buttonStyle);
         makeButton.setInteractive({
             useHandCursor: true
         });
@@ -146,79 +152,79 @@ export default class GameScene extends Phaser.Scene {
         });
         
         //Flowers
-        let stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'stem');
+        let stem = this.add.image(1475, this.cameras.main.height / 2 - 40, 'stem');
         stem.visible = false;
 
-        let sunf = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'sunflower');
+        let sunf = this.add.image(1475, this.cameras.main.height / 2 - 40, 'sunflower');
         sunf.visible = false;
 
-        let rose = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'rose');
+        let rose = this.add.image(1475, this.cameras.main.height / 2 - 40, 'rose');
         rose.visible = false;
 
-        let tulip = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tulip');
+        let tulip = this.add.image(1475, this.cameras.main.height / 2 - 40, 'tulip');
         tulip.visible = false;
 
         //Add 3 cacti
-        let cactus = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'cactus');
+        let cactus = this.add.image(1475, this.cameras.main.height / 2 - 40, 'cactus');
         cactus.visible = false;
 
-        let cactus_flower = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'cactus_flower');
+        let cactus_flower = this.add.image(1475, this.cameras.main.height / 2 - 40, 'cactus_flower');
         cactus_flower.visible = false;
 
-        let succulent1 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent1');
+        let succulent1 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'succulent1');
         succulent1.visible = false;
 
-        let succulent2 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent2');
+        let succulent2 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'succulent2');
         succulent2.visible = false;
 
         //Add 3 fruits/vegetables: carrot, tomato, lettuce??
-        let carrot_leaves = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot_leaves');
+        let carrot_leaves = this.add.image(1475, this.cameras.main.height / 2 - 40, 'carrot_leaves');
         carrot_leaves.visible = false;
 
-        let carrot = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'carrot');
+        let carrot = this.add.image(1475, this.cameras.main.height / 2 - 40, 'carrot');
         carrot.visible = false;
 
-        let tomato_stem = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tomato_stem');
+        let tomato_stem = this.add.image(1475, this.cameras.main.height / 2 - 40, 'tomato_stem');
         tomato_stem.visible = false;
 
-        let tomato = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'tomato');
+        let tomato = this.add.image(1475, this.cameras.main.height / 2 - 40, 'tomato');
         tomato.visible = false;
 
-        let pumpkin_leaves = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'pumpkin_leaves');
+        let pumpkin_leaves = this.add.image(1475, this.cameras.main.height / 2 - 40, 'pumpkin_leaves');
         pumpkin_leaves.visible = false;
 
-        let pumpkin = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'pumpkin');
+        let pumpkin = this.add.image(1475, this.cameras.main.height / 2 - 40, 'pumpkin');
         pumpkin.visible = false;
 
         //Add bonsai
-        let bonsai_base = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai_base');
+        let bonsai_base = this.add.image(1475, this.cameras.main.height / 2 - 40, 'bonsai_base');
         bonsai_base.visible = false;
 
-        let bonsai1 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai1');
+        let bonsai1 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'bonsai1');
         bonsai1.visible = false;
 
-        let bonsai2 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai2');
+        let bonsai2 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'bonsai2');
         bonsai2.visible = false;
 
-        let bonsai3 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'bonsai3');
+        let bonsai3 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'bonsai3');
         bonsai3.visible = false;
 
         //Pots
         let pots = this.add.group();
         //Pot 1
-        let pot1 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setInteractive();
+        let pot1 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setInteractive();
         pot1.visible = false;
         //Pot 2
-        let pot2 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        let pot2 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
         pot2.visible = false;
         //Pot 3
-        let pot3 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x00FFF0).setInteractive();
+        let pot3 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x00FFF0).setInteractive();
         pot3.visible = false;
         //Pot 4
-        let pot4 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0xAA11FF).setInteractive();
+        let pot4 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0xAA11FF).setInteractive();
         pot4.visible = false;
         //Pot 5
-        let pot5 = pots.create(this.cameras.main.width / 2, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x11111).setInteractive();
+        let pot5 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x11111).setInteractive();
         pot5.visible = false;
     
         //Pot visibility

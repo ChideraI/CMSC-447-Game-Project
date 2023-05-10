@@ -140,11 +140,6 @@ export default class GameSceneL1 extends Phaser.Scene {
         //  A drop zone
         let zone = this.add.zone(this.cameras.main.width / 2, this.cameras.main.height / 2, 300, 300).setRectangleDropZone(300, 300);
     
-        //  Just a visual display of the drop zone
-        let graphics = this.add.graphics();
-        graphics.lineStyle(2, 0xffff00);
-        graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
-    
         //Recipe Book open and close
         let book = this.add.image(this.cameras.main.width - 100, 75, 'recipes').setScale(0.35).setInteractive();
         let recipes = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'open_book').setScale(0.7);
@@ -155,7 +150,7 @@ export default class GameSceneL1 extends Phaser.Scene {
         let r1seed = this.add.image(575, 100, 'seeds').setScale(0.15);
         let r1base = this.add.image(725, 100, 'stem').setScale(0.5);
         let r1plant = this.add.image(725, 100, 'sunflower').setScale(0.5);
-        let r1text = this.add.text(475, 75, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
+        let r1text = this.add.text(475, 75, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r1soil.visible = false;
         r1seed.visible = false;
         r1base.visible = false;
@@ -167,7 +162,7 @@ export default class GameSceneL1 extends Phaser.Scene {
         let r2seed = this.add.image(575, 225, 'seeds').setScale(0.15);
         let r2base = this.add.image(725, 225, 'stem').setScale(0.5);
         let r2plant = this.add.image(725, 225, 'rose').setScale(0.5);
-        let r2text = this.add.text(475, 200, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
+        let r2text = this.add.text(475, 200, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r2soil.visible = false;
         r2seed.visible = false;
         r2base.visible = false;
@@ -179,7 +174,7 @@ export default class GameSceneL1 extends Phaser.Scene {
         let r4seed = this.add.image(575, 475, 'seeds').setTint(0x00FF00).setScale(0.15);
         let r4base = this.add.image(725, 475, 'cactus').setScale(0.5);
         let r4plant = this.add.image(725, 475, 'cactus_flower').setScale(0.5);
-        let r4text = this.add.text(475, 450, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
+        let r4text = this.add.text(475, 450, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r4soil.visible = false;
         r4seed.visible = false;
         r4base.visible = false;
@@ -191,7 +186,7 @@ export default class GameSceneL1 extends Phaser.Scene {
         let r5seed = this.add.image(575, 600, 'seeds').setTint(0x00FF00).setScale(0.15);
         let r5base = this.add.image(725, 600, 'succulent1').setScale(0.5);
         let r5plant = this.add.image(725, 600, 'succulent1').setScale(0.5);
-        let r5text = this.add.text(475, 575, '+     =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
+        let r5text = this.add.text(475, 575, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'});
         r5soil.visible = false;
         r5seed.visible = false;
         r5base.visible = false;
