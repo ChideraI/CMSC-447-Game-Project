@@ -46,6 +46,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.json('level1', 'data/level1.json');
         this.load.json('level2', 'data/level2.json');
         this.load.json('level3', 'data/level3.json');
+        this.load.image('button', 'assets/kisspng-button-glass-clip-art-botwtoon-5b0b1141547751.187244581527451969346.png');
     }
     
     create ()
@@ -86,11 +87,11 @@ export default class GameScene extends Phaser.Scene {
 
         //Tutorial stuff
         if(this.game.config.level == 0 && this.game.config.ccustomer == 1){
-            let welcome = this.add.text(525, 75, 'Welcome to the tutorial level!', {fontSize: '32px', fill: '#000' });
-            let welcome2 = this.add.text(400, 150, 'This is the plant that the customer ordered, be sure to remember it!', {fontSize: '24px', fill: '#000' });
-            let welcome3 = this.add.text(300, 650, 'When you\'re ready, click the \'Make Plant\' button to move to the plant making station.', {fontSize: '24px', fill: '#000' })
+            let welcome = this.add.text(525, 75, 'Welcome to the tutorial level!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+            let welcome2 = this.add.text(400, 150, 'This is the plant that the customer ordered, be sure to remember it!', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+            let welcome3 = this.add.text(300, 650, 'When you\'re ready, click the \'Make Plant\' button to move to the plant making station.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' })
         }else{
-            let customer_text = this.add.text(525, 75, 'Customer'+this.game.config.ccustomer+'\'s Order:', {fontSize: '32px', fill: '#000' });
+            let customer_text = this.add.text(525, 75, 'Customer'+this.game.config.ccustomer+'\'s Order:', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
         }
 
         this.game.config.cpot = cur_data["Customer"+this.game.config.ccustomer]["pot"];
@@ -108,10 +109,30 @@ export default class GameScene extends Phaser.Scene {
         //First, put up log in/new account screen
         
         this.cameras.main.setBackgroundColor(0xAAFFAA);
+        //background button font 
+        const buttonStyle =  {fontSize: '32px', fontFamily:'cursive', fontWeight:'bolder'};
+        //Make plant BACKGROUND BUTTON
+        const loginButtonBg1 = this.add.image(925, 800, 'button').setScale(0.30).setInteractive({
+            useHandCursor: true
+        });
+        loginButtonBg1.on('pointerup', () => {  
 
-        //Make plant button
-        const makeButton = this.add.text(this.cameras.main.width / 2, 800, 'Make Plant', {fontSize: '32px', fill: '#000' });
-        makeButton.setInteractive();
+            if(this.game.config.level == 0){
+                myThis.scene.start('Tutorial');
+            }else if(this.game.config.level == 1){
+                myThis.scene.start('GameL1');
+            }else if(this.game.config.level == 2){
+                myThis.scene.start('GameL2');
+            }else{
+                myThis.scene.start('GameL3');
+            }
+        });
+
+       //Make plant button
+        const makeButton = this.add.text(this.cameras.main.width / 2, 780, 'Make Plant', buttonStyle);
+        makeButton.setInteractive({
+            useHandCursor: true
+        });
         makeButton.on('pointerup', () => { 
             if(this.game.config.level == 0){
                 myThis.scene.start('Tutorial');

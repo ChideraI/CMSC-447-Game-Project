@@ -38,6 +38,7 @@ export default class ScoreScene extends Phaser.Scene {
         this.load.json('level1', 'data/level1.json');
         this.load.json('level2', 'data/level2.json');
         this.load.json('level3', 'data/level3.json');
+        this.load.image('button1', 'assets/kisspng-button-glass-clip-art-botwtoon-5b0b1141547751.187244581527451969346.png');
     }
     
     create ()
@@ -73,11 +74,11 @@ export default class ScoreScene extends Phaser.Scene {
         }
 
         if(this.game.config.level == 0 && this.game.config.ccustomer == 1){
-            let welcome = this.add.text(550, 75, 'Welcome to the score screen!', {fontSize: '32px', fill: '#000' });
-            let welcome2 = this.add.text(400, 150, 'Here you will see the plant you were asked to create for the customer.', {fontSize: '24px', fill: '#000' });
-            let welcome3 = this.add.text(300, 200, 'The score for the current customer as well as the current level are displayed here.', {fontSize: '24px', fill: '#000' });
-            let welcome4 = this.add.text(300, 625, 'When you\'re ready to move on, click the \'Next\' button.', {fontSize: '24px', fill: '#000' });
-            let welcome5 = this.add.text(900, 750, 'Try the next two customers on your own!', {fontSize: '24px', fill: '#000' });
+            let welcome = this.add.text(550, 75, 'Welcome to the score screen!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+            let welcome2 = this.add.text(400, 150, 'Here you will see the plant you were asked to create for the customer.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+            let welcome3 = this.add.text(300, 200, 'The score for the current customer as well as the current level are displayed here.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+            let welcome4 = this.add.text(300, 625, 'When you\'re ready to move on, click the \'Next\' button.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+            let welcome5 = this.add.text(900, 750, 'Try the next two customers on your own!', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
         }
 
         this.game.config.cpot = cur_data["Customer"+this.game.config.ccustomer]["pot"];
@@ -295,16 +296,34 @@ export default class ScoreScene extends Phaser.Scene {
 
         this.game.config.tscore += this.game.config.cscore;
 
-        this.add.text(300, 750, 'Customer '+this.game.config.ccustomer+' Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000' });
+        this.add.text(300, 750, 'Customer '+this.game.config.ccustomer+' Score: $'+this.game.config.cscore, {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
         if(this.game.config.level == 0){
-            this.add.text(300, 800, 'Tutorial Level Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000' });
+            this.add.text(300, 800, 'Tutorial Level Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
         }else{
-            this.add.text(300, 800, 'Level '+this.game.config.level+' Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000' });
+            this.add.text(300, 800, 'Level '+this.game.config.level+' Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
         }
 
         //Make plant button
-        const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next', {fontSize: '32px', fill: '#000' });
-        nextButton.setInteractive();
+
+        //BACKGROUND BUTTON
+        const loginButtonBg2 = this.add.image(1380,820, 'button1').setScale(0.25).setInteractive({
+            useHandCursor: true
+        });
+        loginButtonBg2.on('pointerup', () => {
+            if(this.game.config.ccustomer == num_customers){
+                myThis.scene.start('betweenLevel');
+            }else{
+                this.game.config.ccustomer += 1;
+                this.game.config.cscore = 0;
+                myThis.scene.start('Game');
+            }
+        });
+
+        //text
+        const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        nextButton.setInteractive({
+            useHandCursor: true
+        });
         nextButton.on('pointerup', () => { 
             if(this.game.config.ccustomer == num_customers){
                 myThis.scene.start('betweenLevel');
