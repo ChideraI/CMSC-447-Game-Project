@@ -71,10 +71,10 @@ export default class Tutorial extends Phaser.Scene{
     
         //Soil
         let soils = this.add.group();
-        let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
+        let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
 
-        let soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
-        let soil2 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 200, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
+        let soil1 = soils.create(this.cameras.main.width / 6 - 25, this.cameras.main.height / 6 + 100, 'soil').setTint(0x553311).setInteractive();
+        let soil2 = soils.create(this.cameras.main.width / 6 - 25, this.cameras.main.height / 6 + 200, 'soil').setTint(0xAA4422).setInteractive();
 
         this.input.setDraggable(soil1);
         this.input.setDraggable(soil2);
@@ -82,18 +82,18 @@ export default class Tutorial extends Phaser.Scene{
         //Seeds
         let seeds = this.add.group();
         let seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
-        let seed1 = seeds.create(this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'seeds').setScale(0.2).setInteractive();
+        let seed1 = seeds.create(this.cameras.main.width / 6 - 25, this.cameras.main.height / 2 + 100, 'seeds').setScale(0.2).setInteractive();
         this.input.setDraggable(seed1);
     
         //Pots
         let pots = this.add.group();
-        let potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000', fontFamily:'cursive'});
+        let potText = this.add.text(this.cameras.main.width / 2 - 25, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         //Pot 1
-        let pot1 = pots.create(this.cameras.main.width / 2 - 75, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setInteractive();
+        let pot1 = pots.create(this.cameras.main.width / 2 - 125, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0x553311).setInteractive();
         this.input.setDraggable(pot1);
         
         //Pot 2
-        let pot2 = pots.create(this.cameras.main.width / 2 + 75, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        let pot2 = pots.create(this.cameras.main.width / 2 + 125, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0x555555).setInteractive();
         this.input.setDraggable(pot2);
     
         //Water droplets
@@ -123,7 +123,7 @@ export default class Tutorial extends Phaser.Scene{
         let close_button = this.add.image(1350, 80, 'x').setScale(0.2).setInteractive();
 
         //Sunflower recipe variables
-        let r1soil = this.add.image(400, 100, 'soil').setScale(0.15);
+        let r1soil = this.add.image(400, 100, 'soil').setTint(0x553311).setScale(0.5);
         let r1seed = this.add.image(575, 100, 'seeds').setScale(0.15);
         let r1base = this.add.image(725, 100, 'stem').setScale(0.5);
         let r1plant = this.add.image(725, 100, 'sunflower').setScale(0.5);
@@ -135,7 +135,7 @@ export default class Tutorial extends Phaser.Scene{
         r1text.visible = false;
 
         //Rose recipe variables
-        let r2soil = this.add.image(400, 225, 'soil').setTint(0xFFF000).setScale(0.15);
+        let r2soil = this.add.image(400, 225, 'soil').setTint(0xAA4422).setScale(0.5);
         let r2seed = this.add.image(575, 225, 'seeds').setScale(0.15);
         let r2base = this.add.image(725, 225, 'stem').setScale(0.5);
         let r2plant = this.add.image(725, 225, 'rose').setScale(0.5);

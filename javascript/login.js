@@ -3,8 +3,7 @@ export default class LoginScene extends Phaser.Scene {
         super('Login')
     }
     preload() {
-
-       this.load.html("login_form", "login.html");
+        this.load.html("login_form", "login.html");
         this.load.image('background', './main_screen.png');
         this.load.image('button1', 'assets/kisspng-button-glass-clip-art-botwtoon-5b0b1141547751.187244581527451969346.png');
     }
@@ -105,7 +104,7 @@ export default class LoginScene extends Phaser.Scene {
          loginButton.setInteractive({
             useHandCursor: true
         });
-        
+
         loginButton.on('pointerup', () => {  
             showLogin();                          
          });
