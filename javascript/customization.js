@@ -114,39 +114,41 @@ export default class Customization extends Phaser.Scene {
         //colors
         //hat colors
         let hat_color = this.add.group();
-        let blue1 = hat_color.create(800, 550, 'blue_color').setScale(0.4).setInteractive();
+        let blue1 = hat_color.create(800, 250, 'blue_color').setScale(0.4).setInteractive();
         this.input.setDraggable(blue1);
 
-        let orange_color1 = hat_color.create(980, 550, 'orange_color').setScale(0.4).setInteractive();
+        let orange_color1 = hat_color.create(980, 250, 'orange_color').setScale(0.4).setInteractive();
         this.input.setDraggable(orange_color1);
-
-          
-        let purple_color1 = hat_color.create(1160,550, 'purple_color').setScale(0.4).setInteractive();
-        this.input.setDraggable(purple_color1);
-
-        let blue_dark = hat_color.create(1340, 550, 'dark_blue_color').setScale(0.4).setInteractive();
-        this.input.setDraggable(blue_dark);
 
         //shirt colors 
         let shirt_color = this.add.group();
-        let blue_green = shirt_color.create(800, 300, 'blue_green_color').setScale(0.4).setInteractive();
+        let blue_green = shirt_color.create(800, 500, 'blue_green_color').setScale(0.4).setInteractive();
         this.input.setDraggable(blue_green);
 
     
-        let green_color = shirt_color.create (980, 300, 'green_color').setScale(0.4).setInteractive();
+        let green_color = shirt_color.create (980, 500, 'green_color').setScale(0.4).setInteractive();
         this.input.setDraggable(green_color);
 
+        //Pants colors
+        let pants_color = this.add.group();
+        let purple_color1 = pants_color.create(800,750, 'purple_color').setScale(0.4).setInteractive();
+        this.input.setDraggable(purple_color1);
+
+        let blue_dark = pants_color.create(980, 750, 'dark_blue_color').setScale(0.4).setInteractive();
+        this.input.setDraggable(blue_dark);
+
         //text
-        let tutorial1 = this.add.text(550, 25, 'Welcome to the character customization screen!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
-        let tutorial2 = this.add.text(350, 75, 'Select a color from each section and drag it to the middle of the the blank character.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
-        let tutorial3 = this.add.text(700, 420, 'Shirt color', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
-        let tutorial4 = this.add.text(700, 175, 'Hat color', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        let label1 = this.add.text(550, 25, 'Welcome to the character customization screen!', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        let label2 = this.add.text(350, 75, 'Select a color from each section and drag it to the middle of the the blank character.', {fontSize: '24px', fill: '#000', fontFamily:'cursive' });
+        let label3 = this.add.text(800, 350, 'Shirt color', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        let label4 = this.add.text(800, 125, 'Hat color', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
+        let label5 = this.add.text(800, 600, 'Pants color', {fontSize: '32px', fill: '#000', fontFamily:'cursive' });
 
         //drag and drop
 
         //zone
         //  A drop zone
-        let zone = this.add.zone(this.cameras.main.width / 4, this.cameras.main.height / 1.3, 250, 600).setRectangleDropZone(250, 600);
+        let zone = this.add.zone(this.cameras.main.width / 4, this.cameras.main.height / 1.3, 250, 800).setRectangleDropZone(300, 500);
         
         this.input.on('dragstart', function (pointer, gameObject) {/*gameObject.setTint(0xEEEEEE);*/});
     
@@ -163,17 +165,11 @@ export default class Customization extends Phaser.Scene {
             gameObject.visible = false;
 
             if(hat_color.contains(gameObject)){
-                if (gameObject == blue_dark){
-                    hat1.setTint(0x1063b1);
-                }
-                else if (gameObject == blue_color){
+                if (gameObject == blue1){
                     hat1.setTint(0x3466e8);
                 }
-                else if (gameObject == orange_color){
+                else if (gameObject == orange_color1){
                     hat1.setTint(0xf07822);
-                }
-                else if (gameObject == purple_color){
-                    hat1.setTint(0x7b277c);
                 }
             }
             if(shirt_color.contains(gameObject)){
@@ -182,6 +178,14 @@ export default class Customization extends Phaser.Scene {
                 }
                 else if (gameObject == green_color){
                     shirt1.setTint(0x97aa00);
+                }
+            }
+            if(pants_color.contains(gameObject)){
+                if (gameObject == blue_dark){
+                    pants1.setTint(0x1063b1);
+                }
+                else if (gameObject == purple_color1){
+                    pants1.setTint(0x7b277c);
                 }
             }
         });
