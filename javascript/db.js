@@ -43,6 +43,9 @@ function connect(){
 	return db;
 }
 
+
+
+
 //for new user or new save or new high_score
 //insert
 //also create empty save to be updated later
@@ -60,14 +63,19 @@ function insert_user(name, password){
 		
 		//name not taken
 		if(row === undefined){
-		
-			//insert info into user table
-			db.run('INSERT INTO user (name, password) VALUES ($name, $password)', [name, password], (err) =>{
-			
-				if(err){
-					return console.error(err.message);
-				}
-			});
+			if(password){
+				//insert info into user table
+				db.run('INSERT INTO user (name, password) VALUES (?, ?)', [name, password], (err) =>{
+				
+					if(err){
+						console.log("HERE")
+						return console.error(err.message);
+					}
+					console.log("Successfully added "+ name + " to DB")
+				});
+			}else{
+				console.log('The password value is NULL. Cannot insert into user table.');
+			}
 		
 			//insert empty save
 			db.run('INSERT INTO save (name, last_level_completed, current_score) VALUES (?, ?, ?)', [name, 0, 0], (err) =>{
@@ -263,7 +271,7 @@ function check_password(name, password){
 	
 	db = connect();
 	
-	db.get('SELECT name, password WHERE name = $name AND password = $password', [name, password], function(err, row){
+	db.get('SELECT name, password FROM user WHERE name = ? AND password = ?', [name, password], function(err, row){
 		
 		if(err){
 			return console.error(err.message);
@@ -271,11 +279,11 @@ function check_password(name, password){
 		
 		//no such password name combination
 		if(row === undefined){
-			return 0;
+			return false;
 		}
 		//matches
 		else{
-			return 1;
+			return true;
 		}
 	});
 }
