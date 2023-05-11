@@ -16,8 +16,10 @@ export default class ScoreScene extends Phaser.Scene {
         this.load.image('tulip', 'assets/tulip.png');
         this.load.image('cactus', 'assets/cactus.png');
         this.load.image('cactus_flower', 'assets/cactus_flower.png');
+        this.load.image('succulent1_base', 'assets/cactus_stem_base.png');
         this.load.image('succulent1', 'assets/cactus_stem.png');
-        this.load.image('succulent2', 'assets/succulent.png');
+        this.load.image('succulent2_base', 'assets/succulent.png');
+        this.load.image('succulent2', 'assets/succulent_dots.png');
         this.load.image('carrot_leaves', 'assets/carrot_leaves.png');
         this.load.image('carrot', 'assets/carrot.png');
         this.load.image('tomato_stem', 'assets/tomato_stem.png');
@@ -123,8 +125,14 @@ export default class ScoreScene extends Phaser.Scene {
         let cactus_flower = this.add.image(1475, this.cameras.main.height / 2 - 40, 'cactus_flower');
         cactus_flower.visible = false;
 
+        let succulent1_base = this.add.image(1475, this.cameras.main.height / 2 - 40, 'succulent1_base');
+        succulent1_base.visible = false;
+
         let succulent1 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'succulent1');
         succulent1.visible = false;
+
+        let succulent2_base = this.add.image(1475, this.cameras.main.height / 2 - 40, 'succulent2_base');
+        succulent2_base.visible = false;
 
         let succulent2 = this.add.image(1475, this.cameras.main.height / 2 - 40, 'succulent2');
         succulent2.visible = false;
@@ -164,32 +172,32 @@ export default class ScoreScene extends Phaser.Scene {
         //Pots
         let pots = this.add.group();
         //Pot 1
-        let pot1 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setInteractive();
+        let pot1 = pots.create(1475, this.cameras.main.height / 2 + 65, 'pot').setTint(0x553311).setInteractive();
         pot1.visible = false;
         //Pot 2
-        let pot2 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        let pot2 = pots.create(1475, this.cameras.main.height / 2 + 65, 'pot').setTint(0xFFEEAA).setInteractive();
         pot2.visible = false;
         //Pot 3
-        let pot3 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x00FFF0).setInteractive();
+        let pot3 = pots.create(1475, this.cameras.main.height / 2 + 65, 'pot').setTint(0x00FFF0).setInteractive();
         pot3.visible = false;
         //Pot 4
-        let pot4 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0xAA11FF).setInteractive();
+        let pot4 = pots.create(1475, this.cameras.main.height / 2 + 65, 'pot').setTint(0xAA11FF).setInteractive();
         pot4.visible = false;
         //Pot 5
-        let pot5 = pots.create(1475, this.cameras.main.height / 2 + 100, 'pot').setScale(0.5).setTint(0x11111).setInteractive();
+        let pot5 = pots.create(1475, this.cameras.main.height / 2 + 65, 'pot').setTint(0x11111).setInteractive();
         pot5.visible = false;
     
         //Pot visibility
         if(cur_pot == 1){
-            pot1.visible = true;
-        }else if(cur_soil == 2){
-            pot2.visible = true;
-        }else if(cur_soil == 3){
-            pot3.visible = true;
-        }else if(cur_soil == 2){
-            pot4.visible = true;
+            cur_pot = pot1;
+        }else if(cur_pot == 2){
+            cur_pot = pot2;
+        }else if(cur_pot == 3){
+            cur_pot = pot3;
+        }else if(cur_pot == 4){
+            cur_pot = pot4;
         }else{
-            pot5.visible = true;
+            cur_pot = pot5;
         }
 
         //Flowers
@@ -209,10 +217,10 @@ export default class ScoreScene extends Phaser.Scene {
             cur_base = cactus;
             cur_plant = cactus_flower;
         }else if(cur_soil == 2 && cur_seed == 2){
-            cur_base = succulent1;
+            cur_base = succulent1_base;
             cur_plant = succulent1;
         }else if(cur_soil == 3 && cur_seed == 2){
-            cur_base = succulent2;
+            cur_base = succulent2_base;
             cur_plant = succulent2;
         }
 
@@ -240,6 +248,7 @@ export default class ScoreScene extends Phaser.Scene {
             cur_plant = bonsai3;
         }
 
+        cur_pot.visible = true;
         cur_base.visible = true;
         cur_plant.visible = true;
 
@@ -284,16 +293,19 @@ export default class ScoreScene extends Phaser.Scene {
         }
     
         if(fert_count == 1){
+            cur_pot.setScale(1.25);
             cur_base.setScale(1.25);
             cur_plant.setScale(1.25);
-            cur_plant.y -= 30;
-            cur_base.y -= 30;
+            cur_plant.y;
+            cur_base.y;
         }else if(fert_count == 2){
+            cur_pot.setScale(1.5);
             cur_base.setScale(1.5);
             cur_plant.setScale(1.5);
             cur_plant.y -= 20;
             cur_base.y -= 20;
         }else if(fert_count == 3){
+            cur_pot.setScale(2);
             cur_base.setScale(2);
             cur_plant.setScale(2);
             cur_plant.y -= 50;

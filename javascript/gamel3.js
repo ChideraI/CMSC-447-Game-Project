@@ -15,8 +15,10 @@ export default class GameSceneL3 extends Phaser.Scene {
         this.load.image('tulip', 'assets/tulip.png');
         this.load.image('cactus', 'assets/cactus.png');
         this.load.image('cactus_flower', 'assets/cactus_flower.png');
+        this.load.image('succulent1_base', 'assets/cactus_stem_base.png');
         this.load.image('succulent1', 'assets/cactus_stem.png');
-        this.load.image('succulent2', 'assets/succulent.png');
+        this.load.image('succulent2_base', 'assets/succulent.png');
+        this.load.image('succulent2', 'assets/succulent_dots.png');
         this.load.image('carrot', 'assets/carrot.png');
         this.load.image('carrot_leaves', 'assets/carrot_leaves.png');
         this.load.image('tomato_stem', 'assets/tomato_stem.png');
@@ -93,8 +95,14 @@ export default class GameSceneL3 extends Phaser.Scene {
         let cactus_flower = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'cactus_flower');
         cactus_flower.visible = false;
 
+        let succulent1_base = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent1_base');
+        succulent1_base.visible = false;
+
         let succulent1 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent1');
         succulent1.visible = false;
+
+        let succulent2_base = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent2_base');
+        succulent2_base.visible = false;
 
         let succulent2 = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2 - 40, 'succulent2');
         succulent2.visible = false;
@@ -136,9 +144,9 @@ export default class GameSceneL3 extends Phaser.Scene {
         let soils = this.add.group();
         let soilText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 6, 'Soil', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
 
-        let soil1 = soils.create(this.cameras.main.width / 6, this.cameras.main.height / 6 + 100, 'soil').setScale(0.2).setInteractive();
-        let soil2 = soils.create(this.cameras.main.width / 6 - 100, this.cameras.main.height / 6 + 200, 'soil').setTint(0xFFF000).setScale(0.2).setInteractive();
-        let soil3 = soils.create(this.cameras.main.width / 6 + 100, this.cameras.main.height / 6 + 200, 'soil').setTint(0x000FFF).setScale(0.2).setInteractive();
+        let soil1 = soils.create(this.cameras.main.width / 6 - 25, this.cameras.main.height / 6 + 100, 'soil').setTint(0x553311).setInteractive();
+        let soil2 = soils.create(this.cameras.main.width / 6 - 125, this.cameras.main.height / 6 + 200, 'soil').setTint(0xAA4422).setInteractive();
+        let soil3 = soils.create(this.cameras.main.width / 6 + 75, this.cameras.main.height / 6 + 200, 'soil').setTint(0x666655).setInteractive();
 
         this.input.setDraggable(soil1);
         this.input.setDraggable(soil2);
@@ -146,33 +154,33 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Seeds
         let seeds = this.add.group();
-        let seedText = this.add.text(this.cameras.main.width / 6 - 50, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
-        let seed1 = seeds.create(this.cameras.main.width / 6 - 75, this.cameras.main.height / 2 + 100, 'seeds').setScale(0.2).setInteractive();
+        let seedText = this.add.text(this.cameras.main.width / 6 - 75, this.cameras.main.height / 2, 'Seeds', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
+        let seed1 = seeds.create(this.cameras.main.width / 6 - 100, this.cameras.main.height / 2 + 100, 'seeds').setScale(0.2).setInteractive();
         this.input.setDraggable(seed1);
-        let seed2 = seeds.create(this.cameras.main.width / 6 - 75, this.cameras.main.height / 2 + 200, 'seeds').setTint(0x00FF00).setScale(0.2).setInteractive();
+        let seed2 = seeds.create(this.cameras.main.width / 6 - 100, this.cameras.main.height / 2 + 200, 'seeds').setTint(0x00FF00).setScale(0.2).setInteractive();
         this.input.setDraggable(seed2);
-        let seed3 = seeds.create(this.cameras.main.width / 6 + 75, this.cameras.main.height / 2 + 100, 'seeds').setTint(0x0000FF).setScale(0.2).setInteractive();
+        let seed3 = seeds.create(this.cameras.main.width / 6 + 50, this.cameras.main.height / 2 + 100, 'seeds').setTint(0x0000FF).setScale(0.2).setInteractive();
         this.input.setDraggable(seed3);
-        let seed4 = seeds.create(this.cameras.main.width / 6 + 75, this.cameras.main.height / 2 + 200, 'seeds').setTint(0xFF0000).setScale(0.2).setInteractive();
+        let seed4 = seeds.create(this.cameras.main.width / 6 + 50, this.cameras.main.height / 2 + 200, 'seeds').setTint(0xFF0000).setScale(0.2).setInteractive();
         this.input.setDraggable(seed4);
     
         //Pots
         let pots = this.add.group();
-        let potText = this.add.text(this.cameras.main.width / 2 - 50, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
+        let potText = this.add.text(this.cameras.main.width / 2 - 25, 3*this.cameras.main.height / 4 - 25, 'Pots', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         //Pot 1
-        let pot1 = pots.create(this.cameras.main.width / 2 - 300, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setInteractive();
+        let pot1 = pots.create(this.cameras.main.width / 2 - 300, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0x553311).setInteractive();
         this.input.setDraggable(pot1);
         //Pot 2
-        let pot2 = pots.create(this.cameras.main.width / 2 - 150, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0x555555).setInteractive();
+        let pot2 = pots.create(this.cameras.main.width / 2 - 150, 3*this.cameras.main.height / 4, 'pot').setTint(0xFFEEAA).setInteractive();
         this.input.setDraggable(pot2);
         //Pot 3
-        let pot3 = pots.create(this.cameras.main.width / 2, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0x00FFF0).setInteractive();
+        let pot3 = pots.create(this.cameras.main.width / 2, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0x00FFF0).setInteractive();
         this.input.setDraggable(pot3);
         //Pot 4
-        let pot4 = pots.create(this.cameras.main.width / 2 + 150, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0xAA11FF).setInteractive();
+        let pot4 = pots.create(this.cameras.main.width / 2 + 150, 3*this.cameras.main.height / 4, 'pot').setTint(0xAA11FF).setInteractive();
         this.input.setDraggable(pot4);
         //Pot 5
-        let pot5 = pots.create(this.cameras.main.width / 2 + 300, 3*this.cameras.main.height / 4 + 100, 'pot').setScale(0.5).setTint(0x11111).setInteractive();
+        let pot5 = pots.create(this.cameras.main.width / 2 + 300, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0x11111).setInteractive();
         this.input.setDraggable(pot5);
     
         //Water droplets
@@ -190,7 +198,7 @@ export default class GameSceneL3 extends Phaser.Scene {
     
         //Fertilizer
         let ferts = this.add.group();
-        let fertText = this.add.text(5*this.cameras.main.width / 6 - 100, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
+        let fertText = this.add.text(5*this.cameras.main.width / 6 - 75, this.cameras.main.height / 2, 'Fertilizer', { fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         //Fertilizer 1
         let fert1 = ferts.create(5*this.cameras.main.width / 6, this.cameras.main.height / 2 + 100, 'fertilizer').setScale(0.2).setInteractive();
         this.input.setDraggable(fert1);
@@ -210,7 +218,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         let close_button = this.add.image(1350, 80, 'x').setScale(0.2).setInteractive();
 
         //Sunflower recipe variables
-        let r1soil = this.add.image(400, 100, 'soil').setScale(0.15);
+        let r1soil = this.add.image(400, 100, 'soil').setTint(0x553311).setScale(0.5);
         let r1seed = this.add.image(575, 100, 'seeds').setScale(0.15);
         let r1base = this.add.image(725, 100, 'stem').setScale(0.5);
         let r1plant = this.add.image(725, 100, 'sunflower').setScale(0.5);
@@ -222,7 +230,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r1text.visible = false;
 
         //Rose recipe variables
-        let r2soil = this.add.image(400, 225, 'soil').setTint(0xFFF000).setScale(0.15);
+        let r2soil = this.add.image(400, 225, 'soil').setTint(0xAA4422).setScale(0.5);
         let r2seed = this.add.image(575, 225, 'seeds').setScale(0.15);
         let r2base = this.add.image(725, 225, 'stem').setScale(0.5);
         let r2plant = this.add.image(725, 225, 'rose').setScale(0.5);
@@ -234,7 +242,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r2text.visible = false;
 
         //Tulip recipe variables
-        let r3soil = this.add.image(400, 350, 'soil').setTint(0x000FFF).setScale(0.15);
+        let r3soil = this.add.image(400, 350, 'soil').setTint(0x666655).setScale(0.5);
         let r3seed = this.add.image(575, 350, 'seeds').setScale(0.15);
         let r3base = this.add.image(725, 350, 'stem').setScale(0.5);
         let r3plant = this.add.image(725, 350, 'tulip').setScale(0.5);
@@ -246,7 +254,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r3text.visible = false;
 
         //Cactus Flower recipe variables
-        let r4soil = this.add.image(400, 475, 'soil').setScale(0.15);
+        let r4soil = this.add.image(400, 475, 'soil').setTint(0x553311).setScale(0.5);
         let r4seed = this.add.image(575, 475, 'seeds').setTint(0x00FF00).setScale(0.15);
         let r4base = this.add.image(725, 475, 'cactus').setScale(0.5);
         let r4plant = this.add.image(725, 475, 'cactus_flower').setScale(0.5);
@@ -258,9 +266,9 @@ export default class GameSceneL3 extends Phaser.Scene {
         r4text.visible = false;
 
         //Succulent #1 recipe variables
-        let r5soil = this.add.image(400, 600, 'soil').setTint(0xFFF000).setScale(0.15);
+        let r5soil = this.add.image(400, 600, 'soil').setTint(0xAA4422).setScale(0.5);
         let r5seed = this.add.image(575, 600, 'seeds').setTint(0x00FF00).setScale(0.15);
-        let r5base = this.add.image(725, 600, 'succulent1').setScale(0.5);
+        let r5base = this.add.image(725, 600, 'succulent1_base').setScale(0.5);
         let r5plant = this.add.image(725, 600, 'succulent1').setScale(0.5);
         let r5text = this.add.text(475, 575, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r5soil.visible = false;
@@ -270,9 +278,9 @@ export default class GameSceneL3 extends Phaser.Scene {
         r5text.visible = false;
 
         //Succulent #2 recipe variables
-        let r6soil = this.add.image(400, 725, 'soil').setTint(0x000FFF).setScale(0.15);
+        let r6soil = this.add.image(400, 725, 'soil').setTint(0x666655).setScale(0.5);
         let r6seed = this.add.image(575, 725, 'seeds').setTint(0x00FF00).setScale(0.15);
-        let r6base = this.add.image(725, 725, 'succulent2').setScale(0.5);
+        let r6base = this.add.image(725, 725, 'succulent2_base').setScale(0.5);
         let r6plant = this.add.image(725, 725, 'succulent2').setScale(0.5);
         let r6text = this.add.text(475, 700, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive'  });
         r6soil.visible = false;
@@ -282,7 +290,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r6text.visible = false;
 
         //Carrot recipe variables
-        let r7soil = this.add.image(950, 100, 'soil').setScale(0.15);
+        let r7soil = this.add.image(950, 100, 'soil').setTint(0x553311).setScale(0.5);
         let r7seed = this.add.image(1125, 100, 'seeds').setTint(0x0000FF).setScale(0.15);
         let r7base = this.add.image(1275, 100, 'carrot_leaves').setScale(0.5);
         let r7plant = this.add.image(1275, 100, 'carrot').setScale(0.5);
@@ -294,7 +302,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r7text.visible = false;
 
         //Tomato recipe variables
-        let r8soil = this.add.image(950, 225, 'soil').setTint(0xFFF000).setScale(0.15);
+        let r8soil = this.add.image(950, 225, 'soil').setTint(0xAA4422).setScale(0.5);
         let r8seed = this.add.image(1125, 225, 'seeds').setTint(0x0000FF).setScale(0.15);
         let r8base = this.add.image(1275, 225, 'tomato_stem').setScale(0.5);
         let r8plant = this.add.image(1275, 225, 'tomato').setScale(0.5);
@@ -306,7 +314,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r8text.visible = false;
 
         //Pumpkin recipe variables
-        let r9soil = this.add.image(950, 350, 'soil').setTint(0x000FFF).setScale(0.15);
+        let r9soil = this.add.image(950, 350, 'soil').setTint(0x666655).setScale(0.5);
         let r9seed = this.add.image(1125, 350, 'seeds').setTint(0x0000FF).setScale(0.15);
         let r9base = this.add.image(1275, 350, 'pumpkin_leaves').setScale(0.5);
         let r9plant = this.add.image(1275, 350, 'pumpkin').setScale(0.5);
@@ -318,7 +326,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r9text.visible = false;
 
         //Bonsai #1 recipe variables
-        let r10soil = this.add.image(950, 475, 'soil').setScale(0.15);
+        let r10soil = this.add.image(950, 475, 'soil').setTint(0x553311).setScale(0.5);
         let r10seed = this.add.image(1125, 475, 'seeds').setTint(0xFF0000).setScale(0.15);
         let r10base = this.add.image(1275, 475, 'bonsai_base').setScale(0.5);
         let r10plant = this.add.image(1275, 475, 'bonsai1').setScale(0.5);
@@ -330,7 +338,7 @@ export default class GameSceneL3 extends Phaser.Scene {
         r10text.visible = false;
 
         //Bonsai #2 recipe variables
-        let r11soil = this.add.image(950, 600, 'soil').setTint(0xFFF000).setScale(0.15);
+        let r11soil = this.add.image(950, 600, 'soil').setTint(0xAA4422).setScale(0.5);
         let r11seed = this.add.image(1125, 600, 'seeds').setTint(0xFF0000).setScale(0.15);
         let r11base = this.add.image(1275, 600, 'bonsai_base').setScale(0.5);
         let r11plant = this.add.image(1275, 600, 'bonsai2').setScale(0.5);
@@ -342,11 +350,11 @@ export default class GameSceneL3 extends Phaser.Scene {
         r11text.visible = false;
 
         //Bonsai #3 recipe variables
-        let r12soil = this.add.image(950, 725, 'soil').setTint(0x000FFF).setScale(0.15);
+        let r12soil = this.add.image(950, 725, 'soil').setTint(0x666655).setScale(0.5);
         let r12seed = this.add.image(1125, 725, 'seeds').setTint(0xFF0000).setScale(0.15);
         let r12base = this.add.image(1275, 725, 'bonsai_base').setScale(0.5);
         let r12plant = this.add.image(1275, 725, 'bonsai3').setScale(0.5);
-        let r12text = this.add.text(10255, 700, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive' });
+        let r12text = this.add.text(1025, 700, '+          =', { fontSize: '48px', fill: '#000', fontFamily:'cursive' });
         r12soil.visible = false;
         r12seed.visible = false;
         r12base.visible = false;
@@ -528,7 +536,7 @@ export default class GameSceneL3 extends Phaser.Scene {
             gameObject.input.enabled = false;
 
             if(pots.contains(gameObject)){
-                gameObject.y = dropZone.y + 100;
+                gameObject.y = dropZone.y + 40;
                 pot1.disableInteractive();
                 pot2.disableInteractive();
                 pot3.disableInteractive();
@@ -537,7 +545,7 @@ export default class GameSceneL3 extends Phaser.Scene {
             }
     
             else if(soils.contains(gameObject)){
-                gameObject.y = dropZone.y + 25;
+                gameObject.y = dropZone.y + 40;
                 soil1.disableInteractive();
                 soil2.disableInteractive();
                 soil3.disableInteractive();
@@ -626,7 +634,7 @@ export default class GameSceneL3 extends Phaser.Scene {
             }else if(cur_soil == soil2 && cur_seed == seed2){
                 seed2.visible = false;
                 soil2.visible = false;
-                cur_base = succulent1;
+                cur_base = succulent1_base;
                 cur_plant = succulent1;
                 cur_base.visible = true;
                 cur_plant.visible = true;
@@ -635,7 +643,7 @@ export default class GameSceneL3 extends Phaser.Scene {
             }else if(cur_soil == soil3 && cur_seed == seed2){
                 seed2.visible = false;
                 soil3.visible = false;
-                cur_base = succulent2;
+                cur_base = succulent2_base;
                 cur_plant = succulent2;
                 cur_base.visible = true;
                 cur_plant.visible = true;
@@ -744,20 +752,23 @@ export default class GameSceneL3 extends Phaser.Scene {
             }
     
             if(fert_count == 1 && ferts.contains(gameObject)){
+                cur_pot.setScale(1.25);
                 cur_base.setScale(1.25);
                 cur_plant.setScale(1.25);
-                cur_plant.y -= 30;
-                cur_base.y -= 30;
+                cur_plant.y -= 20;
+                cur_base.y -= 20;
             }else if(fert_count == 2 && ferts.contains(gameObject)){
+                cur_pot.setScale(1.5);
                 cur_base.setScale(1.5);
                 cur_plant.setScale(1.5);
                 cur_plant.y -= 20;
                 cur_base.y -= 20;
             }else if(fert_count == 3 && ferts.contains(gameObject)){
+                cur_pot.setScale(2);
                 cur_base.setScale(2);
                 cur_plant.setScale(2);
-                cur_plant.y -= 50;
-                cur_base.y -= 50;
+                cur_plant.y -= 45;
+                cur_base.y -= 45;
             }
         });
 
