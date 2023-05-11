@@ -264,7 +264,7 @@ export default class Tutorial extends Phaser.Scene{
             gameObject.input.enabled = false;
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
-                gameObject.y = dropZone.y + 100;
+                gameObject.y = dropZone.y + 25;
                 pot1.disableInteractive();
                 pot2.disableInteractive();
             }
@@ -362,10 +362,11 @@ export default class Tutorial extends Phaser.Scene{
             }
     
             if(fert_count == 1 && ferts.contains(gameObject)){
+                cur_pot.setScale(1.25);
                 cur_base.setScale(1.25);
                 cur_plant.setScale(1.25);
-                cur_plant.y -= 30;
-                cur_base.y -= 30;
+                cur_plant.y -= 20;
+                cur_base.y -= 20;
             }
         });
         //background button
