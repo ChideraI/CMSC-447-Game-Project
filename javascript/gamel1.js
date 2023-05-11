@@ -277,14 +277,14 @@ export default class GameSceneL1 extends Phaser.Scene {
             gameObject.input.enabled = false;
             //gameObject.disableBody(true, true);
             if(pots.contains(gameObject)){
-                gameObject.y = dropZone.y + 25;
+                gameObject.y = dropZone.y + 40;
                 pot1.disableInteractive();
                 pot2.disableInteractive();
                 pot3.disableInteractive();
             }
     
             else if(soils.contains(gameObject)){
-                gameObject.y = dropZone.y + 25;
+                gameObject.y = dropZone.y + 40;
                 soil1.disableInteractive();
                 soil2.disableInteractive();
             }
