@@ -29,24 +29,25 @@ export default class betweenLevel extends Phaser.Scene {
         }else{
             this.add.text(500, 400, 'Level '+this.game.config.level+' Final Score: $'+this.game.config.tscore, {fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
         }
-        //BACKGROUND BUTTON
-        const loginButtonBg2 = this.add.image(1425,820, 'button1').setScale(0.25).setInteractive({
-             useHandCursor: true
-        });
-        loginButtonBg2.on('pointerup', () => {
-            this.game.config.level += 1;
-            this.game.config.ccustomer = 1;
-            this.game.config.cscore = 0;
-            this.game.config.tscore = 0;
-            myThis.scene.start('Game');
-        });
 
         //Make plant button
         if(this.game.config.level != 3){
+            //BACKGROUND BUTTON
+            const loginButtonBg2 = this.add.image(1425,820, 'button1').setScale(0.25).setInteractive({
+                useHandCursor: true
+            });
+            loginButtonBg2.on('pointerup', () => {
+                this.game.config.level += 1;
+                this.game.config.ccustomer = 1;
+                this.game.config.cscore = 0;
+                this.game.config.tscore = 0;
+                myThis.scene.start('Game');
+            });
+
             const nextButton = this.add.text(this.cameras.main.width / 2 + 500, 800, 'Next Level', {fontSize: '32px', fill: '#000', fontFamily:'cursive'  });
             nextButton.setInteractive({
                 useHandCursor: true
-           });
+            });
             nextButton.on('pointerup', () => {
                 this.game.config.level += 1;
                 this.game.config.ccustomer = 1;
@@ -67,7 +68,7 @@ export default class betweenLevel extends Phaser.Scene {
         const loginButton = this.add.text(50, 50, 'Main Menu', {fontSize: '32px', fill: '#000', fontFamily:'cursive'});
         loginButton.setInteractive({
             useHandCursor: true
-       });
+        });
         loginButton.on('pointerup', () => {  myThis.scene.start('Login') });
     }
 }

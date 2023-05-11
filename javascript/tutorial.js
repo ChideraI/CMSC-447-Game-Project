@@ -93,7 +93,7 @@ export default class Tutorial extends Phaser.Scene{
         this.input.setDraggable(pot1);
         
         //Pot 2
-        let pot2 = pots.create(this.cameras.main.width / 2 + 125, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0x555555).setInteractive();
+        let pot2 = pots.create(this.cameras.main.width / 2 + 125, 3*this.cameras.main.height / 4 + 100, 'pot').setTint(0xFFEEAA).setInteractive();
         this.input.setDraggable(pot2);
     
         //Water droplets
