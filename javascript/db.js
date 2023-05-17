@@ -1,10 +1,8 @@
-//need to npm install sqlite3
-
-const fs = require('fs');
+//const fs = require('fs');
+//npm install sqlite3
 
 const sqlite3 = require('sqlite3').verbose();
 
-//change filepath
 const filename = './user.db';
 
 //connect to database and make tables if not done already
@@ -19,7 +17,7 @@ function connect(){
 	});
 	
 	//user table
-	db.run('CREATE TABLE IF NOT EXISTS user(name TEXT PRIMARY KEY, password TEXT NOT NULL, hair TEXT DEFAULT "original", skin TEXT DEFAULT "original", outfit TEXT DEFAULT "original");', (err) => {
+	db.run('CREATE TABLE IF NOT EXISTS user(name TEXT PRIMARY KEY, password TEXT NOT NULL, hat TEXT DEFAULT "original", skin TEXT DEFAULT "original", shirt TEXT DEFAULT "original", pants TEXT DEFAULT "original", shoes TEXT DEFAULT "original");', (err) => {
 														 
 		if(err){
 			return console.error(err.message);
@@ -49,12 +47,13 @@ function connect(){
 //for new user or new save or new high_score
 //insert
 //also create empty save to be updated later
-//returns 0 if name for user is already taken
+//returns row if name for user is already taken
+//else undefined
 function insert_user(name, password){
 	
 	db = connect();
 	
-	//STILL NEED TO ADD CHECK IF NAME ALREADY TAKEN
+	//checks if name is taken, row is undefined if not entries in table for supplied name
 	db.get('SELECT * FROM user WHERE name = $name', [name], function(err, row){
 		
 		if(err){
@@ -63,6 +62,8 @@ function insert_user(name, password){
 		
 		//name not taken
 		if(row === undefined){
+		
+			console.log("name not taken");
 		
 			//insert info into user table
 			db.run('INSERT INTO user (name, password) VALUES ($name, $password)', [name, password], (err) =>{
@@ -87,38 +88,16 @@ function insert_user(name, password){
 					return console.error(err.message);
 				}
 			});
+			
 		}
 		
 		//name taken
 		else{
 			console.log("Name already used");
-			return 0;
+			console.log(row);
+			return row;
 		}
 	});
-
-		//insert info into user table
-		db.run('INSERT INTO user (name, password) VALUES ($name, $password)', [name, password], (err) =>{
-			
-			if(err){
-				return console.error(err.message);
-			}
-		});
-		
-		//insert empty save
-		db.run('INSERT INTO save (name, last_level_completed, current_score) VALUES (?, ?, ?)', [name, 0, 0], (err) =>{
-		
-			if(err){
-				return console.error(err.message);
-			}
-		});
-	
-		//insert empty high score to be updated later
-		db.run('INSERT INTO high_score (name, score) VALUES (?, ?)', [name, 0], (err) =>{
-	
-			if(err){
-				return console.error(err.message);
-			}
-		});
 }
 
 
@@ -191,12 +170,26 @@ function update_high_score(name, score){
 
 	db = connect();
 	
-	db.run('UPDATE high_score SET score = $score WHERE name = $name', [score, name], (err) =>{
+	db.get('SELECT score FROM high_score WHERE name = $name', [name], function (err, row){
 		
 		if(err){
 			return console.error(err.message);
 		}
+		
+		//needs tested
+		//check if score is higher
+		if(row.score < score){
+		
+			db.run('UPDATE high_score SET score = $score WHERE name = $name', [score, name], (err) =>{
+		
+				if(err){
+					return console.error(err.message);
+				}
+			});
+		}
 	});
+	
+	
 
 }
 //get top 5 high scores or current score or customization or progress
@@ -206,7 +199,7 @@ function query_top5(){
 
 	db = connect();
 
-	db.all("SELECT * FROM high_score ORDER BY score DESC LIMIT 5;", (err, rows) =>{
+	db.all("SELECT * FROM high_score ORDER BY score DESC LIMIT 5;", function(err, rows){
 	
 		if(err){
 			return console.error(err.message);
@@ -223,7 +216,7 @@ function query_score(name){
 
 	db = connect();
 
-	db.get('SELECT current_score FROM save WHERE name = $name', [name], (err, row) =>{
+	db.get('SELECT current_score FROM save WHERE name = $name', [name], function(err, row) {
 	
 		if(err){
 			return console.error(err.message);
@@ -240,7 +233,7 @@ function query_customization(name){
 
 	db = connect();
 
-	db.get('SELECT hair, skin, outfit FROM user WHERE name = $name', [name], (err, row) =>{
+	db.get('SELECT hair, skin, outfit FROM user WHERE name = $name', [name], function(err, row){
 	
 		if(err){
 			return console.error(err.message);
@@ -257,7 +250,7 @@ function query_progress(name){
 
 	db = connect();
 
-	db.get("SELECT last_level_completed FROM save WHERE name = $name", [name], (err, row) =>{
+	db.get("SELECT last_level_completed FROM save WHERE name = $name", [name], function(err, row){
 	
 		if(err){
 			return console.error(err.message);
@@ -276,7 +269,7 @@ function check_password(name, password){
 	
 	db = connect();
 	
-	db.get('SELECT name, password WHERE name = $name AND password = $password', [name, password], (err, row)=>{
+	db.get('SELECT name, password WHERE name = $name AND password = $password', [name, password], function(err, row){
 		
 		if(err){
 			return console.error(err.message);
@@ -291,6 +284,17 @@ function check_password(name, password){
 			return 1;
 		}
 	});
+}
+
+function close(db){
+	db.close( (err) =>{
+		if(err){
+			return console.error(err.message);
+		}
+		
+		console.log("Connection closed.");
+	});
+
 }
 
 //delete seems unnecessary so it is omitted
